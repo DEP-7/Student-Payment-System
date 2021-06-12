@@ -11,12 +11,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="439.0" prefWidth="448.0" style="-fx-background-color: #404040;" stylesheets="@css/LoginFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
    <children>
-      <AnchorPane layoutX="81.0" layoutY="144.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;">
+      <AnchorPane layoutX="81.0" layoutY="144.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="144.0">
          <children>
-            <JFXTextField fx:id="txtUsername" focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Username" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <JFXTextField fx:id="txtUsername" focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Username" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -29,9 +28,9 @@
             </JFXTextField>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="81.0" layoutY="219.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;">
+      <AnchorPane layoutX="81.0" layoutY="219.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="219.0">
          <children>
-            <JFXPasswordField focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Password" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <JFXPasswordField focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Password" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -44,23 +43,23 @@
             </JFXPasswordField>
          </children>
       </AnchorPane>
-      <JFXCheckBox checkedColor="#8566b2" layoutX="157.0" layoutY="288.0" prefHeight="18.0" prefWidth="54.0" text="Remember me" textFill="WHITE" unCheckedColor="WHITE" />
-      <JFXButton layoutX="116.0" layoutY="344.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="Login" textFill="WHITE">
+      <JFXCheckBox checkedColor="#8566b2" layoutX="157.0" layoutY="288.0" prefHeight="18.0" prefWidth="54.0" text="Remember me" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.topAnchor="288.0" />
+      <JFXButton layoutX="116.0" layoutY="344.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="Login" textFill="WHITE" AnchorPane.topAnchor="344.0">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="238.0" layoutY="344.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE">
+      <JFXButton layoutX="238.0" layoutY="344.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE" AnchorPane.topAnchor="344.0">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <Label layoutX="95.0" layoutY="412.0" text="Copyrights © 2021 DEP -7. All Rights Reserved" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="95.0" layoutY="412.0" prefHeight="15.0" prefWidth="292.0" text="Copyrights © 2021 DEP -7. All Rights Reserved" textFill="WHITE" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="412.0">
          <font>
             <Font size="12.0" />
          </font>
       </Label>
-      <ImageView fitHeight="88.0" fitWidth="88.0" layoutX="178.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="88.0" fitWidth="88.0" layoutX="178.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="33.0">
          <image>
             <Image url="@assets/DC_Profile_Image.png" />
          </image>

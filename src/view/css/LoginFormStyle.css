@@ -1,5 +1,4 @@
 .text-field{
-    -fx-prompt-text-fill: white 0.6;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.6);
     -fx-text-fill: white;
-    -fx-indent: 3cm;
 }
