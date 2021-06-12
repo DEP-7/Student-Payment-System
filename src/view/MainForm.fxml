@@ -1,10 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
-      <AnchorPane prefHeight="1080.0" prefWidth="304.0" style="-fx-background-color: #575757;" />
+      <AnchorPane layoutX="304.0" layoutY="6.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="72.0" layoutY="20.0" text="Dashboard" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="1220.0" layoutY="20.0" prefHeight="25.0" text="2020-June-05 12:46:30 PM" textFill="WHITE" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1536.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@assets/profileimages/DC_Profile_Image.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="1080.0" prefWidth="304.0" style="-fx-background-color: #575757;">
+         <children>
+            <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
+               <children>
+                  <AnchorPane prefHeight="48.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_Dashboard.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="Dashboard" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="48.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_Add_Payment.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="Add New Payment" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="48.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_View_Payments.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="View Payments" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="48.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_Manage_Students.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="Manage Students" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="48.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_View_Courses.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="View Courses" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="48.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_View_Batches.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="View Batches" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <ImageView fitHeight="88.0" fitWidth="294.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@assets/icons/Icon_IJSE.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
