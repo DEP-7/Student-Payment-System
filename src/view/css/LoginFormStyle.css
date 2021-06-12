@@ -13,3 +13,7 @@
     -fx-border-radius: 5px;
     -fx-border-width: 2px;
 }
+
+#text-items{
+    -fx-background-radius: 5px 5px 0 0;
+}

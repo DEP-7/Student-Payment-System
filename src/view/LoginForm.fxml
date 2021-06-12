@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="439.0" prefWidth="448.0" style="-fx-background-color: #404040;" stylesheets="@css/LoginFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
    <children>
-      <AnchorPane layoutX="81.0" layoutY="144.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="144.0">
+      <AnchorPane id="text-items" layoutX="81.0" layoutY="144.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="144.0">
          <children>
             <JFXTextField focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Username" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
@@ -29,7 +29,7 @@
             </JFXTextField>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="81.0" layoutY="219.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="219.0">
+      <AnchorPane id="text-items" layoutX="81.0" layoutY="219.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="219.0">
          <children>
             <JFXPasswordField focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Password" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
@@ -68,7 +68,7 @@
       </Label>
       <ImageView fitHeight="88.0" fitWidth="88.0" layoutX="178.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="33.0">
          <image>
-            <Image url="@assets/DC_Profile_Image.png" />
+            <Image url="@assets/profileimages/DC_Profile_Image.png" />
          </image>
       </ImageView>
    </children>
