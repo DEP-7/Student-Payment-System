@@ -15,16 +15,20 @@ public class LoginFormController {
 
     public void btnLogin_OnAction(ActionEvent actionEvent) throws IOException {
         Stage mainStage = (Stage) txtUsername.getScene().getWindow();
-        Parent root = FXMLLoader.load(this.getClass().getResource("../view/MainForm.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/MainForm.fxml"));
+        Parent root = fxmlLoader.load();
+        MainFormController ctrl = fxmlLoader.getController();
         Scene mainScene = new Scene(root);
+        mainScene.setUserData(ctrl);
         mainStage.setScene(mainScene);
         mainStage.setTitle("Dashboard");
         mainStage.setResizable(true);
-
         Platform.runLater(() -> {
             mainStage.setMaximized(true);
             mainStage.centerOnScreen();
             mainStage.sizeToScene();
         });
+        Parent dashboardFormLoader = FXMLLoader.load(this.getClass().getResource("../view/DashboardForm.fxml"));
+        ctrl.pneStage.getChildren().add(dashboardFormLoader);
     }
 }
