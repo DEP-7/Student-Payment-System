@@ -1,4 +1,15 @@
-.text-field{
+.text-field {
     -fx-prompt-text-fill: rgba(255, 255, 255, 0.6);
     -fx-text-fill: white;
+}
+
+.button:hover{
+    -fx-border-color: white;
+    -fx-border-radius: 5px;
+}
+
+.button:focused{
+    -fx-border-color: #8566b2;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
 }
