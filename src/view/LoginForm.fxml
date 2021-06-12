@@ -16,7 +16,7 @@
    <children>
       <AnchorPane id="text-items" layoutX="81.0" layoutY="144.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="144.0">
          <children>
-            <JFXTextField focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Username" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXTextField fx:id="txtUsername" focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Username" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -45,7 +45,7 @@
          </children>
       </AnchorPane>
       <JFXCheckBox checkedColor="#8566b2" layoutX="157.0" layoutY="288.0" prefHeight="18.0" prefWidth="54.0" text="Remember me" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.topAnchor="288.0" />
-      <JFXButton layoutX="116.0" layoutY="344.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="_Login" textFill="WHITE" AnchorPane.topAnchor="344.0">
+      <JFXButton layoutX="116.0" layoutY="344.0" onAction="#btnLogin_OnAction" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="_Login" textFill="WHITE" AnchorPane.topAnchor="344.0">
          <font>
             <Font size="14.0" />
          </font>
