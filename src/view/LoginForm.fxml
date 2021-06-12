@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -24,7 +29,7 @@
             </JFXTextField>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="81.0" layoutY="220.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;">
+      <AnchorPane layoutX="81.0" layoutY="219.0" prefHeight="54.0" prefWidth="285.0" style="-fx-background-color: #545454;">
          <children>
             <JFXPasswordField focusColor="#c173ff" labelFloat="true" prefHeight="30.0" prefWidth="285.0" promptText="  Password" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <font>
@@ -39,5 +44,26 @@
             </JFXPasswordField>
          </children>
       </AnchorPane>
+      <JFXCheckBox checkedColor="#8566b2" layoutX="157.0" layoutY="288.0" prefHeight="18.0" prefWidth="54.0" text="Remember me" textFill="WHITE" unCheckedColor="WHITE" />
+      <JFXButton layoutX="116.0" layoutY="344.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="Login" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="238.0" layoutY="344.0" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="95.0" layoutY="412.0" text="Copyrights © 2021 DEP -7. All Rights Reserved" textFill="WHITE">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="88.0" fitWidth="88.0" layoutX="178.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/DC_Profile_Image.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
