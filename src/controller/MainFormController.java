@@ -15,10 +15,11 @@ public class MainFormController {
     public Label lblTitle;
 
     public void pneDashboard_OnMouseClicked(MouseEvent mouseEvent) {
+        loadForm("../view/DashboardForm.fxml", "Dashboard", "Dashboard");
     }
 
     public void pneAddNewPayment_OnMouseClicked(MouseEvent mouseEvent) {
-        loadForm("../view/AddNewPaymentForm.fxml","Add New Payment","Dashboard / Add New Payment");
+        loadForm("../view/AddNewPaymentForm.fxml", "Add New Payment", "Dashboard / Add New Payment");
     }
 
     public void pneViewPayments_OnMouseClicked(MouseEvent mouseEvent) {
@@ -33,15 +34,15 @@ public class MainFormController {
     public void pneViewBatches_OnMouseClicked(MouseEvent mouseEvent) {
     }
 
-    private void loadForm(String url, String formName, String currentFormLocation) {
+    private void loadForm(String url, String formName, String currentFormLocation) { // Make sure to update AccessibleText in all main anchor panes
         String accessibleText = pneStage.getChildren().get(0).getAccessibleText();
         if (accessibleText != null && accessibleText.equals(formName)) {
             return;
         }
         pneStage.getChildren().clear();
         try {
-            Parent addNewPaymentFormLoader = FXMLLoader.load(this.getClass().getResource(url));
-            pneStage.getChildren().add(addNewPaymentFormLoader);
+            Parent formLoader = FXMLLoader.load(this.getClass().getResource(url));
+            pneStage.getChildren().add(formLoader);
             Stage mainStage = (Stage) pneStage.getScene().getWindow();
             mainStage.setTitle(formName);
             lblTitle.setText(currentFormLocation);
@@ -51,7 +52,7 @@ public class MainFormController {
                 mainStage.sizeToScene();
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 }
