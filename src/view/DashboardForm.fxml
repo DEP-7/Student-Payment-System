@@ -4,12 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="987.0" prefWidth="1583.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardFormController">
+<AnchorPane prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardFormController">
    <children>
       <AnchorPane layoutX="75.0" layoutY="75.0" prefHeight="197.0" prefWidth="277.0" style="-fx-background-color: #C4C4C4;" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="75.0">
          <children>
@@ -26,7 +27,7 @@
             <Label alignment="CENTER" layoutX="42.0" layoutY="151.0" prefHeight="18.0" prefWidth="215.0" text="Click here to view registration details" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="154.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="515.0" layoutY="75.0" prefHeight="197.0" prefWidth="277.0" style="-fx-background-color: #C4C4C4;" AnchorPane.leftAnchor="515.0" AnchorPane.topAnchor="75.0">
+      <AnchorPane layoutX="515.0" layoutY="75.0" prefHeight="197.0" prefWidth="277.0" style="-fx-background-color: #C4C4C4;" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="75.0">
          <children>
             <Label layoutX="83.0" layoutY="41.0" text="Total Number of Payments" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="20.0">
                <font>
@@ -41,7 +42,7 @@
             <Label alignment="CENTER" layoutX="42.0" layoutY="151.0" prefHeight="18.0" prefWidth="215.0" text="Click here to view payment details" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="154.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="951.0" layoutY="75.0" prefHeight="197.0" prefWidth="277.0" style="-fx-background-color: #C4C4C4;" AnchorPane.leftAnchor="951.0" AnchorPane.topAnchor="75.0">
+      <AnchorPane layoutX="897.0" layoutY="75.0" prefHeight="197.0" prefWidth="277.0" style="-fx-background-color: #C4C4C4;" AnchorPane.leftAnchor="919.0" AnchorPane.topAnchor="75.0">
          <children>
             <Label layoutX="83.0" layoutY="41.0" text="Total Income" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="20.0">
                <font>
@@ -53,7 +54,7 @@
                   <Font size="64.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="42.0" layoutY="151.0" prefHeight="18.0" prefWidth="215.0" text="Click here to view income details" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="154.0" />
+            <Label alignment="CENTER" layoutX="2.0" layoutY="154.0" prefHeight="18.0" prefWidth="215.0" text="Click here to view income details" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="154.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="1315.0" layoutY="34.0" prefHeight="263.0" prefWidth="263.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="16.0">
@@ -67,20 +68,20 @@
       </AnchorPane>
       <TableView id="tbl-today-information" layoutX="96.0" layoutY="335.0" prefHeight="621.0" prefWidth="1153.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="359.0" AnchorPane.topAnchor="336.0">
         <columns>
-          <TableColumn prefWidth="267.0" text="Course ID" />
-          <TableColumn prefWidth="251.0" text="New Registrations" />
-            <TableColumn prefWidth="332.0" text="Number of Payments" />
+          <TableColumn editable="false" prefWidth="267.0" text="Course ID" />
+          <TableColumn editable="false" prefWidth="251.0" text="New Registrations" />
+            <TableColumn editable="false" prefWidth="332.0" text="Number of Payments" />
             <TableColumn editable="false" prefWidth="301.0" resizable="false" text="Total Income" />
         </columns>
       </TableView>
-      <AnchorPane layoutX="1352.0" layoutY="310.0" prefHeight="155.0" prefWidth="305.0" style="-fx-background-color: #575757;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="295.0">
+      <AnchorPane layoutX="1352.0" layoutY="310.0" prefHeight="155.0" prefWidth="305.0" style="-fx-background-color: #575757;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="295.0">
          <children>
             <Label layoutX="24.0" layoutY="20.0" text="Balance Payment Due Date Exceeded" textFill="WHITE" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" layoutX="24.0" layoutY="50.0" prefHeight="62.0" prefWidth="232.0" text="DEP - 7 - Ranasinghe M.M.D.C. (931630377V)" textFill="#ffffffb2" wrapText="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="59.0" />
+            <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="50.0" prefHeight="62.0" prefWidth="232.0" text="DEP - 7 - Ranasinghe M.M.D.C. (931630377V)" textFill="#ffffffb2" wrapText="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="59.0" />
             <Label layoutX="219.0" layoutY="110.0" text="VIEW ALL" textFill="#9051eb" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <font>
                   <Font size="14.0" />
@@ -90,21 +91,40 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow color="#2c2b2b" height="50.0" offsetX="6.0" offsetY="10.0" radius="23.25" spread="0.5" width="45.0" />
+         </effect>
       </AnchorPane>
-      <AnchorPane layoutX="1362.0" layoutY="494.0" prefHeight="171.0" prefWidth="305.0" style="-fx-background-color: #575757;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="470.0">
+      <AnchorPane layoutX="1362.0" layoutY="494.0" prefHeight="171.0" prefWidth="305.0" style="-fx-background-color: #575757;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="470.0">
          <children>
             <Label layoutX="24.0" layoutY="20.0" text="Reminders" textFill="WHITE" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" layoutX="24.0" layoutY="50.0" prefHeight="62.0" prefWidth="232.0" text="Need to collect online payment receipt from Sankalpa A.G.T.K (941525876V)" textFill="#ffffffb2" wrapText="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="59.0" />
+            <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="50.0" prefHeight="62.0" prefWidth="232.0" text="Need to collect online payment receipt from Sankalpa A.G.T.K (941525876V)" textFill="#ffffffb2" wrapText="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="59.0" />
             <Label layoutX="219.0" layoutY="110.0" text="DONE" textFill="#9051eb" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
          </children>
+         <effect>
+            <DropShadow color="#2c2b2b" height="50.0" offsetX="6.0" offsetY="10.0" radius="23.25" spread="0.5" width="45.0" />
+         </effect>
+      </AnchorPane>
+      <AnchorPane layoutX="1372.0" layoutY="690.0" prefHeight="131.0" prefWidth="305.0" style="-fx-background-color: #575757;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="658.0">
+         <children>
+            <Label layoutX="24.0" layoutY="20.0" text="Today’s Payments" textFill="WHITE" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="24.0" layoutY="50.0" prefHeight="56.0" prefWidth="232.0" text="DEP - 7&#10;GDSE -11" textFill="#ffffffb2" wrapText="true" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="59.0" />
+         </children>
+         <effect>
+            <DropShadow color="#2c2b2b" height="50.0" offsetX="6.0" offsetY="10.0" radius="23.25" spread="0.5" width="45.0" />
+         </effect>
       </AnchorPane>
    </children>
 </AnchorPane>

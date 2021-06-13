@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1050.0" prefWidth="1850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+<AnchorPane prefHeight="944.0" prefWidth="1830.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
-      <AnchorPane layoutX="304.0" layoutY="6.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="304.0" layoutY="6.0" maxHeight="1594.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="72.0" layoutY="20.0" text="Dashboard" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="20.0">
                <font>
@@ -30,7 +30,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="1080.0" prefWidth="304.0" style="-fx-background-color: #575757;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
+            <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
                <children>
                   <AnchorPane prefHeight="48.0" prefWidth="200.0">
                      <children>
@@ -124,6 +124,6 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="987.0" prefWidth="1583.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
+      <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="708.0" prefWidth="1526.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
    </children>
 </AnchorPane>

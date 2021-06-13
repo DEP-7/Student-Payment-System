@@ -22,6 +22,7 @@ public class LoginFormController {
         mainScene.setUserData(ctrl);
         mainStage.setScene(mainScene);
         mainStage.setTitle("Dashboard");
+        mainStage.setMaxWidth(1860);
         mainStage.setResizable(true);
         Platform.runLater(() -> {
             mainStage.setMaximized(true);
