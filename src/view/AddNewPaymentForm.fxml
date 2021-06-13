@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/AddNewPaymentFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddNewPaymentFormController">
+<AnchorPane accessibleText="Add New Payment" prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/AddNewPaymentFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddNewPaymentFormController">
    <children>
       <AnchorPane layoutX="778.0" layoutY="371.0" prefHeight="149.0" prefWidth="836.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="106.0">
          <children>
