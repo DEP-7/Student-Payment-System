@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,9 +10,10 @@
 
 <AnchorPane prefHeight="944.0" prefWidth="1830.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
-      <AnchorPane layoutX="304.0" layoutY="6.0" maxHeight="1594.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="881.0" prefWidth="1526.0" style=": #404040;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
+      <AnchorPane layoutX="304.0" layoutY="6.0" maxHeight="1594.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="72.0" layoutY="20.0" text="Dashboard" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="20.0">
+            <Label layoutX="72.0" layoutY="20.0" text="Dashboard" textFill="WHITE" AnchorPane.leftAnchor="376.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -28,9 +30,9 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="1080.0" prefWidth="304.0" style="-fx-background-color: #575757;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutY="58.0" prefHeight="886.0" prefWidth="304.0" style="-fx-background-color: #575757;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="64.0">
          <children>
-            <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
+            <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
                <children>
                   <AnchorPane prefHeight="48.0" prefWidth="200.0">
                      <children>
@@ -118,12 +120,14 @@
                   </AnchorPane>
                </children>
             </VBox>
-            <ImageView fitHeight="88.0" fitWidth="294.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
-               <image>
-                  <Image url="@assets/icons/Icon_IJSE.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
-      <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="708.0" prefWidth="1526.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
+         </children>
+         <effect>
+            <DropShadow color="#363636f7" height="10.0" offsetX="5.0" offsetY="10.0" radius="14.905" spread="0.15" width="51.62" />
+         </effect></AnchorPane>
+      <ImageView fitHeight="88.0" fitWidth="294.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@assets/icons/Icon_IJSE.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
