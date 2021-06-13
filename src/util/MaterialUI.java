@@ -1,15 +1,17 @@
 package util;
 
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class MaterialUI {
-    public static void paintTextFields(TextField... textFields) {
-        for (TextField txt : textFields) {
+    public static void paintTextFields(TextInputControl... textFields) {
+        for (TextInputControl txt : textFields) {
             AnchorPane pneTextContainer = (AnchorPane) txt.getParent();
             String floatedText = txt.getAccessibleText();
             Canvas canvas = new Canvas();
@@ -26,6 +28,11 @@ public class MaterialUI {
             txt.focusedProperty().addListener((observable, oldValue, newValue) -> {
                 redrawTextFieldCanvas(canvas, ctx, floatedText, newValue);
             });
+
+            pneTextContainer.setOnMouseEntered(event -> {
+                pneTextContainer.setCursor(Cursor.TEXT);
+            });
+
             pneTextContainer.setOnMouseClicked(event -> {
                 txt.requestFocus();
             });
@@ -37,7 +44,7 @@ public class MaterialUI {
         ctx.setStroke(focus ? Color.valueOf("#C173FF") : Color.WHITE);
         ctx.strokeRoundRect(1, 10, canvas.getWidth() - 2, canvas.getHeight() - 11, 10, 10);
         ctx.setFill(Color.valueOf("#404040"));
-        ctx.fillRect(12, 0, new Text(floatedText).getLayoutBounds().getWidth() + 4, 20);
+        ctx.fillRect(12, 0, new Text(floatedText).getLayoutBounds().getWidth() + 8, 20);
         ctx.setFill(focus ? Color.valueOf("#C173FF") : Color.WHITE);
         ctx.fillText(floatedText, 16, 15);
     }

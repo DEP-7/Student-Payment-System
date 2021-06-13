@@ -1,0 +1,25 @@
+.text-field{
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.text-area, .text-area.scroll-pane,.text-area.scroll-pane.viewport {
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+
+.radio-button {
+    -jfx-unselected-color: white;
+    -jfx-selected-color: white;
+}
+
+.radio-button:focused {
+    -jfx-unselected-color: #C173FF;
+    -jfx-selected-color: #C173FF;
+}
+
+#text-items{
+    -fx-background-radius: 5px 5px 0 0;
+}

@@ -1,19 +1,27 @@
 package controller;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import com.jfoenix.controls.JFXTextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import util.MaterialUI;
 
 public class AddNewPaymentFormController {
     public TextField txtNIC;
+    public TextField txtReceiptNumber;
+    public JFXTextField txtUsername;
+    public TextField txtOnlineReferencNumber;
+    public TextField txtFileName;
+    public TextField txtCardNumber;
+    public TextField txtExpirationDate;
+    public TextField txtNameOnCard;
+    public TextField txtAmountReceived;
+    public TextField txtDueDateOfBalancePayment;
+    public TextField txtPaymentDate;
+    public TextField txtTotalAmount;
+    public TextField txtBalanceAmount;
+    public TextArea txtNotes;
 
     public void initialize() {
-        MaterialUI.paintTextFields(txtNIC);
+        MaterialUI.paintTextFields(txtNIC, txtReceiptNumber, txtOnlineReferencNumber, txtFileName, txtCardNumber, txtExpirationDate, txtNameOnCard, txtAmountReceived, txtDueDateOfBalancePayment, txtPaymentDate, txtTotalAmount, txtBalanceAmount, txtNotes);
     }
-
 }
