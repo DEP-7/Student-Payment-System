@@ -3,15 +3,14 @@ package util;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Control;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class MaterialUI {
-    public static void paintTextFields(TextInputControl... textFields) {
-        for (TextInputControl txt : textFields) {
+    public static void paintTextFields(Control... textFields) {
+        for (Control txt : textFields) {
             AnchorPane pneTextContainer = (AnchorPane) txt.getParent();
             String floatedText = txt.getAccessibleText();
             Canvas canvas = new Canvas();

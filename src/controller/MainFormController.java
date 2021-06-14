@@ -26,6 +26,7 @@ public class MainFormController {
     }
 
     public void pneManageStudents_OnMouseClicked(MouseEvent mouseEvent) {
+        loadForm("../view/ManageStudentsForm.fxml", "Manage Students", "Dashboard / Manage Students");
     }
 
     public void pneViewCourses_OnMouseClicked(MouseEvent mouseEvent) {
