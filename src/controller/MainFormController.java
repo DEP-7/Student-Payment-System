@@ -35,6 +35,7 @@ public class MainFormController {
     }
 
     public void pneViewBatches_OnMouseClicked(MouseEvent mouseEvent) {
+        loadForm("../view/ViewBatchesForm.fxml", "View Batches", "Dashboard / View Batches");
     }
 
     private void loadForm(String url, String formName, String currentFormLocation) { // Make sure to update AccessibleText in all main anchor panes

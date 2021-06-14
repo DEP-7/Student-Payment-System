@@ -9,7 +9,7 @@ public class ViewCoursesFormController {
     public Label lblEntryRequirements;
     public Label lblNotes;
 
-    public void initialize(){
-        MaterialUI.paintTextFields(txtSearch,lblEntryRequirements,lblNotes);
+    public void initialize() {
+        MaterialUI.paintTextFields(txtSearch, lblEntryRequirements, lblNotes);
     }
 }
