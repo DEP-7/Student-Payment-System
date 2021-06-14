@@ -31,6 +31,7 @@ public class MainFormController {
     }
 
     public void pneViewCourses_OnMouseClicked(MouseEvent mouseEvent) {
+        loadForm("../view/ViewCoursesForm.fxml", "View Courses", "Dashboard / View Courses");
     }
 
     public void pneViewBatches_OnMouseClicked(MouseEvent mouseEvent) {
