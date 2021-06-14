@@ -1,0 +1,21 @@
+.text-field, .combo-box{
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+}
+
+.radio-button {
+    -jfx-unselected-color: white;
+    -jfx-selected-color: white;
+}
+
+.radio-button:focused {
+    -jfx-unselected-color: #C173FF;
+    -jfx-selected-color: #C173FF;
+}
+
+#titled-pane{
+    -fx-border-color: white;
+    -fx-border-radius: 5px 5px;
+}
