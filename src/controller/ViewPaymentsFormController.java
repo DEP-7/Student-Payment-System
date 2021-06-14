@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import util.MaterialUI;
 
 public class ViewPaymentsFormController {
     public ToggleGroup rbtnDayGaps;
@@ -27,4 +28,8 @@ public class ViewPaymentsFormController {
     public TextField txtNotes;
     public TextField txtSearch;
     public TextField txtToDate;
+
+    public void initialize(){
+        MaterialUI.paintTextFields(txtFromDate,txtReceiptNumber,txtNIC,cmbCourseId,cmbBatchNumber,txtPaymentDescription,txtPaymentMethod,txtOnlineReference,txtCardNumber,txtExpirationDate,txtNameOnCard,txtTotalAmount,txtAmountReceived,txtBalanceAmount,txtDueDate,txtBalanceSettledDate,txtReceiptDate,txtCashier,txtNotes,txtSearch,txtToDate);
+        }
 }

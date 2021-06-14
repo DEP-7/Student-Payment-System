@@ -23,6 +23,7 @@ public class MainFormController {
     }
 
     public void pneViewPayments_OnMouseClicked(MouseEvent mouseEvent) {
+        loadForm("../view/ViewPaymentsForm.fxml", "View Payments", "Dashboard / View Payments");
     }
 
     public void pneManageStudents_OnMouseClicked(MouseEvent mouseEvent) {
