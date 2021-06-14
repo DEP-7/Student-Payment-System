@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="855.0" prefWidth="600.0" style="-fx-background-color: #404040;" stylesheets="@css/SettingsFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsFormController">
+    <children>
+        <AnchorPane layoutX="105.0" layoutY="234.0" prefHeight="66.0" prefWidth="465.0" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="307.0">
+            <children>
+                <TextField fx:id="txtUsername" accessibleText="Username *" prefHeight="24.0" promptText="Enter new username here and click update button" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <JFXButton layoutX="580.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="390.0">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <AnchorPane layoutX="105.0" layoutY="312.0" prefHeight="66.0" prefWidth="465.0" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="461.0">
+            <children>
+                <TextField fx:id="txtCurrentPassword" accessibleText="Current Password *" prefHeight="24.0" promptText="Enter current password here" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="105.0" layoutY="390.0" prefHeight="66.0" prefWidth="465.0" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="547.0">
+            <children>
+                <TextField fx:id="txtNewPassword" accessibleText="New Password *" prefHeight="24.0" promptText="Enter new password here" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="151.0" layoutY="476.0" prefHeight="66.0" prefWidth="465.0" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="633.0">
+            <children>
+                <TextField fx:id="txtConfirmPassword" accessibleText="Confirm Password *" prefHeight="24.0" promptText="Enter new password again" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <JFXButton layoutX="112.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="711.0">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton layoutX="268.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="787.0">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton layoutX="424.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="OK" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.topAnchor="787.0">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+      <AnchorPane layoutX="47.0" layoutY="33.0" prefHeight="64.0" prefWidth="200.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="40.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="20.0">
+               <image>
+                  <Image url="@assets/icons/Icon_Settings.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="174.0" layoutY="24.0" text="Settings" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="199.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="86.0">
+         <image>
+            <Image url="@assets/profileimages/Student_Profile_Picture_Null.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="47.5" fitWidth="47.5" layoutX="348.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="228.0">
+         <image>
+            <Image url="@assets/icons/Icon_Camera.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

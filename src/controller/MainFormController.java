@@ -3,9 +3,11 @@ package controller;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -90,7 +92,20 @@ public class MainFormController {
                 mainStage.sizeToScene();
             });
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
+    }
+
+    public void imgSettings_OnMouseClicked(MouseEvent mouseEvent) throws IOException {
+        Stage settingsStage = new Stage();
+        Parent load = FXMLLoader.load(this.getClass().getResource("../view/SettingsForm.fxml"));
+        Scene settingScene = new Scene(load);
+        settingsStage.setScene(settingScene);
+        settingsStage.setTitle("Settings");
+        settingsStage.initModality(Modality.WINDOW_MODAL);
+        settingsStage.initOwner(pneStage.getScene().getWindow());
+        settingsStage.setResizable(false);
+        settingsStage.centerOnScreen();
+        settingsStage.show();
     }
 }

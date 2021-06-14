@@ -22,6 +22,6 @@ public class ManageStudentsFormController {
     public JFXComboBox cmbBatchNumber;
 
     public void initialize(){
-        MaterialUI.paintTextFields(txtNIC,txtFullName,txtNameWithInitials,txtBirthday,txtHighestEducationalQualification,txtPreviousRegisteredCourses,txtAddress,txtContactNumber,txtEmail,txtAge,txtSearch,cmbCourseId,cmbBatchNumber);
+        MaterialUI.paintTextFields(txtNIC, txtFullName, txtNameWithInitials, txtBirthday, txtHighestEducationalQualification, txtPreviousRegisteredCourses, txtAddress, txtContactNumber, txtEmail, txtAge, txtSearch, cmbCourseId, cmbBatchNumber);
     }
 }
