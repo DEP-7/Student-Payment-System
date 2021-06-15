@@ -15,14 +15,16 @@ import java.io.IOException;
 public class MainFormController {
     public AnchorPane pneStage;
     public Label lblTitle;
+    public Label lblTime;
 
     Parent[] formArray;
 
     public void initialize() throws IOException {
-        String[] urlFormNames={"DashboardForm","AddNewPaymentForm","ViewPaymentsForm","ManageStudentsForm","ViewCoursesForm","ViewBatchesForm"};
+        // Please update below array by inserting fxml file name, when adding new forms
+        String[] urlFormNames = {"DashboardForm", "AddNewPaymentForm", "ViewPaymentsForm", "ManageStudentsForm", "ViewCoursesForm", "ViewBatchesForm"};
         formArray = new Parent[urlFormNames.length];
         for (int i = 0; i < formArray.length; i++) {
-            formArray[i] = FXMLLoader.load(this.getClass().getResource("../view/"+urlFormNames[i]+".fxml"));
+            formArray[i] = FXMLLoader.load(this.getClass().getResource("../view/" + urlFormNames[i] + ".fxml"));
         }
     }
 
@@ -51,18 +53,14 @@ public class MainFormController {
     }
 
     private void load(int urlIndex, String currentFormLocation) {
-        //String accessibleText = pneStage.getChildren().get(0).getAccessibleText();
-        System.out.println(pneStage.getChildren().get(0));
-        System.out.println(formArray[urlIndex]);
-        System.out.println();
-        if (pneStage.getChildren().get(0)==formArray[urlIndex]) {
+        if (pneStage.getChildren().get(0) == formArray[urlIndex]) {
             return;
         }
         pneStage.getChildren().clear();
         pneStage.getChildren().add(formArray[urlIndex]);
         Stage mainStage = (Stage) pneStage.getScene().getWindow();
         String[] splittedFormLocationString = currentFormLocation.split("/");
-        mainStage.setTitle(splittedFormLocationString[splittedFormLocationString.length-1].trim());
+        mainStage.setTitle(splittedFormLocationString[splittedFormLocationString.length - 1].trim());
         lblTitle.setText(currentFormLocation);
         Platform.runLater(() -> {
             //mainStage.setMaximized(true);

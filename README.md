@@ -1,7 +1,6 @@
 # Student Payment System
 
-A simple Java FX Application to manage student payments.
-
+A simple Java FX Application to manage student payments developed with the guidance of Mr. Ranjith Suranga.
 ### How to use this repo?
 
 1. Clone the repository first
@@ -23,6 +22,6 @@ in [Figma](https://www.figma.com/file/bhdvUqGNgqjJvGIHqNmmia/Chandimal---Student
 
 ### License
 
-Copyright &copy; 2021 Dhanushka Chandimal. All rights reserved.
+Copyright &copy; 2021 Dhanushka Chandimal All rights reserved.
 
 Licensed under the [MIT](LICENSE) license
