@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/ViewPaymentsFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageCoursesAdminFormController">
+    <children>
+        <AnchorPane layoutX="154.0" layoutY="21.0" prefHeight="66.0" prefWidth="1025.0" AnchorPane.leftAnchor="490.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="19.0">
+            <children>
+                <TextField fx:id="txtSearch" accessibleText="Search Courses" prefHeight="24.0" promptText="Enter Course Name, Course ID, Course Duration, Course Fee etc" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="490.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="112.0">
+            <columns>
+                <TableColumn editable="false" prefWidth="107.0" text="Course Name" />
+                <TableColumn editable="false" prefWidth="169.66668701171875" text="Course ID" />
+                <TableColumn editable="false" prefWidth="98.33331298828125" text="Duration" />
+                <TableColumn editable="false" prefWidth="84.6666259765625" text="Course Fee" />
+                <TableColumn editable="false" prefWidth="215.666748046875" text="No. of Installments" />
+                <TableColumn editable="false" prefWidth="173.0" text="Course Status" />
+            <TableColumn editable="false" prefWidth="75.0" text="Course Initiation Date" />
+            </columns>
+        </TableView>
+      <VBox layoutX="105.0" layoutY="26.0" spacing="4.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="19.0">
+         <children>
+            <AnchorPane prefHeight="66.0" prefWidth="350.0">
+               <children>
+                  <TextField fx:id="txtCourseName" accessibleText="Course Name" prefHeight="24.0" promptText="Eg: Direct Entry Programme" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="66.0" prefWidth="350.0">
+               <children>
+                  <TextField fx:id="txtCourseID" accessibleText="Course ID" prefHeight="24.0" promptText="Eg:DEP" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <HBox>
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="txtCourseFee" accessibleText="Course Fee" prefHeight="24.0" promptText="Eg: 100,000.00" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="66.0" prefWidth="137.0">
+                     <children>
+                        <TextField fx:id="txtNumberOfInstallments" accessibleText="No. of Installements" prefHeight="24.0" promptText="Eg: 2" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="txtNumberOfStudents" accessibleText="No. of Students" prefHeight="24.0" promptText="Eg: 30" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <JFXCheckBox checkedColor="#8566b2" prefHeight="18.0" prefWidth="54.0" text="Unlimited" textFill="WHITE" unCheckedColor="WHITE">
+                     <HBox.margin>
+                        <Insets left="20.0" top="30.0" />
+                     </HBox.margin>
+                  </JFXCheckBox>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="txtCourseDuration" accessibleText="Course Duration" prefHeight="24.0" promptText="Eg: 4" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <JFXRadioButton layoutX="10.0" layoutY="6.0" selected="true" text="Months" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbnDuration" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton layoutX="12.0" layoutY="34.0" text="Weeks" textFill="WHITE" toggleGroup="$rbnDuration" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXRadioButton>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="txtFirstInstallment" accessibleText="First Installment" prefHeight="24.0" promptText="Eg: 2" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <JFXRadioButton layoutX="18.0" layoutY="16.0" selected="true" text="Weeks" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbnFirstInstallment" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton layoutX="26.0" layoutY="36.0" text="Days" textFill="WHITE" toggleGroup="$rbnFirstInstallment" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXRadioButton>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="txtInstallmentGap" accessibleText="Installment Gap" prefHeight="24.0" promptText="Eg: 2" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <JFXRadioButton layoutX="16.0" layoutY="12.0" selected="true" text="Months" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbnInstallmentGap" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton layoutX="24.0" layoutY="32.0" text="Days" textFill="WHITE" toggleGroup="$rbnInstallmentGap" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXRadioButton>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="66.0" prefWidth="350.0">
+               <children>
+                  <AnchorPane id="titled-pane" layoutY="7.0" prefHeight="56.0" prefWidth="253.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <JFXRadioButton layoutX="42.0" layoutY="20.0" selected="true" text="Available" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbnGender" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton layoutX="145.0" layoutY="20.0" text="Not Available" textFill="WHITE" toggleGroup="$rbnGender" AnchorPane.leftAnchor="145.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXRadioButton>
+                     </children>
+                  </AnchorPane>
+                  <Label prefHeight="15.0" prefWidth="90.0" style="-fx-background-color: #404040; -fx-text-fill: transparent;" stylesheets="@css/AddNewPaymentFormStyle.css" text=" " textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label stylesheets="@css/AddNewPaymentFormStyle.css" text="Course Status" textFill="WHITE" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="3.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox>
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="230.0">
+                     <children>
+                        <TextField fx:id="txtFileName" accessibleText="File Name" prefHeight="24.0" promptText="-Click button to add-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <JFXButton prefHeight="36.0" prefWidth="105.0" style="-fx-background-color: #545454;" text="Add File" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="15.0" top="15.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="119.0" prefWidth="350.0">
+               <children>
+                  <TextArea fx:id="txtMinimumRequirements" accessibleText="Minimum Requirements" prefHeight="200.0" prefWidth="200.0" promptText="Eg: Graduates\nUndergraduates" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="90.0" prefWidth="350.0">
+               <children>
+                  <TextArea fx:id="txtNotes" accessibleText="Notes" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" promptText="Click Here to Add Notes" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <JFXButton layoutX="303.0" layoutY="849.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="882.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="403.0" layoutY="865.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="394.0" AnchorPane.topAnchor="882.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="201.0" layoutY="866.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="882.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="100.0" layoutY="849.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="882.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+    </children>
+</AnchorPane>
