@@ -27,13 +27,11 @@
         </AnchorPane>
         <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="847.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="668.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="112.0">
             <columns>
-                <TableColumn editable="false" prefWidth="107.0" text="Course Name" />
-                <TableColumn editable="false" prefWidth="169.66668701171875" text="Course ID" />
-                <TableColumn editable="false" prefWidth="98.33331298828125" text="Duration" />
-                <TableColumn editable="false" prefWidth="84.6666259765625" text="Course Fee" />
-                <TableColumn editable="false" prefWidth="215.666748046875" text="No. of Installments" />
-                <TableColumn editable="false" prefWidth="173.0" text="Course Status" />
-            <TableColumn editable="false" prefWidth="75.0" text="Course Initiation Date" />
+                <TableColumn editable="false" prefWidth="161.66668701171875" text="User NIC" />
+                <TableColumn editable="false" prefWidth="225.33331298828125" text="Name" />
+                <TableColumn editable="false" prefWidth="80.6666259765625" text="Gender" />
+                <TableColumn editable="false" prefWidth="144.333251953125" text="Account Status" />
+                <TableColumn editable="false" prefWidth="235.6666259765625" text="Last Login" />
             </columns>
         </TableView>
       <VBox layoutX="105.0" layoutY="26.0" spacing="18.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="19.0">
@@ -67,21 +65,35 @@
             </AnchorPane>
             <HBox spacing="9.0">
                <children>
-                  <AnchorPane id="titled-pane" prefHeight="56.0" prefWidth="269.0">
+                  <AnchorPane prefHeight="66.0" prefWidth="269.0">
                      <children>
-                        <JFXRadioButton layoutX="17.0" layoutY="20.0" selected="true" text="Available" textFill="WHITE" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="21.0">
+                        <AnchorPane id="titled-pane" layoutY="7.0" prefHeight="56.0" prefWidth="253.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <JFXRadioButton layoutX="42.0" layoutY="20.0" selected="true" text="Male" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="rbnGender" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton layoutX="145.0" layoutY="20.0" text="Female" textFill="WHITE" toggleGroup="$rbnGender" AnchorPane.leftAnchor="145.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXRadioButton>
+                           </children>
+                        </AnchorPane>
+                        <Label prefHeight="15.0" prefWidth="52.0" style="-fx-background-color: #404040; -fx-text-fill: transparent;" stylesheets="@css/AddNewPaymentFormStyle.css" text=" " textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="0.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="12.0" />
                            </font>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="rbnAvailability" />
-                           </toggleGroup>
-                        </JFXRadioButton>
-                        <JFXRadioButton layoutX="130.0" layoutY="20.0" text="Not Available" textFill="WHITE" toggleGroup="$rbnAvailability" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="20.0">
+                        </Label>
+                        <Label stylesheets="@css/AddNewPaymentFormStyle.css" text="Gender" textFill="WHITE" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="3.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="12.0" />
                            </font>
-                        </JFXRadioButton>
+                        </Label>
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="66.0" prefWidth="147.0">
@@ -141,7 +153,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="403.0" layoutY="865.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="879.0">
+      <JFXButton layoutX="403.0" layoutY="865.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Delete" textFill="WHITE" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="879.0">
          <font>
             <Font size="14.0" />
          </font>

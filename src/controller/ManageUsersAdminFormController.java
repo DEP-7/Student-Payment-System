@@ -5,7 +5,7 @@ import javafx.scene.control.ToggleGroup;
 import util.MaterialUI;
 
 public class ManageUsersAdminFormController {
-    public ToggleGroup rbnAvailability;
+    public ToggleGroup rbnGender;
     public TextField txtNameWithInitials;
     public TextField txtContactNumber;
     public TextField txtDateOfBirth;
