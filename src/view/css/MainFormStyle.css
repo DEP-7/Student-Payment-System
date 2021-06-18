@@ -1,0 +1,4 @@
+.menu:hover:selected{
+    -fx-border-color: white;
+    -fx-background-color: red;
+}

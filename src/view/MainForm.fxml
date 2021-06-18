@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="944.0" prefWidth="1830.0" stylesheets="@css/MainFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+<AnchorPane prefHeight="944.0" prefWidth="1830.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
       <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="881.0" prefWidth="1526.0" style=": #404040;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
       <AnchorPane layoutX="304.0" layoutY="6.0" maxHeight="1594.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -38,7 +38,7 @@
          <children>
             <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
                <children>
-                  <AnchorPane id="sidebar-menu" onMouseClicked="#pneDashboard_OnMouseClicked" prefHeight="48.0" prefWidth="200.0">
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneDashboard_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -55,7 +55,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane id="sidebar-menu" onMouseClicked="#pneAddNewPayment_OnMouseClicked" prefHeight="48.0" prefWidth="200.0">
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneAddNewPayment_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -72,7 +72,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane id="sidebar-menu" onMouseClicked="#pneViewPayments_OnMouseClicked" prefHeight="48.0" prefWidth="200.0">
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewPayments_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -89,7 +89,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane id="sidebar-menu" onMouseClicked="#pneManageStudents_OnMouseClicked" prefHeight="48.0" prefWidth="200.0">
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneManageStudents_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -106,7 +106,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane id="sidebar-menu" onMouseClicked="#pneViewCourses_OnMouseClicked" prefHeight="48.0" prefWidth="200.0">
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewCourses_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -123,7 +123,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane id="sidebar-menu" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0">
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -131,6 +131,57 @@
                            </image>
                         </ImageView>
                         <Label layoutX="72.0" layoutY="12.0" text="View Batches" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </AnchorPane>
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_View_Batches.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="Manage Batches" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </AnchorPane>
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_View_Courses.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="Manage Courses" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </AnchorPane>
+                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
+                           <image>
+                              <Image url="@assets/icons/Icon_Manage_Users.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="72.0" layoutY="12.0" text="Manage Users" textFill="WHITE" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="12.0">
                            <font>
                               <Font size="14.0" />
                            </font>

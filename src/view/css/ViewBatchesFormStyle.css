@@ -4,3 +4,16 @@
     -fx-background-color: transparent;
     -fx-font-size: 16px;
 }
+
+.text-area {
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
+    -fx-text-fill: white;
+    -fx-base:trnasparent;
+    -fx-highlight-fill: #C173FF;
+    -fx-highlight-text-fill: black;
+}
+.scroll-bar {
+    -fx-color: #696969;
+    -fx-base: #404040;
+    -fx-outer-border: derive(-fx-color, -40%);
+}
