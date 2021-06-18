@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleText="Dashboard" prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardFormController">
+<AnchorPane accessibleText="Dashboard" prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/DashboardFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardFormController">
    <children>
       <AnchorPane layoutX="75.0" layoutY="75.0" prefHeight="197.0" prefWidth="277.0" style="-fx-background-color: #C4C4C4;" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="75.0">
          <children>
@@ -66,7 +66,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView id="tbl-today-information" layoutX="96.0" layoutY="335.0" prefHeight="621.0" prefWidth="1153.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="359.0" AnchorPane.topAnchor="336.0">
+      <TableView id="tbl-today-information" fx:id="tblResults" layoutX="96.0" layoutY="335.0" prefHeight="621.0" prefWidth="1153.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="359.0" AnchorPane.topAnchor="336.0">
         <columns>
           <TableColumn editable="false" prefWidth="267.0" text="Course ID" />
           <TableColumn editable="false" prefWidth="251.0" text="New Registrations" />
