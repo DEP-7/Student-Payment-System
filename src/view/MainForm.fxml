@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXRippler?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="944.0" prefWidth="1830.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+<AnchorPane prefHeight="944.0" prefWidth="1830.0" stylesheets="@css/MainFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
       <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="881.0" prefWidth="1526.0" style=": #404040;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
       <AnchorPane layoutX="304.0" layoutY="6.0" maxHeight="1594.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -38,7 +39,16 @@
          <children>
             <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
                <children>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneDashboard_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <JFXRippler fx:id="rprDashboard" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprAddNewPayment" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprViewPayments" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprManageStudents" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprViewCourses" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprViewBatches" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprManageBatches" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprManageCourses" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <JFXRippler fx:id="rprManageUsers" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
+                  <AnchorPane fx:id="pneItemDashboard" focusTraversable="true" onKeyPressed="#pneItemDashbord_OnKeyPressed" onKeyReleased="#pneItemDashbord_OnKeyReleased" onMouseClicked="#pneDashboard_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -55,7 +65,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneAddNewPayment_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemAddNewPayment" focusTraversable="true" onKeyPressed="#pneAddNewPayment_OnKeyPressed" onKeyReleased="#pneAddNewPayment_OnKeyReleased" onMouseClicked="#pneAddNewPayment_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -72,7 +82,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewPayments_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemViewPayments" focusTraversable="true" onKeyPressed="#pneViewPayments_OnKeyPressed" onKeyReleased="#pneViewPayments_OnKeyReleased" onMouseClicked="#pneViewPayments_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -89,7 +99,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneManageStudents_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemManageStudents" focusTraversable="true" onKeyPressed="#pneManageStudents_OnKeyPressed" onKeyReleased="#pneManageStudents_OnKeyReleased" onMouseClicked="#pneManageStudents_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -106,7 +116,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewCourses_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemViewCourses" focusTraversable="true" onKeyPressed="#pneViewCourses_OnKeyPressed" onKeyReleased="#pneViewCourses_OnKeyReleased" onMouseClicked="#pneViewCourses_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -123,7 +133,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemViewBatches" focusTraversable="true" onKeyPressed="#pneViewBatches_OnKeyPressed" onKeyReleased="#pneViewBatches_OnKeyReleased" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -140,7 +150,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemManageBatches" focusTraversable="true" onKeyPressed="#pneManageBatches_OnKeyPressed" onKeyReleased="#pneManageBatches_OnKeyReleased" onMouseClicked="#pneManageBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -157,7 +167,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemManageCourses" focusTraversable="true" onKeyPressed="#pneManageCourses_OnKeyPressed" onKeyReleased="#pneManageCourses_OnKeyReleased" onMouseClicked="#pneManageCourses_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>
@@ -174,7 +184,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane focusTraversable="true" onMouseClicked="#pneViewBatches_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
+                  <AnchorPane fx:id="pneItemManageUsers" focusTraversable="true" onKeyPressed="#pneManageUsers_OnKeyPressed" onKeyReleased="#pneManageUsers_OnKeyReleased" onMouseClicked="#pneManageUsers_OnMouseClicked" prefHeight="48.0" prefWidth="200.0" styleClass="menu">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="12.0">
                            <image>

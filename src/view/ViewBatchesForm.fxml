@@ -20,6 +20,12 @@
                 </TextField>
             </children>
         </AnchorPane>
+      <AnchorPane accessibleText="Course ID" layoutX="63.0" layoutY="90.0" prefHeight="64.0" prefWidth="240.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="90.0">
+         <children>
+            <JFXComboBox fx:id="cmbCourseId" accessibleText="Course ID" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="-Select Course ID-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+         </children>
+      </AnchorPane>
+        <JFXCheckBox checkedColor="#8566b2" layoutX="1279.0" layoutY="647.0" prefHeight="18.0" prefWidth="54.0" text="Select ongoing batches only" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="120.0" />
         <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="175.0">
             <columns>
                 <TableColumn prefWidth="246.99996948242188" text="Batch Number" />
@@ -29,30 +35,6 @@
                 <TableColumn prefWidth="259.0" text="End Date" />
             </columns>
         </TableView>
-        <AnchorPane layoutX="952.0" layoutY="365.0" prefHeight="414.0" prefWidth="369.0" AnchorPane.leftAnchor="1146.0" AnchorPane.topAnchor="201.0">
-            <children>
-                <Label fx:id="lblDelayedPayments" accessibleText="Delayed Payments" alignment="TOP_LEFT" text="Select a batch from table to view details" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
-        <AnchorPane layoutX="967.0" layoutY="351.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="1146.0" AnchorPane.topAnchor="105.0">
-            <children>
-                <Label fx:id="lblNextPaymentDate" accessibleText="Next Payment Date" alignment="TOP_LEFT" text="Select a batch from table to view details" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
-        <JFXCheckBox checkedColor="#8566b2" layoutX="1279.0" layoutY="647.0" prefHeight="18.0" prefWidth="54.0" text="Select ongoing batches only" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="120.0" />
-      <AnchorPane accessibleText="Course ID" layoutX="63.0" layoutY="90.0" prefHeight="64.0" prefWidth="240.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="90.0">
-         <children>
-            <JFXComboBox fx:id="cmbCourseId" accessibleText="Course ID" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="-Select Course ID-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-         </children>
-      </AnchorPane>
       <AnchorPane layoutX="962.0" layoutY="375.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="1146.0" AnchorPane.topAnchor="19.0">
          <children>
             <Label fx:id="lblBatchNumber" accessibleText="Batch Number" alignment="TOP_LEFT" text="Select a batch from table to view details" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
@@ -62,6 +44,24 @@
             </Label>
          </children>
       </AnchorPane>
+        <AnchorPane layoutX="967.0" layoutY="351.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="1146.0" AnchorPane.topAnchor="105.0">
+            <children>
+                <Label fx:id="lblNextPaymentDate" accessibleText="Next Payment Date" alignment="TOP_LEFT" text="Select a batch from table to view details" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="952.0" layoutY="365.0" prefHeight="414.0" prefWidth="369.0" AnchorPane.leftAnchor="1146.0" AnchorPane.topAnchor="201.0">
+            <children>
+                <Label fx:id="lblDelayedPayments" accessibleText="Delayed Payments" alignment="TOP_LEFT" text="Select a batch from table to view details" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
       <AnchorPane layoutX="977.0" layoutY="361.0" prefHeight="290.0" prefWidth="369.0" AnchorPane.leftAnchor="1146.0" AnchorPane.topAnchor="625.0">
          <children>
             <Label fx:id="lblNotes" accessibleText="Notes" alignment="TOP_LEFT" text="Select a batch from table to view details" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">

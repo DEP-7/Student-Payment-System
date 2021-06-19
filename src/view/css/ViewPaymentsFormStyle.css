@@ -65,6 +65,7 @@
     -fx-background-color: transparent;
     -fx-font-size: 16px;
 }
+
 /*Radio Button Styles*/
 .radio-button {
     -jfx-unselected-color: white;
@@ -75,6 +76,7 @@
     -jfx-unselected-color: #C173FF;
     -jfx-selected-color: #C173FF;
 }
+
 /*Specified Styles*/
 #titled-pane{
     -fx-border-color: white;

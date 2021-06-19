@@ -18,26 +18,6 @@
 
 <AnchorPane prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/ViewCoursesFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageCoursesAdminFormController">
     <children>
-        <AnchorPane layoutX="154.0" layoutY="21.0" prefHeight="66.0" prefWidth="1025.0" AnchorPane.leftAnchor="490.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="19.0">
-            <children>
-                <TextField fx:id="txtSearch" accessibleText="Search Courses" prefHeight="24.0" promptText="Enter Course Name, Course ID, Course Duration, Course Fee etc" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </TextField>
-            </children>
-        </AnchorPane>
-        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="490.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="112.0">
-            <columns>
-                <TableColumn editable="false" prefWidth="107.0" text="Course Name" />
-                <TableColumn editable="false" prefWidth="169.66668701171875" text="Course ID" />
-                <TableColumn editable="false" prefWidth="98.33331298828125" text="Duration" />
-                <TableColumn editable="false" prefWidth="84.6666259765625" text="Course Fee" />
-                <TableColumn editable="false" prefWidth="215.666748046875" text="No. of Installments" />
-                <TableColumn editable="false" prefWidth="173.0" text="Course Status" />
-            <TableColumn editable="false" prefWidth="75.0" text="Course Initiation Date" />
-            </columns>
-        </TableView>
       <VBox layoutX="105.0" layoutY="26.0" spacing="4.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="19.0">
          <children>
             <AnchorPane prefHeight="66.0" prefWidth="350.0">
@@ -263,6 +243,22 @@
             </AnchorPane>
          </children>
       </VBox>
+      <JFXButton layoutX="100.0" layoutY="849.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="882.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="201.0" layoutY="866.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="882.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
       <JFXButton layoutX="303.0" layoutY="849.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="882.0">
          <font>
             <Font size="14.0" />
@@ -279,21 +275,25 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="201.0" layoutY="866.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="882.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton layoutX="100.0" layoutY="849.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="882.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
+        <AnchorPane layoutX="154.0" layoutY="21.0" prefHeight="66.0" prefWidth="1025.0" AnchorPane.leftAnchor="490.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="19.0">
+            <children>
+                <TextField fx:id="txtSearch" accessibleText="Search Courses" prefHeight="24.0" promptText="Enter Course Name, Course ID, Course Duration, Course Fee etc" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="490.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="112.0">
+            <columns>
+                <TableColumn editable="false" prefWidth="107.0" text="Course Name" />
+                <TableColumn editable="false" prefWidth="169.66668701171875" text="Course ID" />
+                <TableColumn editable="false" prefWidth="98.33331298828125" text="Duration" />
+                <TableColumn editable="false" prefWidth="84.6666259765625" text="Course Fee" />
+                <TableColumn editable="false" prefWidth="215.666748046875" text="No. of Installments" />
+                <TableColumn editable="false" prefWidth="173.0" text="Course Status" />
+            <TableColumn editable="false" prefWidth="173.0" text="Course Initiation Date" />
+            </columns>
+        </TableView>
     </children>
 </AnchorPane>

@@ -1,4 +1,9 @@
-.menu:hover:selected{
-    -fx-border-color: white;
-    -fx-background-color: red;
+.menu:hover{
+    -fx-border-color: #6a4fcb;
+    -fx-border-radius: 5px;
+}
+
+.menu:focused{
+    -fx-border-color: #8978cd;
+    -fx-border-radius: 5px;
 }

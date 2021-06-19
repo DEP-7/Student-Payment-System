@@ -1,10 +1,13 @@
 package controller;
 
+import com.jfoenix.controls.JFXRippler;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -13,17 +16,46 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainFormController {
+    public AnchorPane pneItemManageStudents;
+    public AnchorPane pneItemAddNewPayment;
+    public AnchorPane pneItemManageBatches;
+    public AnchorPane pneItemManageCourses;
+    public AnchorPane pneItemViewPayments;
+    public AnchorPane pneItemViewCourses;
+    public AnchorPane pneItemViewBatches;
+    public AnchorPane pneItemManageUsers;
+    public AnchorPane pneItemDashboard;
     public AnchorPane pneStage;
+    public JFXRippler rprManageStudents;
+    public JFXRippler rprAddNewPayment;
+    public JFXRippler rprManageBatches;
+    public JFXRippler rprManageCourses;
+    public JFXRippler rprViewPayments;
+    public JFXRippler rprViewCourses;
+    public JFXRippler rprViewBatches;
+    public JFXRippler rprManageUsers;
+    public JFXRippler rprDashboard;
     public Label lblTitle;
     public Label lblTime;
 
     Parent[] formArray;
 
     public void initialize() throws IOException {
+        rprManageStudents.setControl(pneItemManageStudents);
+        rprAddNewPayment.setControl(pneItemAddNewPayment);
+        rprManageBatches.setControl(pneItemManageBatches);
+        rprManageCourses.setControl(pneItemManageCourses);
+        rprViewPayments.setControl(pneItemViewPayments);
+        rprViewCourses.setControl(pneItemViewCourses);
+        rprViewBatches.setControl(pneItemViewBatches);
+        rprManageUsers.setControl(pneItemManageUsers);
+        rprDashboard.setControl(pneItemDashboard);
+
         // Please update below array by inserting fxml file name, when adding new forms
-        String[] urlFormNames = {"DashboardForm", "AddNewPaymentForm", "ViewPaymentsForm", "ManageStudentsForm", "ViewCoursesForm", "ViewBatchesForm"};
+        String[] urlFormNames = {"DashboardForm", "AddNewPaymentForm", "ViewPaymentsForm", "ManageStudentsForm", "ViewCoursesForm", "ViewBatchesForm","ManageCoursesAdminForm","ManageUsersAdminForm","ManageBatchesAdminForm"};
         formArray = new Parent[urlFormNames.length];
         for (int i = 0; i < formArray.length; i++) {
+            System.out.println(urlFormNames[i]);
             formArray[i] = FXMLLoader.load(this.getClass().getResource("../view/" + urlFormNames[i] + ".fxml"));
         }
     }
@@ -50,6 +82,18 @@ public class MainFormController {
 
     public void pneViewBatches_OnMouseClicked(MouseEvent mouseEvent) {
         load(5, "Dashboard / View Batches");
+    }
+
+    public void pneManageCourses_OnMouseClicked(MouseEvent mouseEvent) {
+        load(6, "Dashboard / Manage Courses");
+    }
+
+    public void pneManageUsers_OnMouseClicked(MouseEvent mouseEvent) {
+        load(7, "Dashboard / Manage Users");
+    }
+
+    public void pneManageBatches_OnMouseClicked(MouseEvent mouseEvent) {
+        load(8, "Dashboard / Manage Batches");
     }
 
     private void load(int urlIndex, String currentFormLocation) {
@@ -80,5 +124,113 @@ public class MainFormController {
         settingsStage.setResizable(false);
         settingsStage.centerOnScreen();
         settingsStage.show();
+    }
+
+    public void pneItemDashbord_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(0, "Dashboard");
+        }
+    }
+
+    public void pneAddNewPayment_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(1, "Dashboard / Add New Payment");
+        }
+    }
+
+    public void pneViewPayments_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(2, "Dashboard / View Payments");
+        }
+    }
+
+    public void pneManageStudents_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(3, "Dashboard / Manage Students");
+        }
+    }
+
+    public void pneViewCourses_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(4, "Dashboard / View Courses");
+        }
+    }
+
+    public void pneViewBatches_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(5, "Dashboard / View Batches");
+        }
+    }
+
+    public void pneManageCourses_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(6, "Dashboard / Manage Courses");
+        }
+    }
+
+    public void pneManageUsers_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(7, "Dashboard / Manage Users");
+        }
+    }
+
+    public void pneManageBatches_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            load(8, "Dashboard / Manage Batches");
+        }
+    }
+
+    public void pneItemDashbord_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprDashboard.createManualRipple().run();
+        }
+    }
+
+    public void pneAddNewPayment_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprAddNewPayment.createManualRipple().run();
+        }
+    }
+
+    public void pneViewPayments_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprViewPayments.createManualRipple().run();
+        }
+    }
+
+    public void pneManageStudents_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprManageStudents.createManualRipple().run();
+        }
+    }
+
+    public void pneViewCourses_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprViewCourses.createManualRipple().run();
+        }
+    }
+
+    public void pneViewBatches_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprViewBatches.createManualRipple().run();
+        }
+    }
+
+    public void pneManageBatches_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprManageBatches.createManualRipple().run();
+        }
+    }
+
+    public void pneManageCourses_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprManageCourses.createManualRipple().run();
+        }
+    }
+
+    public void pneManageUsers_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode()==KeyCode.SPACE || keyEvent.getCode()==KeyCode.ENTER) {
+            rprManageUsers.createManualRipple().run();
+        }
     }
 }
