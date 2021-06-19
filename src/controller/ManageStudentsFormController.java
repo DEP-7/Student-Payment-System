@@ -15,7 +15,10 @@ import util.MaterialUI;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.zip.DataFormatException;
 
 public class ManageStudentsFormController {
     private final StudentService studentService = new StudentService();
@@ -36,9 +39,9 @@ public class ManageStudentsFormController {
     public TextField txtEmail;
     public TextField txtNIC;
     public TextField txtAge;
-    TextField previouslyFocusedTextField;
-    ArrayList<Integer> caretPositionArray;
-    int lengthOfString = 0;
+    private ArrayList<Integer> caretPositionArray;
+    private TextField previouslyFocusedTextField;
+    private int lengthOfString = 0;
 
     public void initialize() {
         cmbBatchNumber.getItems().add("001");
@@ -51,6 +54,41 @@ public class ManageStudentsFormController {
 
         MaterialUI.paintTextFields(txtNIC, txtFullName, txtNameWithInitials, txtDateOfBirth, txtHighestEducationalQualification,
                 txtPreviousRegisteredCourses, txtAddress, txtContactNumber, txtEmail, txtAge, txtSearch, cmbCourseId, cmbBatchNumber, txtDiscount);
+
+        txtDateOfBirth.textProperty().addListener((observable, oldValue, newValue) -> {
+            String inputText = txtDateOfBirth.getText();
+
+            if (inputText.length() == 4 || inputText.length() == 7 || inputText.length() == 10) {
+                LocalDate today = LocalDate.now();
+                Period period = null;
+                LocalDate dob;
+
+                try {
+                    if (inputText.length() == 4) {
+                        inputText = inputText + "-" + String.format("%02d", today.getMonthValue()) + "-" + today.getDayOfMonth();
+                        dob = LocalDate.parse(inputText);
+                        period = Period.between(dob, today);
+                    } else if (inputText.length() == 7) {
+                        inputText = inputText + "-" + today.getDayOfMonth();
+                        dob = LocalDate.parse(inputText);
+                        period = Period.between(dob, today);
+                    } else if (inputText.length() == 10) {
+                        dob = LocalDate.parse(inputText);
+                        period = Period.between(dob, today);
+                    }
+
+                    if (period.getYears() >= 0 && period.getMonths() >= 0 && period.getDays() >= 0) {
+                        txtAge.setText(period.getYears() + "-" + period.getMonths() + "-" + period.getDays());
+                    } else {
+                        txtAge.setText("Invalid");
+                    }
+
+                } catch (DateTimeParseException e) {
+                    txtAge.setText("Invalid");
+                }
+            }
+        });
+
         loadAllStudents();
     }
 
@@ -110,6 +148,7 @@ public class ManageStudentsFormController {
             separateString(keyEvent, txtNIC, "", 12);
             return;
         }
+
         separateString(keyEvent, txtNIC, "V", 9);
     }
 
@@ -128,14 +167,15 @@ public class ManageStudentsFormController {
                 caretPosition -= 1;
             }
         }
+
         text = text.replaceAll("[^0-9]", "");
         lengthOfString = previouslyFocusedTextField == currentTextField ? lengthOfString : calculateLengthOfString(separatingLengths); // Reduce iteration when typing in same text field
         String newText = "";
         int indexTotal = 0;
         int indexTotalPrevious = 0;
 
-        for (int i = 0; i < separatingLengths.length; i++) {
-            indexTotalPrevious += separatingLengths[i];
+        for (int separatingLength : separatingLengths) {
+            indexTotalPrevious += separatingLength;
             if (text.length() > indexTotal) {
                 if (text.length() >= indexTotalPrevious) {
                     newText += text.substring(indexTotal, indexTotalPrevious) + separator;
@@ -143,15 +183,16 @@ public class ManageStudentsFormController {
                     newText += text.substring(indexTotal);
                     break;
                 }
-                indexTotal += separatingLengths[i];
+                indexTotal += separatingLength;
             } else {
                 break;
             }
         }
 
-        if (separatingLengths.length>1 && keyEvent.getText().matches("\\d") && separator.equals(Character.toString(newText.charAt(caretPosition - 1)))) { // 1993|-5 -> 1993-|25 caret position error fixing 1993-2|5
+        if (separatingLengths.length > 1 && keyEvent.getText().matches("\\d") && separator.equals(Character.toString(newText.charAt(caretPosition - 1)))) { // 1993|-5 -> 1993-|25 caret position error fixing 1993-2|5
             caretPosition += 1;
         }
+
         currentTextField.setText(lengthOfString <= text.length() && separatingLengths.length != 1 ? newText.substring(0, newText.length() - 1) : newText);
         currentTextField.positionCaret(isCaretAtLast ? newText.length() : caretPosition);
         previouslyFocusedTextField = currentTextField;
@@ -160,11 +201,12 @@ public class ManageStudentsFormController {
     private int calculateLengthOfString(int[] integerArray) {
         int total = 0;
         caretPositionArray = new ArrayList<>();
+
         for (int i = 0; i < integerArray.length; i++) {
             total += integerArray[i];
             caretPositionArray.add(total + i);
         }
+
         return total;
     }
-
 }
