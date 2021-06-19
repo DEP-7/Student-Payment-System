@@ -16,7 +16,7 @@
 
 <AnchorPane accessibleText="Manage Students" prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/ManageStudentsFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageStudentsFormController">
     <children>
-        <AnchorPane layoutX="24.0" layoutY="261.0" prefHeight="66.0" prefWidth="550.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="15.0">
+        <AnchorPane layoutX="24.0" layoutY="261.0" prefHeight="66.0" prefWidth="410.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="15.0">
             <children>
                 <TextField fx:id="txtNIC" accessibleText="Student ID (NIC)" prefHeight="24.0" promptText="Eg: 931630377V" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
@@ -25,6 +25,15 @@
                 </TextField>
             </children>
         </AnchorPane>
+      <AnchorPane disable="true" layoutX="34.0" layoutY="271.0" prefHeight="66.0" prefWidth="126.0" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <TextField fx:id="txtDiscount" accessibleText="Discount" prefHeight="24.0" promptText="Eg: 0.00%" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
         <AnchorPane layoutX="82.0" layoutY="106.0" prefHeight="66.0" prefWidth="550.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="93.0">
             <children>
                 <TextField fx:id="txtFullName" accessibleText="Full Name" prefHeight="24.0" promptText="Eg: Magam Mudalige Dhanushka Chandimal Ranasinghe" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -52,10 +61,10 @@
                                 <Font size="14.0" />
                             </font>
                      <toggleGroup>
-                        <ToggleGroup fx:id="rbtnGender" />
+                        <ToggleGroup fx:id="rbnGender" />
                      </toggleGroup>
                         </JFXRadioButton>
-                        <JFXRadioButton layoutX="145.0" layoutY="20.0" text="Female" textFill="WHITE" toggleGroup="$rbtnGender" AnchorPane.leftAnchor="145.0">
+                        <JFXRadioButton layoutX="145.0" layoutY="20.0" text="Female" textFill="WHITE" toggleGroup="$rbnGender" AnchorPane.leftAnchor="145.0">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -76,7 +85,7 @@
         </AnchorPane>
         <AnchorPane layoutX="50.0" layoutY="340.0" prefHeight="66.0" prefWidth="147.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="327.0">
             <children>
-                <TextField fx:id="txtBirthday" accessibleText="Date of Birth" prefHeight="24.0" promptText="Eg: 2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
+                <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" prefHeight="24.0" promptText="Eg: 2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -138,7 +147,7 @@
                 <JFXComboBox fx:id="cmbBatchNumber" accessibleText="Batch Number" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="-Select Batch Number-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
             </children>
         </AnchorPane>
-        <JFXButton layoutX="258.0" layoutY="364.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="874.0">
+        <JFXButton layoutX="258.0" layoutY="364.0" onAction="#btnAdd_OnAction" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -179,7 +188,7 @@
                 </TextField>
             </children>
         </AnchorPane>
-        <TableView layoutX="653.0" layoutY="112.0" prefHeight="810.0" prefWidth="844.0" AnchorPane.leftAnchor="671.0" AnchorPane.topAnchor="100.0">
+        <TableView fx:id="tblResult" layoutX="653.0" layoutY="112.0" prefHeight="810.0" prefWidth="844.0" AnchorPane.leftAnchor="671.0" AnchorPane.topAnchor="100.0">
             <columns>
                 <TableColumn prefWidth="135.0" text="Student ID" />
                 <TableColumn prefWidth="110.0" text="Student Name" />
@@ -197,7 +206,7 @@
                 </TextField>
             </children>
         </AnchorPane>
-      <ImageView fitHeight="139.0" fitWidth="251.0" layoutX="417.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="384.0" AnchorPane.topAnchor="259.0">
+      <ImageView fx:id="imgStudentImage" fitHeight="139.0" fitWidth="251.0" layoutX="417.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="384.0" AnchorPane.topAnchor="259.0">
          <image>
             <Image url="@assets/profileimages/Select_Student_Image_Null.png" />
          </image>
