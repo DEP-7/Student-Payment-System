@@ -27,7 +27,7 @@
         </AnchorPane>
       <AnchorPane disable="true" layoutX="34.0" layoutY="271.0" prefHeight="66.0" prefWidth="126.0" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="15.0">
          <children>
-            <TextField fx:id="txtDiscount" accessibleText="Discount" prefHeight="24.0" promptText="Eg: 0.00%" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <TextField fx:id="txtDiscount" accessibleText="Discount" prefHeight="24.0" promptText="Eg: 0.00" text="0.00" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>

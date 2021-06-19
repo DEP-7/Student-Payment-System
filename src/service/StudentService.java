@@ -12,28 +12,29 @@ import java.util.List;
 public class StudentService {
     public static ArrayList<Student> studentDB = new ArrayList();
 
-    static {
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
-    }
+//    static {
+//        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
+//        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
+//        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
+//        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
+//        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
+//        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "DEP", 7, new BigDecimal("0")));
+//    }
 
     public void addStudent(Student student) throws DuplicateEntryException {
-        if (getStudent(student.getNic()) == null) {
-            studentDB.add(student);
+        if (getStudent(student.getNic()) != null) {
+            throw new DuplicateEntryException();
         }
-        throw new DuplicateEntryException();
+        studentDB.add(student);
     }
 
-    public void updateStudent(Student student) throws NotFoundException {
-        Student studentToUpdate = searchStudent(student.getNic());
-        studentDB.set(studentDB.indexOf(studentToUpdate), studentToUpdate);
+    public void updateStudent(Student studentToUpdate) throws NotFoundException {
+        Student studentBeforeUpdate = searchStudent(studentToUpdate.getNic());
+        studentDB.set(studentDB.indexOf(studentBeforeUpdate), studentToUpdate);
     }
 
     public void deleteStudent(String nic) throws NotFoundException {
+        // TODO : Students without any single payments can delete. So check payment details before delete
         Student studentToDelete = searchStudent(nic);
         studentDB.remove(studentToDelete);
     }
