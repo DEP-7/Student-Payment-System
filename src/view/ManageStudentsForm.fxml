@@ -18,7 +18,7 @@
     <children>
         <AnchorPane layoutX="24.0" layoutY="261.0" prefHeight="66.0" prefWidth="410.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="15.0">
             <children>
-                <TextField fx:id="txtNIC" accessibleText="Student ID (NIC)" prefHeight="24.0" promptText="Eg: 931630377V" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                <TextField fx:id="txtNIC" accessibleText="Student ID (NIC)" onKeyReleased="#txtNIC_OnKeyReleased" prefHeight="24.0" promptText="Eg: 931630377V" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -85,7 +85,7 @@
         </AnchorPane>
         <AnchorPane layoutX="50.0" layoutY="340.0" prefHeight="66.0" prefWidth="147.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="327.0">
             <children>
-                <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" prefHeight="24.0" promptText="Eg: 2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
+                <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" onKeyReleased="#txtDateOfBirth_OnKeyReleased" prefHeight="24.0" promptText="Eg: 2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -121,7 +121,7 @@
         </AnchorPane>
         <AnchorPane layoutX="87.0" layoutY="627.0" prefHeight="66.0" prefWidth="550.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="635.0">
             <children>
-                <TextField fx:id="txtContactNumber" accessibleText="Contact Number" prefHeight="24.0" promptText="Eg: 0716520080" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                <TextField fx:id="txtContactNumber" accessibleText="Contact Number" onKeyReleased="#txtContactNumber_OnKeyReleased" prefHeight="24.0" promptText="Eg: 071-6520080" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
                         <Font size="16.0" />
                     </font>
