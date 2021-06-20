@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static util.ValidationUtil.*;
 
@@ -51,7 +52,8 @@ public class ManageStudentsFormController {
     public TextField txtAge;
     private ArrayList<Integer> caretPositionArray;
     private TextField previouslyFocusedTextField;
-    private final String studentNICToUpdate = "";
+    private String studentNICToUpdate = "";
+    private boolean isFirstFocusLostFromNIC = true;
     private int lengthOfString = 0;
 
     public void initialize() {
@@ -103,6 +105,36 @@ public class ManageStudentsFormController {
             }
         });
 
+        txtNIC.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue && isFirstFocusLostFromNIC) {
+                if (isValidNIC(txtNIC.getText())) {
+                    try {
+                        Optional<ButtonType> option = new Alert(Alert.AlertType.CONFIRMATION, "Student exist. Do you want to view details?", ButtonType.OK, ButtonType.CANCEL).showAndWait();
+                        if (option.get() == ButtonType.CANCEL) {
+                            txtNIC.clear();
+                            txtNIC.requestFocus();
+                            return;
+                        }
+                        Student availableStudentForNIC = studentService.searchStudent(txtNIC.getText());
+                        txtFullName.setText(availableStudentForNIC.getNameInFull());
+                        txtDiscount.setText(availableStudentForNIC.getDiscount().toString());
+                        txtNameWithInitials.setText(availableStudentForNIC.getNameWithInitials());
+                        rbnGender.selectToggle(availableStudentForNIC.getGender()=="Male"?rbnMale:rbnFemale);
+                        txtDateOfBirth.setText(availableStudentForNIC.getDateOfBirth().toString());
+                        txtHighestEducationalQualification.setText(availableStudentForNIC.getEduQualification());
+                        txtAddress.setText(availableStudentForNIC.getAddress());
+                        txtContactNumber.setText(availableStudentForNIC.getContactNumber());
+                        txtEmail.setText(availableStudentForNIC.getEmail());
+                        //cmbBatchNumber.setText(availableStudentForNIC.getNameInFull());
+                        //cmbCourseId.setText(availableStudentForNIC.getNameInFull());
+                        setDisableAll(true);
+                        isFirstFocusLostFromNIC = false;
+                    } catch (NotFoundException e) {
+                    }
+                }
+            }
+        });
+
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             loadAllStudents(newValue);
         });
@@ -126,6 +158,16 @@ public class ManageStudentsFormController {
 
     public void btnAdd_OnAction(ActionEvent actionEvent) {
         addStudent(false);
+    }
+
+    public void btnUpdate_OnAction(ActionEvent actionEvent) {
+        addStudent(true);
+    }
+
+    public void btnUpdate_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
+            addStudent(true);
+        }
     }
 
     private void addStudent(boolean isUpdateStudent) {
@@ -152,11 +194,11 @@ public class ManageStudentsFormController {
         try {
             if (isUpdateStudent) {
                 studentService.updateStudent(student, studentNICToUpdate);
-            }else {
+            } else {
                 studentService.addStudent(student);
             }
             loadAllStudents("");
-            String alertMessage=isUpdateStudent?"Student have been updated successfully":"Student have been added successfully";
+            String alertMessage = isUpdateStudent ? "Student have been updated successfully" : "Student have been added successfully";
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
             clearAll();
             txtNIC.requestFocus();
@@ -196,6 +238,8 @@ public class ManageStudentsFormController {
         txtAge.setText("00-00-00");
         txtSearch.clear();
         loadAllStudents("");
+        isFirstFocusLostFromNIC = true;
+        setDisableAll(false);
     }
 
     private boolean isValidated() {
@@ -327,21 +371,12 @@ public class ManageStudentsFormController {
         }
     }
 
-    public void btnUpdate_OnAction(ActionEvent actionEvent) {
-        addStudent(true);
-    }
-
-    public void btnUpdate_OnKeyPressed(KeyEvent keyEvent) {
-        addStudent(true);
-    }
-
     private void setDisableAll(boolean value) {
         txtNIC.setDisable(value);
         txtDiscount.setDisable(value);
         txtFullName.setDisable(value);
         txtNameWithInitials.setDisable(value);
-        rbnMale.setDisable(value);
-        rbnFemale.setDisable(value);
+        rbnMale.getParent().setDisable(value);
         txtDateOfBirth.setDisable(value);
         txtAge.setDisable(value);
         txtHighestEducationalQualification.setDisable(value);
@@ -354,5 +389,10 @@ public class ManageStudentsFormController {
         btnAdd.setDisable(value);
         btnUpdate.setDisable(value);
         btnEdit.setDisable(!value);
+        studentNICToUpdate = value ? "" : txtNIC.getText();
+        if (!value) {
+            txtNIC.requestFocus();
+            txtNIC.selectAll();
+        }
     }
 }
