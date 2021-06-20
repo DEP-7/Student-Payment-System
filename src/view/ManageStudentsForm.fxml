@@ -83,7 +83,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="50.0" layoutY="340.0" prefHeight="66.0" prefWidth="147.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="327.0">
+        <AnchorPane layoutX="50.0" layoutY="340.0" prefHeight="66.0" prefWidth="156.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="327.0">
             <children>
                 <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" onKeyReleased="#txtDateOfBirth_OnKeyReleased" prefHeight="24.0" promptText="Eg: 2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
                     <font>
@@ -197,7 +197,7 @@
                 <TableColumn prefWidth="265.66668701171875" text="Contact Number" />
             </columns>
         </TableView>
-        <AnchorPane layoutX="260.0" layoutY="345.0" prefHeight="66.0" prefWidth="95.0" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="327.0">
+        <AnchorPane layoutX="260.0" layoutY="345.0" prefHeight="66.0" prefWidth="106.0" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="327.0">
             <children>
                 <TextField fx:id="txtAge" accessibleText="Age" prefHeight="24.0" promptText="00-00-00" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
                     <font>

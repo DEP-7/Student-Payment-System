@@ -10,7 +10,6 @@ import javafx.scene.input.KeyEvent;
 import model.Student;
 import model.StudentTM;
 import service.StudentService;
-import service.exception.DuplicateEntryException;
 import util.MaterialUI;
 
 import java.math.BigDecimal;
@@ -18,7 +17,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.zip.DataFormatException;
+
+import static util.ValidationUtil.*;
 
 public class ManageStudentsFormController {
     private final StudentService studentService = new StudentService();
@@ -44,6 +44,7 @@ public class ManageStudentsFormController {
     private int lengthOfString = 0;
 
     public void initialize() {
+        System.out.println(new BigDecimal("25.5").compareTo(new BigDecimal("25.5")));
         cmbBatchNumber.getItems().add("001");
 
         tblResult.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("nic"));
@@ -101,33 +102,75 @@ public class ManageStudentsFormController {
     }
 
     public void btnAdd_OnAction(ActionEvent actionEvent) {
-        trimTextFields(txtNIC, txtEmail, txtAddress, txtFullName, txtDiscount, txtContactNumber, txtNameWithInitials, txtHighestEducationalQualification);
+        trimTextFields(txtEmail, txtAddress, txtFullName, txtDiscount, txtContactNumber, txtNameWithInitials, txtHighestEducationalQualification);
 
-        Student student = new Student(txtNIC.getText(),
-                txtFullName.getText(),
-                txtNameWithInitials.getText(),
-                ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
-                LocalDate.parse(txtDateOfBirth.getText()),
-                imgStudentImage.getImage(),
-                txtHighestEducationalQualification.getText(),
-                txtAddress.getText(),
-                txtContactNumber.getText(),
-                txtEmail.getText(),
-                cmbCourseId.getValue(),
-                Integer.parseInt(cmbBatchNumber.getValue()),
-                new BigDecimal(txtDiscount.getText()));
-
-        try {
-            studentService.addStudent(student);
-            Alert alertSuccess = new Alert(Alert.AlertType.INFORMATION, "Student have been saved successfully", ButtonType.OK);
-            alertSuccess.setHeaderText(null);
-            alertSuccess.show();
-        } catch (DuplicateEntryException e) {
-            Alert alertUnsuccess = new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText());
-            alertUnsuccess.setHeaderText(null);
-            alertUnsuccess.show();
-            txtNIC.requestFocus();
+        if (!isValidated()) {
+            return;
         }
+
+//        Student student = new Student(txtNIC.getText(),
+//                txtFullName.getText(),
+//                txtNameWithInitials.getText(),
+//                ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
+//                LocalDate.parse(txtDateOfBirth.getText()),
+//                imgStudentImage.getImage(),
+//                txtHighestEducationalQualification.getText(),
+//                txtAddress.getText(),
+//                txtContactNumber.getText(),
+//                txtEmail.getText(),
+//                cmbCourseId.getValue(),
+//                Integer.parseInt(cmbBatchNumber.getValue()),
+//                new BigDecimal(txtDiscount.getText()));
+//
+//        try {
+//            studentService.addStudent(student);
+//            Alert alertSuccess = new Alert(Alert.AlertType.INFORMATION, "Student have been saved successfully", ButtonType.OK);
+//            alertSuccess.setHeaderText(null);
+//            alertSuccess.show();
+//        } catch (DuplicateEntryException e) {
+//            Alert alertFail = new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText());
+//            alertFail.setHeaderText(null);
+//            alertFail.show();
+//            txtNIC.requestFocus();
+//        }
+    }
+
+    private boolean isValidated() {
+
+        if (!isValidNIC(txtNIC.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid NIC", ButtonType.OK).show();
+            txtNIC.requestFocus();
+            return false;
+        } else if (!isValidFullName(txtFullName.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid full name", ButtonType.OK).show();
+            txtFullName.requestFocus();
+            return false;
+        } else if (!isValidNameWithInitials(txtNameWithInitials.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid name", ButtonType.OK).show();
+            txtNameWithInitials.requestFocus();
+            return false;
+        } else if (!isValidPastDate(txtDateOfBirth.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid date of birth", ButtonType.OK).show();
+            txtDateOfBirth.requestFocus();
+            return false;
+        } else if (!isValidPercentage(txtDiscount.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid discount", ButtonType.OK).show();
+            txtDiscount.requestFocus();
+            return false;
+        } else if (!isValidAddress(txtAddress.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid address", ButtonType.OK).show();
+            txtAddress.requestFocus();
+            return false;
+        } else if (!isValidContactNumber(txtContactNumber.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid contact number", ButtonType.OK).show();
+            txtContactNumber.requestFocus();
+            return false;
+        } else if (!isValidEmail(txtEmail.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid contact number", ButtonType.OK).show();
+            txtEmail.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     private void trimTextFields(TextField... textFields) {
