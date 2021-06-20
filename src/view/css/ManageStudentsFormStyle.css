@@ -58,8 +58,8 @@
     -fx-background-color: #404040;
 }
 
-/*Text Field Styles*/
-.text-field, .combo-box{
+/*Text Field and Combo box Styles*/
+.text-field, .combo-box, .combo-box>*.list-cell{
     -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
     -fx-text-fill: white;
     -fx-background-color: transparent;

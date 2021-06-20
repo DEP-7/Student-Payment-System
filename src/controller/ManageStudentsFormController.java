@@ -57,7 +57,7 @@ public class ManageStudentsFormController {
     private int lengthOfString = 0;
 
     public void initialize() {
-        cmbBatchNumber.getItems().add("001");
+        cmbBatchNumber.getItems().add("001");//TODO: Load after completing relavant classes
         cmbCourseId.getItems().add("DEP");
         cmbBatchNumber.getItems().add("001");
         cmbCourseId.getItems().add("DEP");
@@ -109,23 +109,23 @@ public class ManageStudentsFormController {
             if (!newValue && isFirstFocusLostFromNIC) {
                 if (isValidNIC(txtNIC.getText())) {
                     try {
+                        Student availableStudentForNIC = studentService.searchStudent(txtNIC.getText());
                         Optional<ButtonType> option = new Alert(Alert.AlertType.CONFIRMATION, "Student exist. Do you want to view details?", ButtonType.OK, ButtonType.CANCEL).showAndWait();
                         if (option.get() == ButtonType.CANCEL) {
                             txtNIC.clear();
                             txtNIC.requestFocus();
                             return;
                         }
-                        Student availableStudentForNIC = studentService.searchStudent(txtNIC.getText());
                         txtFullName.setText(availableStudentForNIC.getNameInFull());
                         txtDiscount.setText(availableStudentForNIC.getDiscount().toString());
                         txtNameWithInitials.setText(availableStudentForNIC.getNameWithInitials());
-                        rbnGender.selectToggle(availableStudentForNIC.getGender()=="Male"?rbnMale:rbnFemale);
+                        rbnGender.selectToggle(availableStudentForNIC.getGender() == "Male" ? rbnMale : rbnFemale);
                         txtDateOfBirth.setText(availableStudentForNIC.getDateOfBirth().toString());
                         txtHighestEducationalQualification.setText(availableStudentForNIC.getEduQualification());
                         txtAddress.setText(availableStudentForNIC.getAddress());
                         txtContactNumber.setText(availableStudentForNIC.getContactNumber());
                         txtEmail.setText(availableStudentForNIC.getEmail());
-                        //cmbBatchNumber.setText(availableStudentForNIC.getNameInFull());
+                        //cmbBatchNumber.setText(availableStudentForNIC.getNameInFull());//TODO: fill after completing relavant classes
                         //cmbCourseId.setText(availableStudentForNIC.getNameInFull());
                         setDisableAll(true);
                         isFirstFocusLostFromNIC = false;
@@ -394,5 +394,36 @@ public class ManageStudentsFormController {
             txtNIC.requestFocus();
             txtNIC.selectAll();
         }
+    }
+
+    public void txtNIC_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            autoFillDataUsingNIC();
+            txtFullName.requestFocus();
+        }
+    }
+
+    private void autoFillDataUsingNIC() {
+        if (!isValidNIC(txtNIC.getText())) {
+            return;
+        }
+        String nic = txtNIC.getText().trim();
+        if (nic.length() == 10) {
+            nic = "19" + nic;
+        }
+        LocalDate dob = LocalDate.parse(nic.substring(0, 4) + "-01-01");
+        int days = Integer.parseInt(nic.substring(4, 7));
+        if (days > 500) {
+            rbnFemale.setSelected(true);
+        } else {
+            rbnMale.setSelected(true);
+        }
+        days = days > 500 ? days - 500 : days;
+        dob = dob.plusDays(days - 2);
+        txtDateOfBirth.setText(dob.toString());
+    }
+
+    public static  String getNewNIC(String oldNIC) { // Neglect this condition for now
+        return "19"+oldNIC.substring(0,5)+"0"+oldNIC.substring(5,oldNIC.length()-2);
     }
 }
