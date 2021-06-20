@@ -241,7 +241,7 @@ public class ManageStudentsFormController {
         txtEmail.clear();
         cmbCourseId.getSelectionModel().clearSelection();
         cmbBatchNumber.getSelectionModel().clearSelection();
-        txtDiscount.setText("0.00%");
+        txtDiscount.setText("0.00");
         txtAge.setText("00-00-00");
         txtSearch.clear();
         loadAllStudents("");
@@ -282,6 +282,14 @@ public class ManageStudentsFormController {
         } else if (!isValidEmail(txtEmail.getText())) {
             new Alert(Alert.AlertType.ERROR, "Invalid email address", ButtonType.OK).show();
             txtEmail.requestFocus();
+            return false;
+        } else if (cmbCourseId.getSelectionModel().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a course ID", ButtonType.OK).show();
+            cmbCourseId.requestFocus();
+            return false;
+        } else if (cmbBatchNumber.getSelectionModel().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a batch number", ButtonType.OK).show();
+            cmbBatchNumber.requestFocus();
             return false;
         }
 

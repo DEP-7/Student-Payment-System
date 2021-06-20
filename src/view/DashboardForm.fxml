@@ -57,11 +57,26 @@
             <Label alignment="CENTER" layoutX="2.0" layoutY="154.0" prefHeight="18.0" prefWidth="215.0" text="Click here to view income details" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="154.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1315.0" layoutY="34.0" prefHeight="263.0" prefWidth="263.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="16.0">
+      <AnchorPane layoutX="1315.0" layoutY="34.0" prefHeight="263.0" prefWidth="263.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="16.0">
          <children>
             <ImageView fitHeight="263.0" fitWidth="263.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@assets/clockitems/Clock_Frame1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgHoursHand" fitHeight="171.0" fitWidth="177.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/clockitems/Hour_Hand.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgSecondsHand" fitHeight="171.0" fitWidth="193.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/clockitems/Seconds_Hand.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMinutesHand" fitHeight="143.0" fitWidth="151.0" layoutX="60.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/clockitems/Minutes_Hand.png" />
                </image>
             </ImageView>
          </children>
@@ -126,5 +141,6 @@
             <DropShadow color="#2c2b2b" height="50.0" offsetX="6.0" offsetY="10.0" radius="23.25" spread="0.5" width="45.0" />
          </effect>
       </AnchorPane>
+      <Label fx:id="lblTime" layoutX="399.0" layoutY="26.0" text="Label" />
    </children>
 </AnchorPane>

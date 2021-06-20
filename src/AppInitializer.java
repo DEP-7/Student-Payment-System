@@ -14,8 +14,8 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //Parent root = FXMLLoader.load(this.getClass().getResource("view/LoginForm.fxml"));
-        Parent root = FXMLLoader.load(this.getClass().getResource("view/ManageStudentsForm.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("view/LoginForm.fxml"));
+//        Parent root = FXMLLoader.load(this.getClass().getResource("view/DashboardForm.fxml"));
         Scene loginScene = new Scene(root);
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("Login");
