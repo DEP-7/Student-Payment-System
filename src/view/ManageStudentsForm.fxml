@@ -159,7 +159,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
         </AnchorPane>
-        <JFXButton layoutX="258.0" layoutY="364.0" onAction="#btnAdd_OnAction" onKeyPressed="#btnAdd_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="_Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="874.0">
+        <JFXButton fx:id="btnAdd" layoutX="258.0" layoutY="364.0" onAction="#btnAdd_OnAction" onKeyPressed="#btnAdd_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="_Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -167,7 +167,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton layoutX="363.0" layoutY="846.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="_Edit" textFill="WHITE" AnchorPane.leftAnchor="241.0" AnchorPane.topAnchor="874.0">
+        <JFXButton fx:id="btnEdit" disable="true" layoutX="363.0" layoutY="846.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="_Edit" textFill="WHITE" AnchorPane.leftAnchor="241.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -175,7 +175,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton layoutX="373.0" layoutY="856.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="_Update" textFill="WHITE" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="874.0">
+        <JFXButton fx:id="btnUpdate" disable="true" layoutX="373.0" layoutY="856.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="_Update" textFill="WHITE" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>

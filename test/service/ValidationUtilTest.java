@@ -1,11 +1,8 @@
 package service;
 
-import service.exception.DuplicateEntryException;
-import service.exception.NotFoundException;
-
 public class ValidationUtilTest {
 
-    public static void main(String[] args) throws DuplicateEntryException, NotFoundException {
+    public static void main(String[] args) {
         isValidEmail();
         isValidContactNumber();
         isValidAddress();
@@ -14,7 +11,6 @@ public class ValidationUtilTest {
         isValidNameWithInitials();
         isValidFullName();
         isValidNIC();
-        getNewIdNumber();
     }
 
     public static void isValidEmail() {

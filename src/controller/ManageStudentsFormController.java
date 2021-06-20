@@ -56,6 +56,10 @@ public class ManageStudentsFormController {
     private boolean isFirstFocusLostFromNIC = true;
     private int lengthOfString = 0;
 
+    public static String getNewNIC(String oldNIC) { // Neglect this condition for now
+        return "19" + oldNIC.substring(0, 5) + "0" + oldNIC.substring(5, oldNIC.length() - 2);
+    }
+
     public void initialize() {
         cmbBatchNumber.getItems().add("001");//TODO: Load after completing relavant classes
         cmbCourseId.getItems().add("DEP");
@@ -106,6 +110,9 @@ public class ManageStudentsFormController {
         });
 
         txtNIC.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (isValidNIC(txtNIC.getText())) {
+                autoFillDataUsingNIC();
+            }
             if (!newValue && isFirstFocusLostFromNIC) {
                 if (isValidNIC(txtNIC.getText())) {
                     try {
@@ -273,7 +280,7 @@ public class ManageStudentsFormController {
             txtContactNumber.requestFocus();
             return false;
         } else if (!isValidEmail(txtEmail.getText())) {
-            new Alert(Alert.AlertType.ERROR, "Invalid contact number", ButtonType.OK).show();
+            new Alert(Alert.AlertType.ERROR, "Invalid email address", ButtonType.OK).show();
             txtEmail.requestFocus();
             return false;
         }
@@ -340,7 +347,7 @@ public class ManageStudentsFormController {
             }
         }
 
-        if (separatingLengths.length > 1 && keyEvent.getText().matches("\\d") && separator.equals(Character.toString(newText.charAt(caretPosition - 1)))) { // 1993|-5 -> 1993-|25 caret position error fixing 1993-2|5
+        if (newText.length() > caretPosition - 1 && separatingLengths.length > 1 && keyEvent.getText().matches("\\d") && separator.equals(Character.toString(newText.charAt(caretPosition - 1)))) { // 1993|-5 -> 1993-|25 caret position error fixing 1993-2|5
             caretPosition += 1;
         }
 
@@ -398,7 +405,6 @@ public class ManageStudentsFormController {
 
     public void txtNIC_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            autoFillDataUsingNIC();
             txtFullName.requestFocus();
         }
     }
@@ -421,9 +427,5 @@ public class ManageStudentsFormController {
         days = days > 500 ? days - 500 : days;
         dob = dob.plusDays(days - 2);
         txtDateOfBirth.setText(dob.toString());
-    }
-
-    public static  String getNewNIC(String oldNIC) { // Neglect this condition for now
-        return "19"+oldNIC.substring(0,5)+"0"+oldNIC.substring(5,oldNIC.length()-2);
     }
 }
