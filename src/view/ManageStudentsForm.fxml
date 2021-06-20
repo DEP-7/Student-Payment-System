@@ -64,7 +64,7 @@
                         <ToggleGroup fx:id="rbnGender" />
                      </toggleGroup>
                         </JFXRadioButton>
-                        <JFXRadioButton layoutX="145.0" layoutY="20.0" text="Female" textFill="WHITE" toggleGroup="$rbnGender" AnchorPane.leftAnchor="145.0">
+                        <JFXRadioButton fx:id="rbnFemale" layoutX="145.0" layoutY="20.0" text="Female" textFill="WHITE" toggleGroup="$rbnGender" AnchorPane.leftAnchor="145.0">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -85,7 +85,7 @@
         </AnchorPane>
         <AnchorPane layoutX="50.0" layoutY="340.0" prefHeight="66.0" prefWidth="156.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="327.0">
             <children>
-                <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" onKeyReleased="#txtDateOfBirth_OnKeyReleased" prefHeight="24.0" promptText="Eg: 2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
+                <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" onKeyReleased="#txtDateOfBirth_OnKeyReleased" prefHeight="24.0" promptText="Eg: 1993-06-11" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -147,7 +147,7 @@
                 <JFXComboBox fx:id="cmbBatchNumber" accessibleText="Batch Number" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="-Select Batch Number-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
             </children>
         </AnchorPane>
-        <JFXButton layoutX="258.0" layoutY="364.0" onAction="#btnAdd_OnAction" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="874.0">
+        <JFXButton fx:id="btnAdd" layoutX="258.0" layoutY="364.0" onAction="#btnAdd_OnAction" onKeyPressed="#btnAdd_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -155,7 +155,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton layoutX="363.0" layoutY="846.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="241.0" AnchorPane.topAnchor="874.0">
+        <JFXButton fx:id="btnEdit" layoutX="363.0" layoutY="846.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="241.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -163,7 +163,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton layoutX="373.0" layoutY="856.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="874.0">
+        <JFXButton fx:id="btnUpdate" layoutX="373.0" layoutY="856.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -171,7 +171,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton layoutX="444.0" layoutY="865.0" onAction="#btnClear_OnAction" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="553.0" AnchorPane.topAnchor="874.0">
+        <JFXButton fx:id="btnClear" layoutX="444.0" layoutY="865.0" onAction="#btnClear_OnAction" onKeyPressed="#btnClear_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="553.0" AnchorPane.topAnchor="874.0">
             <font>
                 <Font size="14.0" />
             </font>

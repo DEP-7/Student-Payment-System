@@ -31,7 +31,7 @@ public class StudentServiceTest {
 
     public static void updateStudent() throws NotFoundException {
         Student student1 = new Student("931630378V", "Chandimal", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "GDSE", 7, new BigDecimal("20"));
-        studentService.updateStudent(student1);
+        studentService.updateStudent(student1,student1.getNic());
         //assert studentService.searchStudent("931630378V").getNameInFull().equals("Dhanushka Chandimal") :"Update Student Test Failed";
         assert studentService.searchStudent("931630378V").getNameInFull().equals("Chandimal") : "Update Student Test Failed";
     }

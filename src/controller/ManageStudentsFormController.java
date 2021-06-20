@@ -1,5 +1,6 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import model.Student;
 import model.StudentTM;
 import service.StudentService;
 import service.exception.DuplicateEntryException;
+import service.exception.NotFoundException;
 import util.MaterialUI;
 
 import java.math.BigDecimal;
@@ -27,9 +29,14 @@ public class ManageStudentsFormController {
     public TableView<StudentTM> tblResult;
     public JFXComboBox<String> cmbBatchNumber;
     public JFXComboBox<String> cmbCourseId;
+    public JFXRadioButton rbnFemale;
     public JFXRadioButton rbnMale;
     public ToggleGroup rbnGender;
     public ImageView imgStudentImage;
+    public JFXButton btnUpdate;
+    public JFXButton btnClear;
+    public JFXButton btnEdit;
+    public JFXButton btnAdd;
     public TextField txtHighestEducationalQualification;
     public TextField txtPreviousRegisteredCourses;
     public TextField txtNameWithInitials;
@@ -44,6 +51,7 @@ public class ManageStudentsFormController {
     public TextField txtAge;
     private ArrayList<Integer> caretPositionArray;
     private TextField previouslyFocusedTextField;
+    private final String studentNICToUpdate = "";
     private int lengthOfString = 0;
 
     public void initialize() {
@@ -110,7 +118,17 @@ public class ManageStudentsFormController {
         }
     }
 
+    public void btnAdd_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
+            addStudent(false);
+        }
+    }
+
     public void btnAdd_OnAction(ActionEvent actionEvent) {
+        addStudent(false);
+    }
+
+    private void addStudent(boolean isUpdateStudent) {
         trimTextFields(txtEmail, txtAddress, txtFullName, txtDiscount, txtContactNumber, txtNameWithInitials, txtHighestEducationalQualification);
 
         if (!isValidated()) {
@@ -132,14 +150,32 @@ public class ManageStudentsFormController {
                 new BigDecimal(txtDiscount.getText()));
 
         try {
-            studentService.addStudent(student);
+            if (isUpdateStudent) {
+                studentService.updateStudent(student, studentNICToUpdate);
+            }else {
+                studentService.addStudent(student);
+            }
             loadAllStudents("");
-            new Alert(Alert.AlertType.INFORMATION, "Student have been saved successfully", ButtonType.OK).showAndWait();
+            String alertMessage=isUpdateStudent?"Student have been updated successfully":"Student have been added successfully";
+            new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
             clearAll();
             txtNIC.requestFocus();
         } catch (DuplicateEntryException e) {
             new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText()).show();
             txtNIC.requestFocus();
+        } catch (NotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
+            txtNIC.requestFocus();
+        }
+    }
+
+    public void btnClear_OnAction(ActionEvent actionEvent) {
+        clearAll();
+    }
+
+    public void btnClear_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
+            clearAll();
         }
     }
 
@@ -281,16 +317,42 @@ public class ManageStudentsFormController {
         return total;
     }
 
-    public void btnClear_OnAction(ActionEvent actionEvent) {
-        clearAll();
-//        txtNIC.setText("199316300377");
-//        txtFullName.setText("asdfadsf");
-//        txtNameWithInitials.setText("sdfsdf");
-//        txtDateOfBirth.setText("1993-06-11");
-//        txtHighestEducationalQualification.setText("asfasdfads");
-//        txtAddress.setText("asdfasdfsad");
-//        txtContactNumber.setText("071-6520080");
-//        txtEmail.setText("asdfas@dzfsf.csd");
-//        cmbCourseId.getValue();
+    public void btnEdit_OnAction(ActionEvent actionEvent) {
+        setDisableAll(false);
+    }
+
+    public void btnEdit_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
+            setDisableAll(false);
+        }
+    }
+
+    public void btnUpdate_OnAction(ActionEvent actionEvent) {
+        addStudent(true);
+    }
+
+    public void btnUpdate_OnKeyPressed(KeyEvent keyEvent) {
+        addStudent(true);
+    }
+
+    private void setDisableAll(boolean value) {
+        txtNIC.setDisable(value);
+        txtDiscount.setDisable(value);
+        txtFullName.setDisable(value);
+        txtNameWithInitials.setDisable(value);
+        rbnMale.setDisable(value);
+        rbnFemale.setDisable(value);
+        txtDateOfBirth.setDisable(value);
+        txtAge.setDisable(value);
+        txtHighestEducationalQualification.setDisable(value);
+        txtPreviousRegisteredCourses.setDisable(value);
+        txtAddress.setDisable(value);
+        txtContactNumber.setDisable(value);
+        txtEmail.setDisable(value);
+        cmbCourseId.setDisable(value);
+        cmbBatchNumber.setDisable(value);
+        btnAdd.setDisable(value);
+        btnUpdate.setDisable(value);
+        btnEdit.setDisable(!value);
     }
 }

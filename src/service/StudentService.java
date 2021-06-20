@@ -24,7 +24,7 @@ public class StudentService {
         studentDB.add(student);
     }
 
-    public void updateStudent(Student studentToUpdate) throws NotFoundException {
+    public void updateStudent(Student studentToUpdate, String previousNIC) throws NotFoundException {
         Student studentBeforeUpdate = searchStudent(studentToUpdate.getNic());
         studentDB.set(studentDB.indexOf(studentBeforeUpdate), studentToUpdate);
     }
@@ -52,7 +52,7 @@ public class StudentService {
         if (keyword.equals("")) {
             return searchAllStudents();
         }
-        keyword=keyword.toLowerCase();
+        keyword = keyword.toLowerCase();
         List<Student> searchResult = new ArrayList();
 
         for (Student student : studentDB) {
