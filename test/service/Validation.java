@@ -78,7 +78,7 @@ public class Validation {
     }
 
     public static void isValidAddress() {
-        assert !ValidationUtil.isValidAddress("asd") : "Address Test Failed 1";
+        assert ValidationUtil.isValidAddress("asdasdas") : "Address Test Failed 1";
         assert !ValidationUtil.isValidAddress("No. 00D45848 Deeyagaha, Matara.") : "Address Test Failed 2";
         assert !ValidationUtil.isValidAddress("Galle_Rd, =Galle") : "Address Test Failed 3";
     }

@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import model.Student;
 import model.StudentTM;
 import service.StudentService;
+import service.exception.DuplicateEntryException;
 import util.MaterialUI;
 
 import java.math.BigDecimal;
@@ -25,6 +27,7 @@ public class ManageStudentsFormController {
     public TableView<StudentTM> tblResult;
     public JFXComboBox<String> cmbBatchNumber;
     public JFXComboBox<String> cmbCourseId;
+    public JFXRadioButton rbnMale;
     public ToggleGroup rbnGender;
     public ImageView imgStudentImage;
     public TextField txtHighestEducationalQualification;
@@ -44,8 +47,10 @@ public class ManageStudentsFormController {
     private int lengthOfString = 0;
 
     public void initialize() {
-        System.out.println(new BigDecimal("25.5").compareTo(new BigDecimal("25.5")));
         cmbBatchNumber.getItems().add("001");
+        cmbCourseId.getItems().add("DEP");
+        cmbBatchNumber.getItems().add("001");
+        cmbCourseId.getItems().add("DEP");
 
         tblResult.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("nic"));
         tblResult.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("name"));
@@ -90,13 +95,17 @@ public class ManageStudentsFormController {
             }
         });
 
-        loadAllStudents();
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            loadAllStudents(newValue);
+        });
+
+        loadAllStudents("");
     }
 
-    private void loadAllStudents() {
+    private void loadAllStudents(String keyword) {
         tblResult.getItems().clear();
 
-        for (Student student : StudentService.studentDB) {
+        for (Student student : studentService.searchStudentsByKeyword(keyword)) {
             tblResult.getItems().add(new StudentTM(student.getNic(), student.getNameWithInitials(), student.getCourseId(), student.getBatchNumber(), student.getContactNumber()));
         }
     }
@@ -108,31 +117,49 @@ public class ManageStudentsFormController {
             return;
         }
 
-//        Student student = new Student(txtNIC.getText(),
-//                txtFullName.getText(),
-//                txtNameWithInitials.getText(),
-//                ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
-//                LocalDate.parse(txtDateOfBirth.getText()),
-//                imgStudentImage.getImage(),
-//                txtHighestEducationalQualification.getText(),
-//                txtAddress.getText(),
-//                txtContactNumber.getText(),
-//                txtEmail.getText(),
-//                cmbCourseId.getValue(),
-//                Integer.parseInt(cmbBatchNumber.getValue()),
-//                new BigDecimal(txtDiscount.getText()));
-//
-//        try {
-//            studentService.addStudent(student);
-//            Alert alertSuccess = new Alert(Alert.AlertType.INFORMATION, "Student have been saved successfully", ButtonType.OK);
-//            alertSuccess.setHeaderText(null);
-//            alertSuccess.show();
-//        } catch (DuplicateEntryException e) {
-//            Alert alertFail = new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText());
-//            alertFail.setHeaderText(null);
-//            alertFail.show();
-//            txtNIC.requestFocus();
-//        }
+        Student student = new Student(txtNIC.getText(),
+                txtFullName.getText(),
+                txtNameWithInitials.getText(),
+                ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
+                LocalDate.parse(txtDateOfBirth.getText()),
+                imgStudentImage.getImage(),
+                txtHighestEducationalQualification.getText(),
+                txtAddress.getText(),
+                txtContactNumber.getText(),
+                txtEmail.getText(),
+                cmbCourseId.getValue(),
+                Integer.parseInt(cmbBatchNumber.getValue()),
+                new BigDecimal(txtDiscount.getText()));
+
+        try {
+            studentService.addStudent(student);
+            loadAllStudents("");
+            new Alert(Alert.AlertType.INFORMATION, "Student have been saved successfully", ButtonType.OK).showAndWait();
+            clearAll();
+            txtNIC.requestFocus();
+        } catch (DuplicateEntryException e) {
+            new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText()).show();
+            txtNIC.requestFocus();
+        }
+    }
+
+    private void clearAll() {
+        txtNIC.clear();
+        txtFullName.clear();
+        txtNameWithInitials.clear();
+        rbnMale.setSelected(true);
+        txtDateOfBirth.clear();
+        txtHighestEducationalQualification.clear();
+        txtPreviousRegisteredCourses.clear();
+        txtAddress.clear();
+        txtContactNumber.clear();
+        txtEmail.clear();
+        cmbCourseId.getSelectionModel().clearSelection();
+        cmbBatchNumber.getSelectionModel().clearSelection();
+        txtDiscount.setText("0.00%");
+        txtAge.setText("00-00-00");
+        txtSearch.clear();
+        loadAllStudents("");
     }
 
     private boolean isValidated() {
@@ -170,6 +197,7 @@ public class ManageStudentsFormController {
             txtEmail.requestFocus();
             return false;
         }
+
         return true;
     }
 
@@ -251,5 +279,18 @@ public class ManageStudentsFormController {
         }
 
         return total;
+    }
+
+    public void btnClear_OnAction(ActionEvent actionEvent) {
+        clearAll();
+//        txtNIC.setText("199316300377");
+//        txtFullName.setText("asdfadsf");
+//        txtNameWithInitials.setText("sdfsdf");
+//        txtDateOfBirth.setText("1993-06-11");
+//        txtHighestEducationalQualification.setText("asfasdfads");
+//        txtAddress.setText("asdfasdfsad");
+//        txtContactNumber.setText("071-6520080");
+//        txtEmail.setText("asdfas@dzfsf.csd");
+//        cmbCourseId.getValue();
     }
 }

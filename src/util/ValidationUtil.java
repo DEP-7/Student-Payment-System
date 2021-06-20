@@ -15,7 +15,7 @@ public class ValidationUtil {
     }
 
     public static  boolean isValidAddress(String text) {
-        return text.matches("[^\\W_]|[\\\\,.-/]{4,}");
+        return text.matches("([^\\W_]|[\\\\,.-/]){4,}");
     }
 
     public static  boolean isValidPercentage(String text) {
