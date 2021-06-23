@@ -36,5 +36,10 @@ public class LoginFormController {
         });
         Parent dashboardFormLoader = FXMLLoader.load(this.getClass().getResource("../view/DashboardForm.fxml"));
         ctrl.pneStage.getChildren().add(dashboardFormLoader);
+
+        AnchorPane.setRightAnchor(dashboardFormLoader,0.0);
+        AnchorPane.setLeftAnchor(dashboardFormLoader,0.0);
+        AnchorPane.setTopAnchor(dashboardFormLoader,0.0);
+        AnchorPane.setBottomAnchor(dashboardFormLoader,0.0);
     }
 }

@@ -54,8 +54,13 @@ public class MainFormController {
         // Please update below array by inserting fxml file name, when adding new forms
         String[] urlFormNames = {"DashboardForm", "AddNewPaymentForm", "ViewPaymentsForm", "ManageStudentsForm", "ViewCoursesForm", "ViewBatchesForm", "ManageCoursesAdminForm", "ManageUsersAdminForm", "ManageBatchesAdminForm"};
         formArray = new Parent[urlFormNames.length];
+
         for (int i = 0; i < formArray.length; i++) {
             formArray[i] = FXMLLoader.load(this.getClass().getResource("../view/" + urlFormNames[i] + ".fxml"));
+            AnchorPane.setRightAnchor(formArray[i],0.0);
+            AnchorPane.setLeftAnchor(formArray[i],0.0);
+            AnchorPane.setTopAnchor(formArray[i],0.0);
+            AnchorPane.setBottomAnchor(formArray[i],0.0);
         }
     }
 
@@ -105,8 +110,14 @@ public class MainFormController {
         String[] splittedFormLocationString = currentFormLocation.split("/");
         mainStage.setTitle(splittedFormLocationString[splittedFormLocationString.length - 1].trim());
         lblTitle.setText(currentFormLocation);
+
+        AnchorPane.setRightAnchor(formArray[urlIndex],0.0);
+        AnchorPane.setLeftAnchor(formArray[urlIndex],0.0);
+        AnchorPane.setTopAnchor(formArray[urlIndex],0.0);
+        AnchorPane.setBottomAnchor(formArray[urlIndex],0.0);
+
         Platform.runLater(() -> {
-            //mainStage.setMaximized(true);
+            mainStage.setMaximized(true);
             mainStage.centerOnScreen();
             mainStage.sizeToScene();
         });

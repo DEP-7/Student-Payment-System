@@ -71,7 +71,7 @@ public class DashboardFormController {
                 String[] arr = time.split(":");
                 int sleepingTime = 61 - Integer.parseInt(arr[2]);
                 try {
-                    Thread.sleep(sleepingTime * 1000L);
+                    Thread.sleep(sleepingTime * 1000L); // TODO: Stop this thread when terminate the program
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

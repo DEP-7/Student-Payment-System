@@ -3,7 +3,6 @@ package service;
 import model.Student;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
-import util.ValidationUtil;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,12 +1,11 @@
 package model;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Course {
     private String courseID;
     private String courseName;
-    private BigDecimal courseFee;
+    private double courseFee;
     private int numberOfInstallments;
     private int numberOfStudents;
     private String duration;
@@ -21,7 +20,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(String courseID, String courseName, BigDecimal courseFee, int numberOfInstallments, int numberOfStudents, String duration, String firstInstallment, String installmentGap, boolean courseAvailable, String courseSchedule, String minimumRequirements, String notes, LocalDate courseInitiationDate) {
+    public Course(String courseID, String courseName, double courseFee, int numberOfInstallments, int numberOfStudents, String duration, String firstInstallment, String installmentGap, boolean courseAvailable, String courseSchedule, String minimumRequirements, String notes, LocalDate courseInitiationDate) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseFee = courseFee;
@@ -53,11 +52,11 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public BigDecimal getCourseFee() {
+    public double getCourseFee() {
         return courseFee;
     }
 
-    public void setCourseFee(BigDecimal courseFee) {
+    public void setCourseFee(double courseFee) {
         this.courseFee = courseFee;
     }
 
