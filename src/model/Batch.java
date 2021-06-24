@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Batch {
     private int batchNumber;
-    private String courseId;
+    private Course course;
     private LocalDate startedDate;
     private LocalDate endDate;
     private String notes;
@@ -12,9 +12,9 @@ public class Batch {
     public Batch() {
     }
 
-    public Batch(int batchNumber, String courseId, LocalDate startedDate, LocalDate endDate, String notes) {
+    public Batch(int batchNumber, Course course, LocalDate startedDate, LocalDate endDate, String notes) {
         this.batchNumber = batchNumber;
-        this.courseId = courseId;
+        this.course = course;
         this.startedDate = startedDate;
         this.endDate = endDate;
         this.notes = notes;
@@ -28,12 +28,12 @@ public class Batch {
         this.batchNumber = batchNumber;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public LocalDate getStartedDate() {
@@ -64,7 +64,7 @@ public class Batch {
     public String toString() {
         return "Batch{" +
                 "batchNumber=" + batchNumber +
-                ", courseId='" + courseId + '\'' +
+                ", course=" + course +
                 ", startedDate=" + startedDate +
                 ", endDate=" + endDate +
                 ", notes='" + notes + '\'' +
