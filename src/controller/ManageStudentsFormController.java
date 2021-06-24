@@ -63,9 +63,11 @@ public class ManageStudentsFormController {
     }
 
     public void initialize() {
-        for (Course course : courseDB) { // TODO: Try to do this step in Main form loading
+
+        for (Course course : courseDB) {
             cmbCourseId.getItems().add(course.getCourseID());
         }
+
         cmbBatchNumber.getItems().add("001");//TODO: Load after completing relavant classes
         cmbBatchNumber.getItems().add("001");
 

@@ -20,7 +20,7 @@ public class DashboardFormController {
     public Label lblTime;
 
     public void initialize(){
-        startTimer();
+        //startTimer();
         tblResults.getItems().add(new String("sdfsd"));
         tblResults.getItems().add(new String("sdfsd"));
         tblResults.getItems().add(new String("sdfsd"));

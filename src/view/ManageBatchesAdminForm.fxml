@@ -14,7 +14,12 @@
 
 <AnchorPane accessibleText="View Batches" prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/ViewBatchesFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageBatchesAdminFormController">
     <children>
-      <AnchorPane layoutX="164.0" layoutY="31.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="19.0">
+      <AnchorPane accessibleText="Course ID" layoutX="63.0" layoutY="90.0" prefHeight="64.0" prefWidth="240.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="19.0">
+         <children>
+            <JFXComboBox fx:id="cmbCourseId" accessibleText="Course ID" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="-Select Course ID-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="95.0" layoutY="65.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="99.0">
          <children>
             <TextField fx:id="txtBatchNumber" accessibleText="Batch Number" editable="false" prefHeight="24.0" text="000" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
@@ -23,7 +28,7 @@
             </TextField>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="135.0" layoutY="158.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="106.0">
+      <AnchorPane layoutX="95.0" layoutY="152.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="183.0">
          <children>
             <TextField fx:id="txtCourseStartingDate" accessibleText="Course Starting Date" prefHeight="24.0" promptText="Eg: 2020-06-30" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
@@ -32,7 +37,7 @@
             </TextField>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="126.0" layoutY="237.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="235.0">
+      <AnchorPane disable="true" layoutX="95.0" layoutY="281.0" prefHeight="66.0" prefWidth="250.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="267.0">
          <children>
             <TextField fx:id="txtCourseFinishedDate" accessibleText="Course Finished Date" prefHeight="24.0" promptText="Eg: 2021-06-30" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
@@ -41,7 +46,7 @@
             </TextField>
          </children>
       </AnchorPane>
-      <JFXButton layoutX="85.0" layoutY="550.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="550.0">
+      <JFXButton fx:id="btnEndCourse" disable="true" layoutX="374.0" layoutY="281.0" onAction="#btnEndCourse_OnAction" onKeyPressed="#btnEndCourse_OnKeyPress" prefHeight="36.0" prefWidth="102.0" style="-fx-background-color: #545454;" text="End Course" textFill="WHITE" AnchorPane.leftAnchor="352.0" AnchorPane.topAnchor="281.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -49,7 +54,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="213.0" layoutY="550.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="182.0" AnchorPane.topAnchor="550.0">
+      <JFXButton fx:id="btnAdd" layoutX="85.0" layoutY="550.0" onAction="#btnAdd_OnAction" onKeyPressed="#btnAdd_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="590.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -57,7 +62,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="332.0" layoutY="550.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="279.0" AnchorPane.topAnchor="550.0">
+      <JFXButton fx:id="btnEdit" layoutX="213.0" layoutY="550.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="182.0" AnchorPane.topAnchor="590.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -65,7 +70,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="410.0" layoutY="550.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="376.0" AnchorPane.topAnchor="550.0">
+      <JFXButton fx:id="btnUpdate" layoutX="332.0" layoutY="550.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="279.0" AnchorPane.topAnchor="590.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -73,7 +78,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-        <AnchorPane layoutX="154.0" layoutY="21.0" prefHeight="66.0" prefWidth="1032.0" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="19.0">
+      <JFXButton fx:id="btnClear" layoutX="410.0" layoutY="550.0" onAction="#btnClear_OnAction" onKeyPressed="#btnClear_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE" AnchorPane.leftAnchor="376.0" AnchorPane.topAnchor="590.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+        <AnchorPane layoutX="154.0" layoutY="21.0" prefHeight="66.0" prefWidth="797.0" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="19.0">
             <children>
                 <TextField fx:id="txtSearch" accessibleText="Search Batches" prefHeight="24.0" promptText="Enter Batch Number, Started Date etc" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
@@ -82,13 +95,8 @@
                 </TextField>
             </children>
         </AnchorPane>
-      <AnchorPane accessibleText="Course ID" layoutX="63.0" layoutY="90.0" prefHeight="64.0" prefWidth="240.0" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="90.0">
-         <children>
-            <JFXComboBox fx:id="cmbCourseId" accessibleText="Course ID" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="-Select Course ID-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-         </children>
-      </AnchorPane>
-        <JFXCheckBox checkedColor="#8566b2" layoutX="1279.0" layoutY="647.0" prefHeight="18.0" prefWidth="54.0" text="Select ongoing batches only" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="115.0" />
-        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="175.0">
+        <JFXCheckBox fx:id="chkOngoingBatches" checkedColor="#8566b2" layoutX="1279.0" layoutY="647.0" text="Select ongoing batches only" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="1305.0" AnchorPane.topAnchor="50.0" />
+        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="99.0">
             <columns>
                 <TableColumn prefWidth="246.99996948242188" text="Batch Number" />
                 <TableColumn prefWidth="211.00003051757812" text="Number of Students" />
@@ -97,7 +105,7 @@
                 <TableColumn prefWidth="259.0" text="End Date" />
             </columns>
         </TableView>
-      <AnchorPane layoutX="143.0" layoutY="343.0" prefHeight="196.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="322.0">
+      <AnchorPane layoutX="95.0" layoutY="368.0" prefHeight="196.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="351.0">
          <children>
             <TextArea fx:id="txtNotes" accessibleText="Notes" prefHeight="200.0" prefWidth="200.0" promptText="Click Here to Add Notes" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
                <font>
@@ -106,16 +114,16 @@
             </TextArea>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="85.0" layoutY="629.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="629.0">
+      <AnchorPane layoutX="85.0" layoutY="629.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="669.0">
          <children>
-            <Label fx:id="lblNectPaymentDate" accessibleText="Next Payment Date" alignment="TOP_LEFT" text="Select a batch from the table to view" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
+            <Label fx:id="lblNextPaymentDate" accessibleText="Next Payment Date" alignment="TOP_LEFT" text="Select a batch from the table to view" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="85.0" layoutY="706.0" prefHeight="209.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="706.0">
+      <AnchorPane layoutX="85.0" layoutY="706.0" prefHeight="169.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="746.0">
          <children>
             <Label fx:id="lblDelayedPayments" accessibleText="Delayed Payments" alignment="TOP_LEFT" text="Select a batch from the table to view" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
                <font>
