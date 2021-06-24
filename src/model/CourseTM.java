@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class CourseTM implements Serializable {
     private String courseID;
     private String courseName;
-    private BigDecimal courseFee;
+    private double courseFee;
     private int numberOfInstallments;
     private String duration;
     private boolean courseAvailable;
@@ -16,7 +16,7 @@ public class CourseTM implements Serializable {
     public CourseTM() {
     }
 
-    public CourseTM(String courseID, String courseName, BigDecimal courseFee, int numberOfInstallments, String duration, boolean courseAvailable, LocalDate courseInitiationDate) {
+    public CourseTM(String courseID, String courseName, double courseFee, int numberOfInstallments, String duration, boolean courseAvailable, LocalDate courseInitiationDate) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseFee = courseFee;
@@ -42,11 +42,11 @@ public class CourseTM implements Serializable {
         this.courseName = courseName;
     }
 
-    public BigDecimal getCourseFee() {
+    public double getCourseFee() {
         return courseFee;
     }
 
-    public void setCourseFee(BigDecimal courseFee) {
+    public void setCourseFee(double courseFee) {
         this.courseFee = courseFee;
     }
 

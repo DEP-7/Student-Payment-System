@@ -110,9 +110,8 @@ public class ManageStudentsFormController {
         });
 
         txtNIC.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (isValidNIC(txtNIC.getText())) {
-                autoFillDataUsingNIC();
-            }
+            autoFillDataUsingNIC();
+
             if (!newValue && isFirstFocusLostFromNIC) {
                 if (isValidNIC(txtNIC.getText())) {
                     try {
@@ -255,11 +254,11 @@ public class ManageStudentsFormController {
             new Alert(Alert.AlertType.ERROR, "Invalid NIC", ButtonType.OK).show();
             txtNIC.requestFocus();
             return false;
-        } else if (!isValidFullName(txtFullName.getText())) {
+        } else if (!txtFullName.getText().matches("[A-Za-z ]{3,}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid full name", ButtonType.OK).show();
             txtFullName.requestFocus();
             return false;
-        } else if (!isValidNameWithInitials(txtNameWithInitials.getText())) {
+        } else if (!txtNameWithInitials.getText().matches("[A-Za-z .]{3,}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid name", ButtonType.OK).show();
             txtNameWithInitials.requestFocus();
             return false;
@@ -267,15 +266,15 @@ public class ManageStudentsFormController {
             new Alert(Alert.AlertType.ERROR, "Invalid date of birth", ButtonType.OK).show();
             txtDateOfBirth.requestFocus();
             return false;
-        } else if (!isValidPercentage(txtDiscount.getText())) {
+        } else if (!txtDiscount.getText().matches("(100|\\d{1,2})([.]\\d+)?%?")) {
             new Alert(Alert.AlertType.ERROR, "Invalid discount", ButtonType.OK).show();
             txtDiscount.requestFocus();
             return false;
-        } else if (!isValidAddress(txtAddress.getText())) {
+        } else if (!txtAddress.getText().matches("([^\\W_]|[-.,/\\\\ ]){4,}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid address", ButtonType.OK).show();
             txtAddress.requestFocus();
             return false;
-        } else if (!isValidContactNumber(txtContactNumber.getText())) {
+        } else if (!txtContactNumber.getText().matches("[0]\\d{2}-\\d{7}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid contact number", ButtonType.OK).show();
             txtContactNumber.requestFocus();
             return false;

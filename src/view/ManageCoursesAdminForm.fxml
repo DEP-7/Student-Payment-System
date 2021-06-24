@@ -71,7 +71,7 @@
                         </TextField>
                      </children>
                   </AnchorPane>
-                  <JFXCheckBox checkedColor="#8566b2" prefHeight="18.0" prefWidth="54.0" text="Unlimited" textFill="WHITE" unCheckedColor="WHITE">
+                  <JFXCheckBox fx:id="chkUnlimitedStudents" checkedColor="#8566b2" prefHeight="18.0" prefWidth="54.0" text="Unlimited" textFill="WHITE" unCheckedColor="WHITE">
                      <HBox.margin>
                         <Insets left="20.0" top="30.0" />
                      </HBox.margin>
@@ -251,7 +251,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnEdit" layoutX="201.0" layoutY="866.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="882.0">
+      <JFXButton fx:id="btnEdit" disable="true" layoutX="201.0" layoutY="866.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="882.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -259,7 +259,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="303.0" layoutY="849.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="882.0">
+      <JFXButton fx:id="btnUpdate" disable="true" layoutX="303.0" layoutY="849.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="882.0">
          <font>
             <Font size="14.0" />
          </font>
