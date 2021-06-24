@@ -15,7 +15,7 @@ import service.exception.NotFoundException;
 import util.MaterialUI;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,10 +46,6 @@ public class ManageCoursesAdminFormController {
     public TextArea txtNotes;
 
     private boolean isFirstFocusLostFromCourseId = true;
-    private String courseIdToUpdate = "";
-    private ArrayList<Integer> caretPositionArray;
-    private TextField previouslyFocusedTextField;
-    private int lengthOfString = 0;
 
     public void initialize() {
         MaterialUI.paintTextFields(txtSearch, txtCourseName, txtCourseID, txtCourseFee, txtNumberOfInstallments, txtNumberOfStudents, txtCourseDuration, txtFirstInstallment, txtInstallmentGap, txtFileName, txtMinimumRequirements, txtNotes);
@@ -62,9 +58,65 @@ public class ManageCoursesAdminFormController {
         tblResult.getColumns().get(5).setCellValueFactory(new PropertyValueFactory("courseAvailable"));
         tblResult.getColumns().get(6).setCellValueFactory(new PropertyValueFactory("courseInitiationDate"));
 
-        txtCourseName.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            autoFillCourseId();
+        chkUnlimitedStudents.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                txtNumberOfStudents.setDisable(true);
+                chkUnlimitedStudents.setUserData(txtNumberOfStudents.getText());
+                txtNumberOfStudents.setText("Unlimited");
+            }else{
+                txtNumberOfStudents.setDisable(false);
+                txtNumberOfStudents.setText(chkUnlimitedStudents.getUserData().toString());
+            }
         });
+
+        txtCourseName.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (oldValue) {
+                autoFillCourseId();
+            }
+
+        });
+
+        txtCourseID.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (!newValue && isFirstFocusLostFromCourseId) {
+
+                try {
+                    Course existingCourse = courseService.searchCourse(txtCourseID.getText());
+                    Optional<ButtonType> option = new Alert(Alert.AlertType.CONFIRMATION, "Course exist. Do you want to view details?", ButtonType.OK, ButtonType.CANCEL).showAndWait();
+
+                    if (option.get() == ButtonType.CANCEL) {
+                        txtCourseID.clear();
+                        txtCourseID.requestFocus();
+                        return;
+                    }
+
+                    txtCourseName.setText(existingCourse.getCourseName());
+                    txtCourseID.setText(existingCourse.getCourseID());
+                    txtCourseFee.setText(existingCourse.getCourseFee() + "");
+                    txtNumberOfInstallments.setText(existingCourse.getNumberOfInstallments() + "");
+                    txtNumberOfStudents.setText(existingCourse.getNumberOfStudents() == -1 ? "Unlimited" : existingCourse.getNumberOfStudents() + "");
+                    txtCourseDuration.setText(existingCourse.getDuration().split(" - ")[0]);
+                    txtInstallmentGap.setText(existingCourse.getInstallmentGap().split(" - ")[0]);
+                    txtFirstInstallment.setText(existingCourse.getFirstInstallment().split(" - ")[0]);
+                    txtFileName.setText(existingCourse.getCourseSchedule());
+                    txtMinimumRequirements.setText(existingCourse.getMinimumRequirements());
+                    txtNotes.setText(existingCourse.getNotes());
+
+                    rbnDuration.getToggles().get(0).setSelected(existingCourse.getDuration().contains("Months"));
+                    rbnFirstInstallment.getToggles().get(0).setSelected(existingCourse.getFirstInstallment().contains("Weeks"));
+                    rbnInstallmentGap.getToggles().get(0).setSelected(existingCourse.getInstallmentGap().contains("Months"));
+                    rbnCourseStatus.getToggles().get(0).setSelected(existingCourse.isCourseAvailable());
+
+                    chkUnlimitedStudents.setSelected(existingCourse.getNumberOfStudents() == -1);
+
+                    setDisableAll(true);
+                    isFirstFocusLostFromCourseId = false;
+                } catch (NotFoundException e) {
+                }
+            }
+        });
+
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             loadAllCourses(newValue);
@@ -128,10 +180,10 @@ public class ManageCoursesAdminFormController {
                 txtCourseName.getText(),
                 Double.parseDouble(txtCourseFee.getText()),
                 Integer.parseInt(txtNumberOfInstallments.getText()),
-                Integer.parseInt(txtNumberOfStudents.getText()),
-                txtCourseDuration.getText(),
-                txtFirstInstallment.getText(),
-                txtInstallmentGap.getText(),
+                chkUnlimitedStudents.isSelected() ? -1 : Integer.parseInt(txtNumberOfStudents.getText()),
+                txtCourseDuration.getText() + " - " + ((RadioButton) rbnDuration.getSelectedToggle()).getText(),
+                txtFirstInstallment.getText() + " - " + ((RadioButton) rbnFirstInstallment.getSelectedToggle()).getText(),
+                txtInstallmentGap.getText() + " - " + ((RadioButton) rbnInstallmentGap.getSelectedToggle()).getText(),
                 rbnCourseStatus.getToggles().get(0).isSelected(),
                 txtFileName.getText(),
                 txtMinimumRequirements.getText(),
@@ -234,23 +286,27 @@ public class ManageCoursesAdminFormController {
         txtCourseFee.setDisable(value);
         txtNumberOfInstallments.setDisable(value);
         txtNumberOfStudents.setDisable(value);
-        chkUnlimitedStudents.setDisable(value);
         txtCourseDuration.setDisable(value);
-        ((RadioButton) (rbnDuration.getToggles().get(0))).getParent().setDisable(value);
         txtInstallmentGap.setDisable(value);
         txtFirstInstallment.setDisable(value);
-        ((RadioButton) (rbnCourseStatus.getToggles().get(0))).getParent().setDisable(value);
-        txtFileName.setDisable(value);
         txtMinimumRequirements.setDisable(value);
         txtNotes.setDisable(value);
-        txtSearch.setDisable(value);
+
+        chkUnlimitedStudents.setDisable(value);
+
+        ((RadioButton) (rbnDuration.getToggles().get(0))).getParent().setDisable(value);
+        ((RadioButton) (rbnCourseStatus.getToggles().get(0))).getParent().setDisable(value);
+        ((RadioButton) (rbnFirstInstallment.getToggles().get(0))).getParent().setDisable(value);
+        ((RadioButton) (rbnInstallmentGap.getToggles().get(0))).getParent().setDisable(value);
+
         btnAdd.setDisable(value);
         btnUpdate.setDisable(value);
         btnEdit.setDisable(!value);
-        courseIdToUpdate = value ? "" : txtCourseID.getText();
+        btnAddFile.setDisable(value);
+
         if (!value) {
-            txtCourseID.requestFocus();
-            txtCourseID.selectAll();
+            txtCourseName.requestFocus();
+            txtCourseName.selectAll();
         }
     }
 
@@ -260,7 +316,7 @@ public class ManageCoursesAdminFormController {
             return;
         }
         Matcher matcher = Pattern.compile("\\s+").matcher(input);
-        String output = input.charAt(0)+"";
+        String output = input.charAt(0) + "";
         while (matcher.find()) {
             output += input.charAt(matcher.end());
         }

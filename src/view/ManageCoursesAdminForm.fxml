@@ -203,7 +203,7 @@
                <children>
                   <AnchorPane prefHeight="66.0" prefWidth="230.0">
                      <children>
-                        <TextField fx:id="txtFileName" accessibleText="File Name" prefHeight="24.0" promptText="-Click button to add-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                        <TextField fx:id="txtFileName" accessibleText="File Name" disable="true" prefHeight="24.0" promptText="-Click button to add-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                            <font>
                               <Font size="16.0" />
                            </font>

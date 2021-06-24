@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import model.Course;
 import model.Student;
 import model.StudentTM;
 import service.StudentService;
@@ -23,6 +24,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static service.CourseService.courseDB;
 import static util.ValidationUtil.*;
 
 public class ManageStudentsFormController {
@@ -50,10 +52,10 @@ public class ManageStudentsFormController {
     public TextField txtEmail;
     public TextField txtNIC;
     public TextField txtAge;
+    private boolean isFirstFocusLostFromNIC = true;
     private ArrayList<Integer> caretPositionArray;
     private TextField previouslyFocusedTextField;
     private String studentNICToUpdate = "";
-    private boolean isFirstFocusLostFromNIC = true;
     private int lengthOfString = 0;
 
     public static String getNewNIC(String oldNIC) { // Neglect this condition for now
@@ -61,10 +63,11 @@ public class ManageStudentsFormController {
     }
 
     public void initialize() {
+        for (Course course : courseDB) { // TODO: Try to do this step in Main form loading
+            cmbCourseId.getItems().add(course.getCourseID());
+        }
         cmbBatchNumber.getItems().add("001");//TODO: Load after completing relavant classes
-        cmbCourseId.getItems().add("DEP");
         cmbBatchNumber.getItems().add("001");
-        cmbCourseId.getItems().add("DEP");
 
         tblResult.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("nic"));
         tblResult.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("name"));
@@ -110,7 +113,9 @@ public class ManageStudentsFormController {
         });
 
         txtNIC.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            autoFillDataUsingNIC();
+            if (newValue) {
+                autoFillDataUsingNIC();
+            }
 
             if (!newValue && isFirstFocusLostFromNIC) {
                 if (isValidNIC(txtNIC.getText())) {
