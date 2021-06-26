@@ -47,8 +47,16 @@ public class BatchService {
         batchesDB.remove(batchToDelete);
     }
 
-    public List<Batch> searchAllBatches() {
-        return batchesDB;
+    public List<Batch> searchAllBatches(Course course) {
+        List<Batch> results = new ArrayList();
+
+        for (Batch batch : batchesDB) {
+
+            if (batch.getCourse() == course) {
+                results.add(batch);
+            }
+        }
+        return results;
     }
 
     public List<Batch> searchAllOngoingBatches() {
@@ -72,10 +80,10 @@ public class BatchService {
         throw new NotFoundException();
     }
 
-    public List<Batch> searchBatchByKeyword(String keyword, boolean ongoingBatchesOnly) {
+    public List<Batch> searchBatchByKeyword(Course course, String keyword, boolean ongoingBatchesOnly) {
 
         if (keyword.equals("")) {
-            return ongoingBatchesOnly ? searchAllOngoingBatches() : searchAllBatches();
+            return ongoingBatchesOnly ? searchAllOngoingBatches() : searchAllBatches(course);
         }
 
         keyword = keyword.toLowerCase();
@@ -103,11 +111,11 @@ public class BatchService {
         }
         for (int i = 0; i < batchesDB.size(); i++) {
             if (getBatch(count, course) == null) {
-                return count==0?0:count-1;
+                return count == 0 ? 0 : count - 1;
             }
             count++;
         }
-        return count-1;
+        return count - 1;
     }
 
     private Batch getBatch(int batchNumber, Course course) {

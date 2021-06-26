@@ -3,15 +3,19 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import model.Batch;
 import model.Course;
 import model.Student;
 import model.StudentTM;
+import service.BatchService;
+import service.CourseService;
 import service.StudentService;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
@@ -22,13 +26,15 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
-import static service.CourseService.courseDB;
 import static util.ValidationUtil.*;
 
 public class ManageStudentsFormController {
     private final StudentService studentService = new StudentService();
+    private final CourseService courseService = new CourseService();
+    private final BatchService batchService = new BatchService();
     public TableView<StudentTM> tblResult;
     public JFXComboBox<String> cmbBatchNumber;
     public JFXComboBox<String> cmbCourseId;
@@ -64,12 +70,39 @@ public class ManageStudentsFormController {
 
     public void initialize() {
 
-        for (Course course : courseDB) {
+        for (Course course : courseService.searchAllCourses()) {
             cmbCourseId.getItems().add(course.getCourseID());
         }
 
-        cmbBatchNumber.getItems().add("001");//TODO: Load after completing relavant classes
-        cmbBatchNumber.getItems().add("001");
+        btnAdd.getParent().parentProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                Platform.runLater(() -> {
+                    MainFormController ctrl = (MainFormController) txtNIC.getScene().getUserData();
+                    boolean[] formUpdateController = (boolean[]) ctrl.pneItemContainer.getUserData();
+                    if (formUpdateController[3]) {
+                        cmbCourseId.getItems().clear();
+                        for (Course course : courseService.searchAllCourses()) {
+                            cmbCourseId.getItems().add(course.getCourseID());
+                        }
+                        cmbBatchNumber.getItems().clear();
+                    }
+                });
+            }
+        });
+
+        cmbCourseId.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                try {
+                    cmbBatchNumber.getItems().clear();
+                    for (Batch batch : batchService.searchAllBatches(courseService.searchCourse(newValue))) {
+                        cmbBatchNumber.getItems().add(batch.getBatchNumber() + "");
+                    }
+                } catch (NotFoundException e) {
+                    new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code students 001").show();
+                    txtNIC.requestFocus();
+                }
+            }
+        });
 
         tblResult.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("nic"));
         tblResult.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("name"));

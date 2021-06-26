@@ -191,11 +191,19 @@ public class ManageCoursesAdminFormController {
                 LocalDate.now());
 
         try {
+
             if (isUpdateCourse) {
                 courseService.updateCourse(course);
             } else {
                 courseService.addCourse(course);
             }
+
+            MainFormController ctrl = (MainFormController) txtCourseID.getScene().getUserData();
+            boolean[] comboUpdateArray = (boolean[]) ctrl.pneItemContainer.getUserData();
+            comboUpdateArray[2] = true;
+            comboUpdateArray[3] = true;
+            comboUpdateArray[6] = true;
+            ctrl.pneItemContainer.setUserData(comboUpdateArray);
             loadAllCourses(txtSearch.getText());
             String alertMessage = isUpdateCourse ? "Course have been updated successfully" : "Course have been added successfully";
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
@@ -205,34 +213,38 @@ public class ManageCoursesAdminFormController {
             new Alert(Alert.AlertType.ERROR, "Course already exist for this Course ID " + txtCourseID.getText()).show();
             txtCourseID.requestFocus();
         } catch (NotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
+            new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code course 001").show();
             txtCourseName.requestFocus();
         }
     }
 
     private boolean isValidated() {
 
-        if (!txtCourseFee.getText().matches("((\\d{1,3}(,\\d{3})+)|\\d+)([.]\\d{1,2})?")) {
+        if (txtCourseName.getText().trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Invalid course name", ButtonType.OK).show();
+            txtCourseName.requestFocus();
+            return false;
+        } else if (!txtCourseFee.getText().matches("((\\d{1,3}(,\\d{3})+)|\\d+)([.]\\d{1,2})?")) {
             new Alert(Alert.AlertType.ERROR, "Invalid course fee", ButtonType.OK).show();
             txtCourseFee.requestFocus();
             return false;
-        } else if (!txtNumberOfInstallments.getText().matches("\\d")) {
+        } else if (!txtNumberOfInstallments.getText().matches("\\d+")) {
             new Alert(Alert.AlertType.ERROR, "Invalid number of installments", ButtonType.OK).show();
             txtNumberOfInstallments.requestFocus();
             return false;
-        } else if (!txtNumberOfStudents.getText().matches("\\d")) {
+        } else if (!txtNumberOfStudents.getText().matches("\\d+")) {
             new Alert(Alert.AlertType.ERROR, "Invalid number of students", ButtonType.OK).show();
             txtNumberOfStudents.requestFocus();
             return false;
-        } else if (!txtFirstInstallment.getText().matches("\\d")) {
+        } else if (!txtFirstInstallment.getText().matches("\\d+")) {
             new Alert(Alert.AlertType.ERROR, "Invalid first installment", ButtonType.OK).show();
             txtFirstInstallment.requestFocus();
             return false;
-        } else if (!txtInstallmentGap.getText().matches("\\d")) {
+        } else if (!txtInstallmentGap.getText().matches("\\d+")) {
             new Alert(Alert.AlertType.ERROR, "Invalid installment gap", ButtonType.OK).show();
             txtInstallmentGap.requestFocus();
             return false;
-        } else if (!txtCourseDuration.getText().matches("\\d")) {
+        } else if (!txtCourseDuration.getText().matches("\\d+")) {
             new Alert(Alert.AlertType.ERROR, "Invalid course duration", ButtonType.OK).show();
             txtCourseDuration.requestFocus();
             return false;

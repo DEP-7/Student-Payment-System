@@ -310,7 +310,7 @@
                 </AnchorPane>
             <HBox spacing="70.0">
                <children>
-                  <JFXButton prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE">
+                  <JFXButton fx:id="btnAdd" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -37,7 +37,7 @@
       </AnchorPane>
       <AnchorPane layoutY="58.0" prefHeight="886.0" prefWidth="304.0" style="-fx-background-color: #575757;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="64.0">
          <children>
-            <VBox layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
+            <VBox fx:id="pneItemContainer" layoutY="129.0" prefHeight="569.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="129.0">
                <children>
                   <JFXRippler fx:id="rprDashboard" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />
                   <JFXRippler fx:id="rprAddNewPayment" prefHeight="48.0" prefWidth="200.0" ripplerFill="#c173ff" />

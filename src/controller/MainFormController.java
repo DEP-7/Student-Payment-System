@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -37,6 +38,7 @@ public class MainFormController {
     public JFXRippler rprDashboard;
     public Label lblTitle;
     public Label lblTime;
+    public VBox pneItemContainer;
 
     Parent[] formArray;
 
@@ -62,6 +64,17 @@ public class MainFormController {
             AnchorPane.setTopAnchor(formArray[i],0.0);
             AnchorPane.setBottomAnchor(formArray[i],0.0);
         }
+
+        pneItemContainer.setUserData(new boolean[9]);
+        /*0 - Dashboard
+        * 1 - Add New Payment
+        * 2 - View Payments
+        * 3 - Manage Students
+        * 4 - View Courses
+        * 5 - View Batches
+        * 6 -
+        * 7 -
+        * 8 - */
     }
 
     public void pneDashboard_OnMouseClicked(MouseEvent mouseEvent) {
@@ -106,21 +119,13 @@ public class MainFormController {
         }
         pneStage.getChildren().clear();
         pneStage.getChildren().add(formArray[urlIndex]);
-        Stage mainStage = (Stage) pneStage.getScene().getWindow();
         String[] splittedFormLocationString = currentFormLocation.split("/");
-        mainStage.setTitle(splittedFormLocationString[splittedFormLocationString.length - 1].trim());
         lblTitle.setText(currentFormLocation);
 
         AnchorPane.setRightAnchor(formArray[urlIndex],0.0);
         AnchorPane.setLeftAnchor(formArray[urlIndex],0.0);
         AnchorPane.setTopAnchor(formArray[urlIndex],0.0);
         AnchorPane.setBottomAnchor(formArray[urlIndex],0.0);
-
-        Platform.runLater(() -> {
-            mainStage.setMaximized(true);
-            mainStage.centerOnScreen();
-            mainStage.sizeToScene();
-        });
     }
 
     public void imgSettings_OnMouseClicked(MouseEvent mouseEvent) throws IOException {

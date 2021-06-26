@@ -24,7 +24,7 @@ public class LoginFormController {
         Scene mainScene = new Scene(root);
         mainScene.setUserData(ctrl);
         mainStage.setScene(mainScene);
-        mainStage.setTitle("Dashboard");
+        mainStage.setTitle("Student Payment System");
         mainStage.setMaxWidth(1860);
         mainStage.setMinWidth(950);// Need to change this values
         mainStage.setMinHeight(800);// Need to change this values

@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,9 +20,7 @@ import util.MaterialUI;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
-import static service.BatchService.batchesDB;
-import static service.CourseService.courseDB;
+import java.util.Arrays;
 
 public class ManageBatchesAdminFormController {
     private final CourseService courseService = new CourseService();
@@ -45,11 +44,25 @@ public class ManageBatchesAdminFormController {
     public void initialize() {
         MaterialUI.paintTextFields(cmbCourseId, txtSearch, txtBatchNumber, txtCourseStartingDate, txtCourseFinishedDate, txtNotes, lblNextPaymentDate, lblDelayedPayments);
 
-        for (Course course : courseDB) {
+        for (Course course : courseService.searchAllCourses()) {
             cmbCourseId.getItems().add(course.getCourseID());
         }
 
-        txtBatchNumber.setText(batchesDB.get(batchesDB.size() - 1).getBatchNumber() + "");
+        btnAdd.getParent().parentProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                Platform.runLater(() -> {
+                    MainFormController ctrl = (MainFormController) btnAdd.getScene().getUserData();
+                    boolean[] formUpdateController = (boolean[]) ctrl.pneItemContainer.getUserData();
+                    if (formUpdateController[3]) {
+                        cmbCourseId.getItems().clear();
+                        for (Course course : courseService.searchAllCourses()) {
+                            cmbCourseId.getItems().add(course.getCourseID());
+                        }
+                        txtBatchNumber.clear();
+                    }
+                });
+            }
+        });
 
         tblResult.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("batchNumber"));
         tblResult.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("numberOfStudents"));
@@ -64,39 +77,47 @@ public class ManageBatchesAdminFormController {
                 return;
             }
 
+            loadAllBatches(txtSearch.getText(), chkOngoingBatches.isSelected());
+
             try {
-                txtBatchNumber.setText((batchService.getLastBatchNumber(courseService.searchCourse(cmbCourseId.getValue()))+1)+"");
+                txtBatchNumber.setText((batchService.getLastBatchNumber(courseService.searchCourse(cmbCourseId.getValue())) + 1) + "");
             } catch (NotFoundException e) {
-                new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
+                new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code batch 001").show();
                 cmbCourseId.requestFocus();
             }
-
         });
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            loadAllBatches(newValue,chkOngoingBatches.isSelected());
+            loadAllBatches(newValue, chkOngoingBatches.isSelected());
         });
 
         chkOngoingBatches.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            loadAllBatches(txtSearch.getText(),chkOngoingBatches.isSelected());
+            loadAllBatches(txtSearch.getText(), chkOngoingBatches.isSelected());
         });
 
-        loadAllBatches("",false);
+        Platform.runLater(() -> loadAllBatches("", false));
     }
 
     private void loadAllBatches(String keyword, boolean onGoingBatchesOnly) {
         tblResult.getItems().clear();
 
-        for (Batch batch : batchService.searchBatchByKeyword(keyword, onGoingBatchesOnly)) {
-            tblResult.getItems().add(new BatchTM(batch.getBatchNumber(), 0/*TODO: Update number of students here*/, batch.getStartedDate(), batch.getStartedDate().plusDays(Integer.parseInt(batch.getCourse().getDuration().split(" - ")[0])), batch.getEndDate()));
-            System.out.println(batch.getStartedDate());
+        if (cmbCourseId.getValue() != null && !cmbCourseId.getValue().isEmpty()) {
+            try {
+                for (Batch batch : batchService.searchBatchByKeyword(courseService.searchCourse(cmbCourseId.getValue()), keyword, onGoingBatchesOnly)) {
+                    tblResult.getItems().add(new BatchTM(batch.getBatchNumber(), 0/*TODO: Update number of students here*/, batch.getStartedDate(), batch.getStartedDate().plusDays(Integer.parseInt(batch.getCourse().getDuration().split(" - ")[0])), batch.getEndDate()));
+                }
+            } catch (NotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code batch 002").show();
+                cmbCourseId.requestFocus();
+            }
         }
+
     }
 
     public void btnEndCourse_OnAction(ActionEvent actionEvent) {
         if (txtCourseFinishedDate.getText().equals("Click button to end  -->>")) {
             txtCourseFinishedDate.setText(LocalDate.now().toString());
-        }else{
+        } else {
             txtCourseFinishedDate.clear();
         }
     }
@@ -105,7 +126,7 @@ public class ManageBatchesAdminFormController {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             if (txtCourseFinishedDate.getText().equals("Click button to end  -->>")) {
                 txtCourseFinishedDate.setText(LocalDate.now().toString());
-            }else{
+            } else {
                 txtCourseFinishedDate.clear();
             }
         }
@@ -141,6 +162,11 @@ public class ManageBatchesAdminFormController {
             } else {
                 batchService.addBatch(batch);
             }
+            MainFormController ctrl = (MainFormController) cmbCourseId.getScene().getUserData();
+            boolean[] formUpdatingController = (boolean[]) ctrl.pneItemContainer.getUserData();
+            formUpdatingController[3] = true;
+            formUpdatingController[2] = true;
+            ctrl.pneItemContainer.setUserData(formUpdatingController);
             String alertMessage = updateBatch ? "Batch have been updated successfully" : "Batch have been added successfully";
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
             clearAll();
@@ -150,7 +176,7 @@ public class ManageBatchesAdminFormController {
             new Alert(Alert.AlertType.ERROR, "Course already exist").show();
             cmbCourseId.requestFocus();
         } catch (NotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
+            new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code batch 003").show();
             cmbCourseId.requestFocus();
         }
     }
