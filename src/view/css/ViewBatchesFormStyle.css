@@ -74,3 +74,11 @@
     -fx-highlight-fill: #C173FF;
     -fx-highlight-text-fill: black;
 }
+
+/*Text Field and Combo box Styles*/
+.text-field, .combo-box, .combo-box>*.list-cell{
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+}

@@ -21,7 +21,7 @@
       </AnchorPane>
       <AnchorPane layoutX="95.0" layoutY="65.0" prefHeight="66.0" prefWidth="369.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="99.0">
          <children>
-            <TextField fx:id="txtBatchNumber" accessibleText="Batch Number" editable="false" prefHeight="24.0" text="000" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <TextField fx:id="txtBatchNumber" accessibleText="Batch Number" editable="false" prefHeight="24.0" promptText="Select Course ID" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -39,7 +39,7 @@
       </AnchorPane>
       <AnchorPane disable="true" layoutX="95.0" layoutY="281.0" prefHeight="66.0" prefWidth="250.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="267.0">
          <children>
-            <TextField fx:id="txtCourseFinishedDate" accessibleText="Course Finished Date" prefHeight="24.0" promptText="Eg: 2021-06-30" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <TextField fx:id="txtCourseFinishedDate" accessibleText="Course Finished Date" disable="true" prefHeight="24.0" promptText="Click button to end  --&gt;&gt;" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -96,7 +96,7 @@
             </children>
         </AnchorPane>
         <JFXCheckBox fx:id="chkOngoingBatches" checkedColor="#8566b2" layoutX="1279.0" layoutY="647.0" text="Select ongoing batches only" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="1305.0" AnchorPane.topAnchor="50.0" />
-        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="99.0">
+        <TableView fx:id="tblResult" layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="99.0">
             <columns>
                 <TableColumn prefWidth="246.99996948242188" text="Batch Number" />
                 <TableColumn prefWidth="211.00003051757812" text="Number of Students" />

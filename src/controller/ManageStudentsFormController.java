@@ -210,7 +210,7 @@ public class ManageStudentsFormController {
             } else {
                 studentService.addStudent(student);
             }
-            loadAllStudents("");
+            loadAllStudents(txtSearch.getText());
             String alertMessage = isUpdateStudent ? "Student have been updated successfully" : "Student have been added successfully";
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
             clearAll();
@@ -235,22 +235,23 @@ public class ManageStudentsFormController {
     }
 
     private void clearAll() {
+        rbnMale.setSelected(true);
+
+        cmbCourseId.getSelectionModel().clearSelection();
+        cmbBatchNumber.getSelectionModel().clearSelection();
+
         txtNIC.clear();
         txtFullName.clear();
         txtNameWithInitials.clear();
-        rbnMale.setSelected(true);
         txtDateOfBirth.clear();
         txtHighestEducationalQualification.clear();
         txtPreviousRegisteredCourses.clear();
         txtAddress.clear();
         txtContactNumber.clear();
         txtEmail.clear();
-        cmbCourseId.getSelectionModel().clearSelection();
-        cmbBatchNumber.getSelectionModel().clearSelection();
         txtDiscount.setText("0.00");
         txtAge.setText("00-00-00");
-        txtSearch.clear();
-        loadAllStudents("");
+
         isFirstFocusLostFromNIC = true;
         setDisableAll(false);
     }
@@ -393,11 +394,12 @@ public class ManageStudentsFormController {
     }
 
     private void setDisableAll(boolean value) {
+        rbnMale.getParent().setDisable(value);
+
         txtNIC.setDisable(value);
         txtDiscount.setDisable(value);
         txtFullName.setDisable(value);
         txtNameWithInitials.setDisable(value);
-        rbnMale.getParent().setDisable(value);
         txtDateOfBirth.setDisable(value);
         txtAge.setDisable(value);
         txtHighestEducationalQualification.setDisable(value);
@@ -405,16 +407,15 @@ public class ManageStudentsFormController {
         txtAddress.setDisable(value);
         txtContactNumber.setDisable(value);
         txtEmail.setDisable(value);
+
         cmbCourseId.setDisable(value);
         cmbBatchNumber.setDisable(value);
+
         btnAdd.setDisable(value);
         btnUpdate.setDisable(value);
         btnEdit.setDisable(!value);
+
         studentNICToUpdate = value ? "" : txtNIC.getText();
-        if (!value) {
-            txtNIC.requestFocus();
-            txtNIC.selectAll();
-        }
     }
 
     public void txtNIC_OnKeyPressed(KeyEvent keyEvent) {

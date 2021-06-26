@@ -47,8 +47,20 @@ public class BatchService {
         batchesDB.remove(batchToDelete);
     }
 
-    public List<Batch> searchAllBatchs() {
+    public List<Batch> searchAllBatches() {
         return batchesDB;
+    }
+
+    public List<Batch> searchAllOngoingBatches() {
+        List<Batch> results = new ArrayList();
+
+        for (Batch batch : batchesDB) {
+
+            if (batch.getEndDate() == null) { // TODO: If there is null value to another case it will show as ongoing batch. Try to change this apart from null
+                results.add(batch);
+            }
+        }
+        return results;
     }
 
     public Batch searchBatch(int batchNumber, Course course) throws NotFoundException {
@@ -60,16 +72,16 @@ public class BatchService {
         throw new NotFoundException();
     }
 
-    public List<Batch> searchBatchByKeyword(String keyword, Course course) {
+    public List<Batch> searchBatchByKeyword(String keyword, boolean ongoingBatchesOnly) {
+
         if (keyword.equals("")) {
-            return searchAllBatchs();
+            return ongoingBatchesOnly ? searchAllOngoingBatches() : searchAllBatches();
         }
+
         keyword = keyword.toLowerCase();
         List<Batch> searchResult = new ArrayList();
 
-        for (Batch batch : batchesDB) {
-
-            if (batch.getCourse() != course) { continue; }
+        for (Batch batch : ongoingBatchesOnly ? searchAllOngoingBatches() : batchesDB) {
 
             if (Integer.toString(batch.getBatchNumber()).contains(keyword) ||
                     batch.getCourse().getCourseName().toLowerCase().contains(keyword) ||
@@ -80,6 +92,22 @@ public class BatchService {
             }
         }
         return searchResult;
+    }
+
+    public int getLastBatchNumber(Course course) {
+        int count = 0;
+        for (Batch batch : batchesDB) {
+            if (batch.getCourse() == course) {
+                count++;
+            }
+        }
+        for (int i = 0; i < batchesDB.size(); i++) {
+            if (getBatch(count, course) == null) {
+                return count==0?0:count-1;
+            }
+            count++;
+        }
+        return count-1;
     }
 
     private Batch getBatch(int batchNumber, Course course) {

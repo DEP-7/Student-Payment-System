@@ -196,7 +196,7 @@ public class ManageCoursesAdminFormController {
             } else {
                 courseService.addCourse(course);
             }
-            loadAllCourses("");
+            loadAllCourses(txtSearch.getText());
             String alertMessage = isUpdateCourse ? "Course have been updated successfully" : "Course have been added successfully";
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
             clearAll();
@@ -258,24 +258,25 @@ public class ManageCoursesAdminFormController {
     }
 
     private void clearAll() {
+        chkUnlimitedStudents.setSelected(false);
+
         txtCourseName.clear();
         txtCourseID.clear();
         txtCourseFee.clear();
         txtNumberOfInstallments.clear();
         txtNumberOfStudents.clear();
-        chkUnlimitedStudents.setSelected(false);
         txtCourseDuration.clear();
-        rbnDuration.getToggles().get(0).setSelected(true);
         txtInstallmentGap.clear();
-        rbnInstallmentGap.getToggles().get(0).setSelected(true);
         txtFirstInstallment.clear();
-        rbnFirstInstallment.getToggles().get(0).setSelected(true);
-        rbnCourseStatus.getToggles().get(0).setSelected(true);
         txtFileName.setText("-Click button to add-");
         txtMinimumRequirements.clear();
         txtNotes.clear();
-        txtSearch.clear();
-        loadAllCourses("");
+
+        rbnDuration.getToggles().get(0).setSelected(true);
+        rbnInstallmentGap.getToggles().get(0).setSelected(true);
+        rbnFirstInstallment.getToggles().get(0).setSelected(true);
+        rbnCourseStatus.getToggles().get(0).setSelected(true);
+
         isFirstFocusLostFromCourseId = true;
         setDisableAll(false);
     }
@@ -303,11 +304,6 @@ public class ManageCoursesAdminFormController {
         btnUpdate.setDisable(value);
         btnEdit.setDisable(!value);
         btnAddFile.setDisable(value);
-
-        if (!value) {
-            txtCourseName.requestFocus();
-            txtCourseName.selectAll();
-        }
     }
 
     private void autoFillCourseId() {
