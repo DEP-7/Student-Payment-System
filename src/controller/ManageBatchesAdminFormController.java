@@ -20,7 +20,6 @@ import util.MaterialUI;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 public class ManageBatchesAdminFormController {
     private final CourseService courseService = new CourseService();

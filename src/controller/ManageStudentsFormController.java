@@ -26,7 +26,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 
 import static util.ValidationUtil.*;
@@ -155,24 +154,24 @@ public class ManageStudentsFormController {
             if (!newValue && isFirstFocusLostFromNIC) {
                 if (isValidNIC(txtNIC.getText())) {
                     try {
-                        Student availableStudentForNIC = studentService.searchStudent(txtNIC.getText());
+                        Student existingStudent = studentService.searchStudent(txtNIC.getText());
                         Optional<ButtonType> option = new Alert(Alert.AlertType.CONFIRMATION, "Student exist. Do you want to view details?", ButtonType.OK, ButtonType.CANCEL).showAndWait();
                         if (option.get() == ButtonType.CANCEL) {
                             txtNIC.clear();
                             txtNIC.requestFocus();
                             return;
                         }
-                        txtFullName.setText(availableStudentForNIC.getNameInFull());
-                        txtDiscount.setText(availableStudentForNIC.getDiscount().toString());
-                        txtNameWithInitials.setText(availableStudentForNIC.getNameWithInitials());
-                        rbnGender.selectToggle(availableStudentForNIC.getGender() == "Male" ? rbnMale : rbnFemale);
-                        txtDateOfBirth.setText(availableStudentForNIC.getDateOfBirth().toString());
-                        txtHighestEducationalQualification.setText(availableStudentForNIC.getEduQualification());
-                        txtAddress.setText(availableStudentForNIC.getAddress());
-                        txtContactNumber.setText(availableStudentForNIC.getContactNumber());
-                        txtEmail.setText(availableStudentForNIC.getEmail());
-                        //cmbBatchNumber.setText(availableStudentForNIC.getNameInFull());//TODO: fill after completing relavant classes
-                        //cmbCourseId.setText(availableStudentForNIC.getNameInFull());
+                        txtFullName.setText(existingStudent.getNameInFull());
+                        txtDiscount.setText(existingStudent.getDiscount().toString());
+                        txtNameWithInitials.setText(existingStudent.getNameWithInitials());
+                        rbnGender.selectToggle(existingStudent.getGender() == "Male" ? rbnMale : rbnFemale);
+                        txtDateOfBirth.setText(existingStudent.getDateOfBirth().toString());
+                        txtHighestEducationalQualification.setText(existingStudent.getEduQualification());
+                        txtAddress.setText(existingStudent.getAddress());
+                        txtContactNumber.setText(existingStudent.getContactNumber());
+                        txtEmail.setText(existingStudent.getEmail());
+                        cmbCourseId.getSelectionModel().select(existingStudent.getCourseId());
+                        cmbBatchNumber.getSelectionModel().select(existingStudent.getBatchNumber()+"");
                         setDisableAll(true);
                         isFirstFocusLostFromNIC = false;
                     } catch (NotFoundException e) {

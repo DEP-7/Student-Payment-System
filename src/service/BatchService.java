@@ -27,6 +27,7 @@ public class BatchService {
         batchesDB.add(new Batch(2, courseDB.get(1), LocalDate.of(2018, 2, 7), LocalDate.of(2018, 5, 7), ""));
         batchesDB.add(new Batch(3, courseDB.get(1), LocalDate.of(2019, 12, 7), LocalDate.of(2020, 12, 21), ""));
         batchesDB.add(new Batch(4, courseDB.get(1), LocalDate.of(2020, 3, 7), LocalDate.of(2021, 5, 7), ""));
+        batchesDB.add(new Batch(1, courseDB.get(2), LocalDate.of(2020, 3, 7), LocalDate.of(2021, 5, 7), ""));
     }
 
     public void addBatch(Batch batch) throws DuplicateEntryException {
