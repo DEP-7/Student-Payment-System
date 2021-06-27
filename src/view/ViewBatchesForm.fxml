@@ -25,8 +25,8 @@
             <JFXComboBox fx:id="cmbCourseId" accessibleText="Course ID" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="-Select Course ID-" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
          </children>
       </AnchorPane>
-        <JFXCheckBox checkedColor="#8566b2" layoutX="1279.0" layoutY="647.0" prefHeight="18.0" prefWidth="54.0" text="Select ongoing batches only" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="120.0" />
-        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="175.0">
+        <JFXCheckBox fx:id="chkOngoingBatches" checkedColor="#8566b2" layoutX="1279.0" layoutY="647.0" prefHeight="18.0" prefWidth="54.0" text="Select ongoing batches only" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="120.0" />
+        <TableView fx:id="tblResult" layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1025.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="175.0">
             <columns>
                 <TableColumn prefWidth="246.99996948242188" text="Batch Number" />
                 <TableColumn prefWidth="211.00003051757812" text="Number of Students" />

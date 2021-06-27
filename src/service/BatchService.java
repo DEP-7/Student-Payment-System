@@ -92,11 +92,12 @@ public class BatchService {
 
         for (Batch batch : ongoingBatchesOnly ? searchAllOngoingBatches() : batchesDB) {
 
-            if (Integer.toString(batch.getBatchNumber()).contains(keyword) ||
+            if (batch.getCourse()==course &&
+                    (Integer.toString(batch.getBatchNumber()).contains(keyword) ||
                     batch.getCourse().getCourseName().toLowerCase().contains(keyword) ||
                     batch.getStartedDate().toString().contains(keyword) ||
-                    batch.getEndDate().toString().contains(keyword) ||
-                    batch.getNotes().contains(keyword)) {
+                    (batch.getEndDate() != null && batch.getEndDate().toString().contains(keyword)) ||
+                    batch.getNotes().contains(keyword))) {
                 searchResult.add(batch);
             }
         }

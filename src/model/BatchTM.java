@@ -9,16 +9,18 @@ public class BatchTM implements Serializable {
     private LocalDate startedDate;
     private LocalDate planedEndDate;
     private LocalDate endDate;
+    private Course course;
 
     public BatchTM() {
     }
 
-    public BatchTM(int batchNumber, int numberOfStudents, LocalDate startedDate, LocalDate planedEndDate, LocalDate endDate) {
+    public BatchTM(int batchNumber, int numberOfStudents, LocalDate startedDate, LocalDate planedEndDate, LocalDate endDate, Course course) {
         this.batchNumber = batchNumber;
         this.numberOfStudents = numberOfStudents;
         this.startedDate = startedDate;
         this.planedEndDate = planedEndDate;
         this.endDate = endDate;
+        this.course = course;
     }
 
     public int getBatchNumber() {
@@ -64,11 +66,19 @@ public class BatchTM implements Serializable {
     @Override
     public String toString() {
         return "BatchTM{" +
-                "batchNumber=" + batchNumber +
-                ", numberOfStudents=" + numberOfStudents +
-                ", startedDate=" + startedDate +
-                ", planedEndDate=" + planedEndDate +
-                ", endDate=" + endDate +
+                "batchNumber=" + getBatchNumber() +
+                ", numberOfStudents=" + getNumberOfStudents() +
+                ", startedDate=" + getStartedDate() +
+                ", planedEndDate=" + getPlanedEndDate() +
+                ", endDate=" + getEndDate() +
                 '}';
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

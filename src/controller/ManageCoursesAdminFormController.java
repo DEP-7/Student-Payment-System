@@ -203,6 +203,7 @@ public class ManageCoursesAdminFormController {
             comboUpdateArray[2] = true;
             comboUpdateArray[3] = true;
             comboUpdateArray[6] = true;
+            comboUpdateArray[5] = true;
             ctrl.pneItemContainer.setUserData(comboUpdateArray);
             loadAllCourses(txtSearch.getText());
             String alertMessage = isUpdateCourse ? "Course have been updated successfully" : "Course have been added successfully";
