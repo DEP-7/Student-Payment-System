@@ -1,6 +1,5 @@
 package controller;
 
-import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
@@ -9,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -22,9 +20,9 @@ import service.exception.NotFoundException;
 import java.io.IOException;
 
 public class LoginFormController {
-    UserService userService=new UserService();
     public JFXPasswordField txtPassword;
     public JFXTextField txtUsername;
+    UserService userService = new UserService();
 
     public void btnLogin_OnAction(ActionEvent actionEvent) {
         loginIn();
@@ -40,15 +38,15 @@ public class LoginFormController {
         User loginUser;
 
         try {
-            loginUser=userService.searchUserByUsername(txtUsername.getText().trim());
+            loginUser = userService.searchUserByUsername(txtUsername.getText().trim());
         } catch (NotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Wrong username").show();
+            new Alert(Alert.AlertType.ERROR, "Invalid username").show();
             txtUsername.requestFocus();
             return;
         }
 
-        if (!loginUser.isPasswordCorrect(txtPassword.getText())) {
-            new Alert(Alert.AlertType.ERROR, "Wrong password").show();
+        if (txtPassword.getText().trim().isEmpty() || !loginUser.isPasswordCorrect(txtPassword.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid password").show();
             txtPassword.requestFocus();
             return;
         }
@@ -78,10 +76,10 @@ public class LoginFormController {
             Parent dashboardFormLoader = FXMLLoader.load(this.getClass().getResource("../view/DashboardForm.fxml"));
             ctrl.pneStage.getChildren().add(dashboardFormLoader);
 
-            AnchorPane.setRightAnchor(dashboardFormLoader,0.0);
-            AnchorPane.setLeftAnchor(dashboardFormLoader,0.0);
-            AnchorPane.setTopAnchor(dashboardFormLoader,0.0);
-            AnchorPane.setBottomAnchor(dashboardFormLoader,0.0);
+            AnchorPane.setRightAnchor(dashboardFormLoader, 0.0);
+            AnchorPane.setLeftAnchor(dashboardFormLoader, 0.0);
+            AnchorPane.setTopAnchor(dashboardFormLoader, 0.0);
+            AnchorPane.setBottomAnchor(dashboardFormLoader, 0.0);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXRippler;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainFormController {
     public AnchorPane pneItemManageStudents;
@@ -42,7 +45,7 @@ public class MainFormController {
     public VBox pneItemContainer;
 
     User loggedUser;
-    Parent[] formArray;
+    ArrayList<Parent> formArray = new ArrayList<>();
 
     public void initialize() throws IOException {
         rprManageStudents.setControl(pneItemManageStudents);
@@ -57,42 +60,41 @@ public class MainFormController {
 
         // Please update below array by inserting fxml file name, when adding new forms
         String[] urlFormNames = {"DashboardForm", "AddNewPaymentForm", "ViewPaymentsForm", "ManageStudentsForm", "ViewCoursesForm", "ViewBatchesForm", "ManageCoursesAdminForm", "ManageUsersAdminForm", "ManageBatchesAdminForm"};
-        formArray = new Parent[urlFormNames.length];
 
-        for (int i = 0; i < formArray.length; i++) {
-            formArray[i] = FXMLLoader.load(this.getClass().getResource("../view/" + urlFormNames[i] + ".fxml"));
-            AnchorPane.setRightAnchor(formArray[i],0.0);
-            AnchorPane.setLeftAnchor(formArray[i],0.0);
-            AnchorPane.setTopAnchor(formArray[i],0.0);
-            AnchorPane.setBottomAnchor(formArray[i],0.0);
+        for (int i = 0; i < urlFormNames.length; i++) {
+            formArray.add(FXMLLoader.load(this.getClass().getResource("../view/" + urlFormNames[i] + ".fxml")));
+            AnchorPane.setRightAnchor(formArray.get(i), 0.0);
+            AnchorPane.setLeftAnchor(formArray.get(i), 0.0);
+            AnchorPane.setTopAnchor(formArray.get(i), 0.0);
+            AnchorPane.setBottomAnchor(formArray.get(i), 0.0);
         }
 
         pneItemContainer.setUserData(new boolean[9]);
         /*0 - Dashboard
-        * 1 - Add New Payment
-        * 2 - View Payments
-        * 3 - Manage Students
-        * 4 - View Courses
-        * 5 - View Batches
-        * 6 - Manage Batches
-        * 7 - Manage Courses
-        * 8 - Manage Users*/
+         * 1 - Add New Payment
+         * 2 - View Payments
+         * 3 - Manage Students
+         * 4 - View Courses
+         * 5 - View Batches
+         * 6 - Manage Batches
+         * 7 - Manage Courses
+         * 8 - Manage Users*/
 
         Platform.runLater(() -> {
             loggedUser = (User) pneStage.getScene().getWindow().getUserData();
-//
-//            rprViewCourses.setVisible(!loggedUser.isAdmin());
-//            rprManageCourses.setVisible(loggedUser.isAdmin());
-//            rprViewBatches.setVisible(!loggedUser.isAdmin());
-//            rprManageBatches.setVisible(loggedUser.isAdmin());
-//            rprManageUsers.setVisible(loggedUser.isAdmin());
-//
-//            pneItemContainer.getChildren().remove(loggedUser.isAdmin()?rprViewCourses:rprManageCourses);
-//            pneItemContainer.getChildren().remove(loggedUser.isAdmin()?rprViewBatches:rprManageBatches);
-//
-//            if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
-//                // TODO: Guidelines to change password
-//            }
+
+            rprViewCourses.setVisible(!loggedUser.isAdmin());
+            rprManageCourses.setVisible(loggedUser.isAdmin());
+            rprViewBatches.setVisible(!loggedUser.isAdmin());
+            rprManageBatches.setVisible(loggedUser.isAdmin());
+            rprManageUsers.setVisible(loggedUser.isAdmin());
+
+            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewCourses : rprManageCourses);
+            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewBatches : rprManageBatches);
+
+            if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
+                // TODO: Guidelines to change password
+            }
         });
     }
 
@@ -133,18 +135,18 @@ public class MainFormController {
     }
 
     private void load(int urlIndex, String currentFormLocation) {
-        if (pneStage.getChildren().get(0) == formArray[urlIndex]) {
+        if (pneStage.getChildren().get(0) == formArray.get(urlIndex)) {
             return;
         }
+
         pneStage.getChildren().clear();
-        pneStage.getChildren().add(formArray[urlIndex]);
-        String[] splittedFormLocationString = currentFormLocation.split("/");
+        pneStage.getChildren().add(formArray.get(urlIndex));
         lblTitle.setText(currentFormLocation);
 
-        AnchorPane.setRightAnchor(formArray[urlIndex],0.0);
-        AnchorPane.setLeftAnchor(formArray[urlIndex],0.0);
-        AnchorPane.setTopAnchor(formArray[urlIndex],0.0);
-        AnchorPane.setBottomAnchor(formArray[urlIndex],0.0);
+        FadeTransition transition = new FadeTransition(Duration.millis(300), pneStage);
+        transition.setFromValue(0.5);
+        transition.setToValue(1);
+        transition.play();
     }
 
     public void imgSettings_OnMouseClicked(MouseEvent mouseEvent) throws IOException {

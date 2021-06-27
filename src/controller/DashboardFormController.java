@@ -5,7 +5,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -17,19 +16,17 @@ public class DashboardFormController {
     public ImageView imgHoursHand;
     public ImageView imgSecondsHand;
     public ImageView imgMinutesHand;
-    public Label lblTime;
 
-    public void initialize(){
-        //startTimer();
-        tblResults.getItems().add(new String("sdfsd"));
-        tblResults.getItems().add(new String("sdfsd"));
-        tblResults.getItems().add(new String("sdfsd"));
+    public void initialize() {
+        startTimer();
+        tblResults.getItems().add("sdfsd");
+        tblResults.getItems().add("sdfsd");
+        tblResults.getItems().add("sdfsd");
     }
 
 
     private void startTimer() {
         String time1 = String.format("%tT", new Date());
-        lblTime.setText(time1);
         String[] arr1 = time1.split(":");
 
         //Set initial positions to start the clock
@@ -53,7 +50,6 @@ public class DashboardFormController {
         // Thread to run seconds hand
         Timeline t2 = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
             String time = String.format("%tT", new Date());
-            lblTime.setText(time);
             String[] arr = time.split(":");
             double secondsAngle = 6 * Double.parseDouble(arr[2]);
             RotateTransition rotateSecondHand = new RotateTransition(Duration.millis(100), imgSecondsHand);
@@ -76,14 +72,13 @@ public class DashboardFormController {
                     e.printStackTrace();
                 }
                 Platform.runLater(() -> {
-                    lblTime.setText(time);
                     double minutesAngle = 6 * Double.parseDouble(arr[1]) + 6;
                     RotateTransition rotateMinuteHand = new RotateTransition(Duration.millis(100), imgMinutesHand);
                     rotateMinuteHand.setFromAngle(minutesAngle - 6);
                     rotateMinuteHand.setToAngle(minutesAngle);
                     rotateMinuteHand.play();
 
-                    double hourAngle = (30 * Double.parseDouble(arr[0]) + (Double.parseDouble(arr[1]) + 1)*0.5);
+                    double hourAngle = (30 * Double.parseDouble(arr[0]) + (Double.parseDouble(arr[1]) + 1) * 0.5);
                     RotateTransition rotateHourHand = new RotateTransition(Duration.millis(100), imgHoursHand);
                     rotateHourHand.setFromAngle(hourAngle - 0.5);
                     rotateHourHand.setToAngle(hourAngle);

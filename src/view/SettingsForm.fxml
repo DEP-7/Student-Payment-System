@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -29,30 +30,18 @@
             </cursor>
         </JFXButton>
         <AnchorPane layoutX="105.0" layoutY="312.0" prefHeight="66.0" prefWidth="465.0" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="461.0">
-            <children>
-                <TextField fx:id="txtCurrentPassword" accessibleText="Current Password *" prefHeight="24.0" promptText="Enter current password here" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </TextField>
-            </children>
+         <children>
+            <PasswordField fx:id="txtCurrentPassword" accessibleText="Current Password *" layoutX="155.0" layoutY="5.0" prefHeight="24.0" promptText="Enter current password here" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+         </children>
         </AnchorPane>
         <AnchorPane layoutX="105.0" layoutY="390.0" prefHeight="66.0" prefWidth="465.0" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="547.0">
             <children>
-                <TextField fx:id="txtNewPassword" accessibleText="New Password *" prefHeight="24.0" promptText="Enter new password here" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </TextField>
+            <PasswordField fx:id="txtNewPassword" accessibleText="New Password *" layoutX="35.0" layoutY="2.0" prefHeight="24.0" promptText="Enter new password here" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="151.0" layoutY="476.0" prefHeight="66.0" prefWidth="465.0" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="633.0">
             <children>
-                <TextField fx:id="txtConfirmPassword" accessibleText="Confirm Password *" prefHeight="24.0" promptText="Enter new password again" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </TextField>
+            <PasswordField fx:id="txtConfirmPassword" accessibleText="Confirm Password *" layoutX="111.0" layoutY="-8.0" prefHeight="24.0" promptText="Enter new password again" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
             </children>
         </AnchorPane>
         <JFXButton layoutX="112.0" layoutY="769.0" onAction="#btnUpdatePassword_OnAction" onKeyPressed="#btnUpdatePassword_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="711.0">
