@@ -176,6 +176,7 @@ public class ManageStudentsFormController {
                         cmbBatchNumber.getSelectionModel().select(existingStudent.getBatchNumber() + "");
                         setDisableAll(true);
                         btnAdd.setDisable(true);
+                        btnUpdate.setDisable(true);
                         isFirstFocusLostFromNIC = false;
                     } catch (NotFoundException e) {
                     }
@@ -210,13 +211,11 @@ public class ManageStudentsFormController {
 
     public void btnUpdate_OnAction(ActionEvent actionEvent) {
         addStudent(true);
-        btnAdd.setDisable(true);
     }
 
     public void btnUpdate_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             addStudent(true);
-            btnAdd.setDisable(true);
         }
     }
 
@@ -251,6 +250,8 @@ public class ManageStudentsFormController {
             String alertMessage = isUpdateStudent ? "Student have been updated successfully" : "Student have been added successfully";
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
             clearAll();
+            btnAdd.setDisable(false);
+            btnUpdate.setDisable(true);
             txtNIC.requestFocus();
         } catch (DuplicateEntryException e) {
             new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText()).show();
@@ -424,12 +425,14 @@ public class ManageStudentsFormController {
     public void btnEdit_OnAction(ActionEvent actionEvent) {
         setDisableAll(false);
         btnAdd.setDisable(true);
+        btnUpdate.setDisable(false);
     }
 
     public void btnEdit_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             setDisableAll(false);
             btnAdd.setDisable(true);
+            btnUpdate.setDisable(false);
         }
     }
 
@@ -451,7 +454,6 @@ public class ManageStudentsFormController {
         cmbCourseId.setDisable(value);
         cmbBatchNumber.setDisable(value);
 
-        btnUpdate.setDisable(value);
         btnEdit.setDisable(!value);
 
         studentNICToUpdate = value ? "" : txtNIC.getText();

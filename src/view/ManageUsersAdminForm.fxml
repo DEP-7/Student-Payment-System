@@ -127,8 +127,8 @@
             </AnchorPane>
          </children>
       </VBox>
-      <JFXCheckBox fx:id="chkMakeAdmin" checkedColor="#8566b2" layoutX="155.0" layoutY="824.0" prefHeight="18.0" prefWidth="54.0" text="Make Admin" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="790.0" />
-      <JFXButton fx:id="btnResetPassword" layoutX="110.0" layoutY="859.0" onAction="#btnResetPassword_OnAction" onKeyPressed="#btnResetPassword_OnKeyPressed" prefHeight="36.0" prefWidth="200.0" style="-fx-background-color: #545454;" text="Reset Current Password" textFill="WHITE" AnchorPane.leftAnchor="435.0" AnchorPane.topAnchor="778.0">
+      <JFXCheckBox fx:id="chkMakeAdmin" checkedColor="#8566b2" layoutX="155.0" layoutY="824.0" prefHeight="18.0" prefWidth="54.0" text="Admin" textFill="WHITE" unCheckedColor="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="790.0" />
+      <JFXButton fx:id="btnResetPassword" disable="true" layoutX="110.0" layoutY="859.0" onAction="#btnResetPassword_OnAction" onKeyPressed="#btnResetPassword_OnKeyPressed" prefHeight="36.0" prefWidth="200.0" style="-fx-background-color: #545454;" text="Reset Current Password" textFill="WHITE" AnchorPane.leftAnchor="435.0" AnchorPane.topAnchor="778.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -144,7 +144,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnEdit" layoutX="201.0" layoutY="866.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="202.0" AnchorPane.topAnchor="879.0">
+      <JFXButton fx:id="btnEdit" disable="true" layoutX="201.0" layoutY="866.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="202.0" AnchorPane.topAnchor="879.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -152,7 +152,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="303.0" layoutY="849.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="319.0" AnchorPane.topAnchor="879.0">
+      <JFXButton fx:id="btnUpdate" disable="true" layoutX="303.0" layoutY="849.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="319.0" AnchorPane.topAnchor="879.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -160,7 +160,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" layoutX="403.0" layoutY="865.0" onAction="#btnDelete_OnAction" onKeyPressed="#btnDelete_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Delete" textFill="WHITE" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="879.0">
+      <JFXButton fx:id="btnDelete" disable="true" layoutX="403.0" layoutY="865.0" onAction="#btnDelete_OnAction" onKeyPressed="#btnDelete_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Delete" textFill="WHITE" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="879.0">
          <font>
             <Font size="14.0" />
          </font>

@@ -141,6 +141,5 @@
             <DropShadow color="#2c2b2b" height="50.0" offsetX="6.0" offsetY="10.0" radius="23.25" spread="0.5" width="45.0" />
          </effect>
       </AnchorPane>
-      <Label fx:id="lblTime" layoutX="399.0" layoutY="26.0" text="Label" />
    </children>
 </AnchorPane>

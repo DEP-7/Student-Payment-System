@@ -23,8 +23,6 @@ import static util.ValidationUtil.*;
 
 public class ManageUsersAdminFormController {
     private final UserService userService = new UserService();
-    private boolean isFirstFocusLostFromNIC = true;
-    private String userNICToUpdate = "";
     public TableView<UserTM> tblResult;
     public JFXCheckBox chkMakeAdmin;
     public ToggleGroup rbnGender;
@@ -45,6 +43,8 @@ public class ManageUsersAdminFormController {
     public JFXButton btnAdd;
     public Label lblDefaultUserName;
     public Label lblDefaultPassword;
+    private boolean isFirstFocusLostFromNIC = true;
+    private String userNICToUpdate = "";
 
     public void initialize() {
         MaterialUI.paintTextFields(txtNameWithInitials, txtContactNumber, txtDateOfBirth, txtFullName, txtAddress, txtSearch, txtEmail, txtNIC, txtAge);
@@ -96,8 +96,8 @@ public class ManageUsersAdminFormController {
                 autoFillDataUsingNIC();
                 String nic = txtNIC.getText().trim();
                 if (!isFirstFocusLostFromNIC && isValidNIC(nic)) {
-                    lblDefaultUserName.setText("System generated username is \""+ nic +"\" and it is recommended to change the username after first login");
-                    lblDefaultPassword.setText("System generated password is \""+ nic +"\" and it is recommended to change the password after first login");
+                    lblDefaultUserName.setText("System generated username is \"" + nic + "\" and it is recommended to change the username after first login");
+                    lblDefaultPassword.setText("System generated password is \"" + nic + "\" and it is recommended to change the password after first login");
                 }
             }
 
@@ -113,12 +113,15 @@ public class ManageUsersAdminFormController {
                         }
                         txtFullName.setText(existingUser.getNameInFull());
                         txtNameWithInitials.setText(existingUser.getNameWithInitials());
-                        rbnGender.getToggles().get(0).setSelected((existingUser.getGender() == "Male"));
+                        rbnGender.getToggles().get(0).setSelected((existingUser.getGender().equals("Male")));
                         txtDateOfBirth.setText(existingUser.getDateOfBirth().toString());
                         txtAddress.setText(existingUser.getAddress());
                         txtContactNumber.setText(existingUser.getContactNumber());
                         txtEmail.setText(existingUser.getEmail());
-                        setDisableAll(true,false);
+                        chkMakeAdmin.setSelected(existingUser.isAdmin());
+                        setDisableAll(true);
+                        btnAdd.setDisable(true);
+                        btnUpdate.setDisable(true);
                         isFirstFocusLostFromNIC = false;
                     } catch (NotFoundException e) {
                     }
@@ -138,7 +141,7 @@ public class ManageUsersAdminFormController {
 
         for (User user : userService.searchUsersByKeyword(keyword)) {
             if (user.isAccountActive()) {
-                tblResult.getItems().add(new UserTM(user.getNic(), user.getNameWithInitials(), user.getGender(), user.isAdmin()?"Admin":"General User", user.getLastLogin()));
+                tblResult.getItems().add(new UserTM(user.getNic(), user.getNameWithInitials(), user.getGender(), user.isAdmin() ? "Admin" : "General User", user.getLastLogin()));
             }
 
         }
@@ -156,45 +159,47 @@ public class ManageUsersAdminFormController {
 
     public void btnUpdate_OnAction(ActionEvent actionEvent) {
         addUser(true);
-        btnAdd.setDisable(true);
     }
 
     public void btnUpdate_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             addUser(true);
-            btnAdd.setDisable(true);
         }
     }
 
     private void addUser(boolean isUpdateUser) {
-        trimTextFields(txtAge, txtNIC, txtEmail, txtSearch, txtAddress, txtFullName, txtDateOfBirth,txtContactNumber,txtNameWithInitials);
+        trimTextFields(txtAge, txtNIC, txtEmail, txtSearch, txtAddress, txtFullName, txtDateOfBirth, txtContactNumber, txtNameWithInitials);
 
         if (!isValidated()) {
             return;
         }
 
-        User user = new User(txtNIC.getText(),
-                txtFullName.getText(),
-                txtNameWithInitials.getText(),
-                ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
-                LocalDate.parse(txtDateOfBirth.getText()),
-                txtAddress.getText(),
-                txtContactNumber.getText(),
-                txtEmail.getText(),
-                chkMakeAdmin.isSelected(),
-                null,
-                txtNIC.getText(),
-                txtNIC.getText(),
-                true);
         try {
+            User user = new User(txtNIC.getText(),
+                    txtFullName.getText(),
+                    txtNameWithInitials.getText(),
+                    ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
+                    LocalDate.parse(txtDateOfBirth.getText()),
+                    txtAddress.getText(),
+                    txtContactNumber.getText(),
+                    txtEmail.getText(),
+                    chkMakeAdmin.isSelected(),
+                    !isUpdateUser ? null : userService.searchUser(userNICToUpdate).getLastLogin(),
+                    txtNIC.getText(),
+                    txtNIC.getText(),
+                    true);
+
             if (isUpdateUser) {
                 userService.updateUser(user, userNICToUpdate);
             } else {
                 userService.addUser(user);
             }
+
+            btnAdd.setDisable(false);
+            btnUpdate.setDisable(true);
             loadAllUsers(txtSearch.getText());
             String alertMessage = isUpdateUser ? "User have been updated successfully" : "User have been added successfully";
-            new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
+            new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).showAndWait();
             clearAll();
             txtNIC.requestFocus();
         } catch (DuplicateEntryException e) {
@@ -249,11 +254,15 @@ public class ManageUsersAdminFormController {
 
     public void btnClear_OnAction(ActionEvent actionEvent) {
         clearAll();
+        btnAdd.setDisable(false);
+        btnUpdate.setDisable(true);
     }
 
     public void btnClear_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             clearAll();
+            btnAdd.setDisable(false);
+            btnUpdate.setDisable(true);
         }
     }
 
@@ -276,10 +285,11 @@ public class ManageUsersAdminFormController {
 
         isFirstFocusLostFromNIC = true;
         setDisableAll(false);
+        btnAdd.setDisable(false);
     }
 
-    private void setDisableAll(boolean value, boolean disableAddButton) {
-        ((RadioButton)rbnGender.getToggles().get(0)).getParent().setDisable(value);
+    private void setDisableAll(boolean value) {
+        ((RadioButton) rbnGender.getToggles().get(0)).getParent().setDisable(value);
 
         txtNIC.setDisable(value);
         txtFullName.setDisable(value);
@@ -292,8 +302,6 @@ public class ManageUsersAdminFormController {
 
         chkMakeAdmin.setDisable(value);
 
-        btnAdd.setDisable(value);
-        btnUpdate.setDisable(value);
         btnEdit.setDisable(!value);
         btnDelete.setDisable(!value);
         btnResetPassword.setDisable(!value);
@@ -301,23 +309,28 @@ public class ManageUsersAdminFormController {
         userNICToUpdate = value ? "" : txtNIC.getText();
     }
 
-    private void setDisableAll(boolean value) {
-        setDisableAll(value,value);
-    }
-
     public void btnEdit_OnAction(ActionEvent actionEvent) {
         setDisableAll(false);
+        btnAdd.setDisable(true);
+        btnUpdate.setDisable(false);
+        btnResetPassword.setDisable(false);
     }
 
     public void btnEdit_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             setDisableAll(false);
+            btnAdd.setDisable(true);
+            btnUpdate.setDisable(false);
+            btnResetPassword.setDisable(false);
         }
     }
 
     public void btnDelete_OnAction(ActionEvent actionEvent) {
         try {
             userService.deleteUser(txtNIC.getText());
+            clearAll();
+            btnAdd.setDisable(true);
+            btnUpdate.setDisable(false);
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
             btnClear.requestFocus();
@@ -328,6 +341,8 @@ public class ManageUsersAdminFormController {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             try {
                 userService.deleteUser(txtNIC.getText());
+                btnAdd.setDisable(true);
+                btnUpdate.setDisable(false);
             } catch (NotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
                 btnClear.requestFocus();
@@ -339,8 +354,8 @@ public class ManageUsersAdminFormController {
         try {
             String nic = txtNIC.getText().trim();
             userService.resetAccount(nic);
-            lblDefaultUserName.setText("System generated username is \""+ nic +"\" and it is recommended to change the username after first login");
-            lblDefaultPassword.setText("System generated password is \""+ nic +"\" and it is recommended to change the password after first login");
+            lblDefaultUserName.setText("System generated username is \"" + nic + "\" and it is recommended to change the username after first login");
+            lblDefaultPassword.setText("System generated password is \"" + nic + "\" and it is recommended to change the password after first login");
             btnResetPassword.setDisable(true);
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
@@ -353,8 +368,8 @@ public class ManageUsersAdminFormController {
             try {
                 String nic = txtNIC.getText().trim();
                 userService.resetAccount(nic);
-                lblDefaultUserName.setText("System generated username is \""+ nic +"\" and it is recommended to change the username after first login");
-                lblDefaultPassword.setText("System generated password is \""+ nic +"\" and it is recommended to change the password after first login");
+                lblDefaultUserName.setText("System generated username is \"" + nic + "\" and it is recommended to change the username after first login");
+                lblDefaultPassword.setText("System generated password is \"" + nic + "\" and it is recommended to change the password after first login");
                 btnResetPassword.setDisable(true);
             } catch (NotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
@@ -373,11 +388,7 @@ public class ManageUsersAdminFormController {
         }
         LocalDate dob = LocalDate.parse(nic.substring(0, 4) + "-01-01");
         int days = Integer.parseInt(nic.substring(4, 7));
-        if (days > 500) {
-            rbnGender.getToggles().get(0).setSelected(false);
-        } else {
-            rbnGender.getToggles().get(0).setSelected(true);
-        }
+        rbnGender.getToggles().get(0).setSelected(days <= 500);
         days = days > 500 ? days - 500 : days;
         dob = dob.plusDays(days - 2);
         txtDateOfBirth.setText(dob.toString());

@@ -1,5 +1,7 @@
 package model;
 
+import lk.ijse.crypto.DCCrypto;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -126,11 +128,11 @@ public class User {
     }
 
     public boolean isPasswordCorrect(String passwordInput) {
-        return password.equals(passwordInput);
+        return password.equals(DCCrypto.encrypt(passwordInput, passwordInput.charAt(0) + "" + passwordInput.charAt(passwordInput.length()-1) + passwordInput.length()*2));
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = DCCrypto.encrypt(password, password.charAt(0) + "" + password.charAt(password.length()) + password.length()*2);
     }
 
     public boolean isAccountActive() {
