@@ -16,11 +16,13 @@ public class User {
     private LocalDateTime lastLogin;
     private String username;
     private String password;
+    private boolean accountActive;
 
     public User() {
     }
 
-    public User(String nic, String nameInFull, String nameWithInitials, String gender, LocalDate dateOfBirth, String address, String contactNumber, String email, boolean admin, LocalDateTime lastLogin, String username, String password) {        this.nic = nic;
+    public User(String nic, String nameInFull, String nameWithInitials, String gender, LocalDate dateOfBirth, String address, String contactNumber, String email, boolean admin, LocalDateTime lastLogin, String username, String password, boolean accountActive) {
+        this.nic = nic;
         this.nameInFull = nameInFull;
         this.nameWithInitials = nameWithInitials;
         this.gender = gender;
@@ -32,6 +34,7 @@ public class User {
         this.lastLogin = lastLogin;
         this.username = username;
         this.password = password;
+        this.accountActive = accountActive;
     }
 
     public String getNic() {
@@ -128,5 +131,31 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAccountActive() {
+        return accountActive;
+    }
+
+    public void setAccountActive(boolean accountActive) {
+        this.accountActive = accountActive;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "nic='" + nic + '\'' +
+                ", nameInFull='" + nameInFull + '\'' +
+                ", nameWithInitials='" + nameWithInitials + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", address='" + address + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", admin=" + admin +
+                ", lastLogin=" + lastLogin +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

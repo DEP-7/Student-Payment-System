@@ -194,12 +194,12 @@
                 <TableColumn editable="false" prefWidth="235.6666259765625" text="Last Login" />
             </columns>
         </TableView>
-      <Label fx:id="lblDefaultUserName" layoutX="170.0" layoutY="621.0" prefWidth="550.0" text="Default username is 931630377 and it is recommended to change the username after first login" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="654.0">
+      <Label fx:id="lblDefaultUserName" layoutX="170.0" layoutY="621.0" prefWidth="550.0" text="System generated username is nic and it is recommended to change the username after first login" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="654.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblDefaultPassword" layoutX="180.0" layoutY="631.0" prefWidth="550.0" text="Default password is 931630377 and it is recommended to change the password after first login" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="723.0">
+      <Label fx:id="lblDefaultPassword" layoutX="180.0" layoutY="631.0" prefWidth="550.0" text="System generated password is nic and it is recommended to change the password after first login" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="723.0">
          <font>
             <Font size="14.0" />
          </font>

@@ -90,7 +90,7 @@ public class ManageStudentsFormController {
         });
 
         cmbCourseId.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty()) {
+            if (newValue != null && !newValue.isEmpty()) {
                 try {
                     cmbBatchNumber.getItems().clear();
                     for (Batch batch : batchService.searchAllBatches(courseService.searchCourse(newValue))) {
@@ -143,11 +143,13 @@ public class ManageStudentsFormController {
                 } catch (DateTimeParseException e) {
                     txtAge.setText("Invalid");
                 }
+            } else if (inputText.length() < 4) {
+                txtAge.setText("00-00-00");
             }
         });
 
         txtNIC.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
+            if (oldValue) {
                 autoFillDataUsingNIC();
             }
 
@@ -171,8 +173,9 @@ public class ManageStudentsFormController {
                         txtContactNumber.setText(existingStudent.getContactNumber());
                         txtEmail.setText(existingStudent.getEmail());
                         cmbCourseId.getSelectionModel().select(existingStudent.getCourseId());
-                        cmbBatchNumber.getSelectionModel().select(existingStudent.getBatchNumber()+"");
+                        cmbBatchNumber.getSelectionModel().select(existingStudent.getBatchNumber() + "");
                         setDisableAll(true);
+                        btnAdd.setDisable(true);
                         isFirstFocusLostFromNIC = false;
                     } catch (NotFoundException e) {
                     }
@@ -207,11 +210,13 @@ public class ManageStudentsFormController {
 
     public void btnUpdate_OnAction(ActionEvent actionEvent) {
         addStudent(true);
+        btnAdd.setDisable(true);
     }
 
     public void btnUpdate_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             addStudent(true);
+            btnAdd.setDisable(true);
         }
     }
 
@@ -286,6 +291,7 @@ public class ManageStudentsFormController {
 
         isFirstFocusLostFromNIC = true;
         setDisableAll(false);
+        btnAdd.setDisable(false);
     }
 
     private boolean isValidated() {
@@ -417,11 +423,13 @@ public class ManageStudentsFormController {
 
     public void btnEdit_OnAction(ActionEvent actionEvent) {
         setDisableAll(false);
+        btnAdd.setDisable(true);
     }
 
     public void btnEdit_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             setDisableAll(false);
+            btnAdd.setDisable(true);
         }
     }
 
@@ -443,7 +451,6 @@ public class ManageStudentsFormController {
         cmbCourseId.setDisable(value);
         cmbBatchNumber.setDisable(value);
 
-        btnAdd.setDisable(value);
         btnUpdate.setDisable(value);
         btnEdit.setDisable(!value);
 

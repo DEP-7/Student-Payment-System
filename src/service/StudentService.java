@@ -25,7 +25,7 @@ public class StudentService {
     }
 
     public void updateStudent(Student studentToUpdate, String previousNIC) throws NotFoundException {
-        Student studentBeforeUpdate = searchStudent(studentToUpdate.getNic());
+        Student studentBeforeUpdate = searchStudent(previousNIC);
         studentDB.set(studentDB.indexOf(studentBeforeUpdate), studentToUpdate);
     }
 
