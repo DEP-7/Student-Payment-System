@@ -132,7 +132,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = DCCrypto.encrypt(password, password.charAt(0) + "" + password.charAt(password.length()) + password.length()*2);
+        this.password = DCCrypto.encrypt(password, password.charAt(0) + "" + password.charAt(password.length()-1) + password.length()*2);
     }
 
     public boolean isAccountActive() {

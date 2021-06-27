@@ -20,7 +20,7 @@
                 </TextField>
             </children>
         </AnchorPane>
-        <JFXButton layoutX="580.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="390.0">
+        <JFXButton layoutX="580.0" layoutY="769.0" onAction="#btnUpdateUsername_OnAction" onKeyPressed="#btnUpdateUsername_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="390.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -55,7 +55,7 @@
                 </TextField>
             </children>
         </AnchorPane>
-        <JFXButton layoutX="112.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="711.0">
+        <JFXButton layoutX="112.0" layoutY="769.0" onAction="#btnUpdatePassword_OnAction" onKeyPressed="#btnUpdatePassword_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="66.0" AnchorPane.topAnchor="711.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -63,15 +63,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton layoutX="268.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="787.0">
-            <font>
-                <Font size="14.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </JFXButton>
-        <JFXButton layoutX="424.0" layoutY="769.0" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="OK" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.topAnchor="787.0">
+        <JFXButton layoutX="424.0" layoutY="769.0" onAction="#btnOk_OnAction" onKeyPressed="#btnOk_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="OK" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.topAnchor="787.0">
             <font>
                 <Font size="14.0" />
             </font>

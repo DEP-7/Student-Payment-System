@@ -78,8 +78,8 @@ public class MainFormController {
         * 7 - Manage Courses
         * 8 - Manage Users*/
 
-//        Platform.runLater(() -> {
-//            loggedUser = (User) pneStage.getScene().getWindow().getUserData();
+        Platform.runLater(() -> {
+            loggedUser = (User) pneStage.getScene().getWindow().getUserData();
 //
 //            rprViewCourses.setVisible(!loggedUser.isAdmin());
 //            rprManageCourses.setVisible(loggedUser.isAdmin());
@@ -93,7 +93,7 @@ public class MainFormController {
 //            if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
 //                // TODO: Guidelines to change password
 //            }
-//        });
+        });
     }
 
     public void pneDashboard_OnMouseClicked(MouseEvent mouseEvent) {
@@ -149,6 +149,7 @@ public class MainFormController {
 
     public void imgSettings_OnMouseClicked(MouseEvent mouseEvent) throws IOException {
         Stage settingsStage = new Stage();
+        settingsStage.setUserData(loggedUser);
         Parent load = FXMLLoader.load(this.getClass().getResource("../view/SettingsForm.fxml"));
         Scene settingScene = new Scene(load);
         settingsStage.setScene(settingScene);
