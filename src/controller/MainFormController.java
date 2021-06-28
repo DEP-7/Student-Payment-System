@@ -88,18 +88,18 @@ public class MainFormController {
         Platform.runLater(() -> {
             loggedUser = (User) pneStage.getScene().getWindow().getUserData();
 
-            rprViewCourses.setVisible(!loggedUser.isAdmin());
-            rprManageCourses.setVisible(loggedUser.isAdmin());
-            rprViewBatches.setVisible(!loggedUser.isAdmin());
-            rprManageBatches.setVisible(loggedUser.isAdmin());
-            rprManageUsers.setVisible(loggedUser.isAdmin());
-
-            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewCourses : rprManageCourses);
-            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewBatches : rprManageBatches);
-
-            if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
-                // TODO: Guidelines to change password
-            }
+//            rprViewCourses.setVisible(!loggedUser.isAdmin());
+//            rprManageCourses.setVisible(loggedUser.isAdmin());
+//            rprViewBatches.setVisible(!loggedUser.isAdmin());
+//            rprManageBatches.setVisible(loggedUser.isAdmin());
+//            rprManageUsers.setVisible(loggedUser.isAdmin());
+//
+//            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewCourses : rprManageCourses);
+//            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewBatches : rprManageBatches);
+//
+//            if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
+//                // TODO: Guidelines to change password
+//            }
         });
     }
 

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/ViewCoursesFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewCoursesFormController">
     <children>
         <AnchorPane layoutX="154.0" layoutY="21.0" prefHeight="66.0" prefWidth="1140.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="19.0">
@@ -16,17 +20,17 @@
                 </TextField>
             </children>
         </AnchorPane>
-        <TableView layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1140.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="112.0">
+        <TableView fx:id="tblResult" layoutX="344.0" layoutY="118.0" prefHeight="803.0" prefWidth="1140.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="112.0">
             <columns>
-                <TableColumn prefWidth="246.99996948242188" text="Course Name" />
-                <TableColumn prefWidth="159.0" text="Course ID" />
+                <TableColumn prefWidth="181.0" text="Course ID" />
+                <TableColumn prefWidth="225.0" text="Course Name" />
                 <TableColumn prefWidth="115.0" text="Duration" />
                 <TableColumn prefWidth="123.0" text="Course Fee" />
                 <TableColumn prefWidth="177.0" text="No. of Installments" />
                 <TableColumn prefWidth="320.0" text="Course Status" />
             </columns>
         </TableView>
-      <JFXButton layoutX="963.0" layoutY="86.0" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #545454;" text="Open Course Schedule" textFill="WHITE" AnchorPane.leftAnchor="1265.0" AnchorPane.topAnchor="29.0">
+      <JFXButton layoutX="963.0" layoutY="86.0" onAction="#btnCourseSchedule_OnAction" onKeyPressed="#btnCourseSchedule_OnKeyPressed" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #545454;" text="Open Course Schedule" textFill="WHITE" AnchorPane.leftAnchor="1265.0" AnchorPane.topAnchor="29.0">
          <font>
             <Font size="14.0" />
          </font>

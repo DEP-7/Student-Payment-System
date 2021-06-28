@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CourseTM implements Serializable {
@@ -10,19 +9,19 @@ public class CourseTM implements Serializable {
     private double courseFee;
     private int numberOfInstallments;
     private String duration;
-    private boolean courseAvailable;
+    private String courseStatus;
     private LocalDate courseInitiationDate;
 
     public CourseTM() {
     }
 
-    public CourseTM(String courseID, String courseName, double courseFee, int numberOfInstallments, String duration, boolean courseAvailable, LocalDate courseInitiationDate) {
+    public CourseTM(String courseID, String courseName, double courseFee, int numberOfInstallments, String duration, String courseStatus, LocalDate courseInitiationDate) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseFee = courseFee;
         this.numberOfInstallments = numberOfInstallments;
         this.duration = duration;
-        this.courseAvailable = courseAvailable;
+        this.courseStatus = courseStatus;
         this.courseInitiationDate = courseInitiationDate;
     }
 
@@ -66,12 +65,12 @@ public class CourseTM implements Serializable {
         this.duration = duration;
     }
 
-    public boolean isCourseAvailable() {
-        return courseAvailable;
+    public String getCourseStatus() {
+        return courseStatus;
     }
 
-    public void setCourseAvailable(boolean courseAvailable) {
-        this.courseAvailable = courseAvailable;
+    public void setCourseStatus(String courseStatus) {
+        this.courseStatus = courseStatus;
     }
 
     public LocalDate getCourseInitiationDate() {
@@ -90,7 +89,7 @@ public class CourseTM implements Serializable {
                 ", courseFee=" + courseFee +
                 ", numberOfInstallments=" + numberOfInstallments +
                 ", duration='" + duration + '\'' +
-                ", courseAvailable=" + courseAvailable +
+                ", courseStatus='" + courseStatus + '\'' +
                 ", courseInitiationDate=" + courseInitiationDate +
                 '}';
     }
