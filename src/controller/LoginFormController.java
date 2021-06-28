@@ -28,7 +28,7 @@ public class LoginFormController {
         loginIn();
     }
 
-    public void btnLogin_OnKeyPressed(KeyEvent keyEvent) {
+    public void btnLogin_OnKeyReleased(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
             loginIn();
         }
