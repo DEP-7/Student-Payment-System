@@ -18,7 +18,10 @@ import javafx.util.Duration;
 import model.User;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainFormController {
     public AnchorPane pneItemManageStudents;
@@ -48,6 +51,8 @@ public class MainFormController {
     ArrayList<Parent> formArray = new ArrayList<>();
 
     public void initialize() throws IOException {
+        startClock();
+
         rprManageStudents.setControl(pneItemManageStudents);
         rprAddNewPayment.setControl(pneItemAddNewPayment);
         rprManageBatches.setControl(pneItemManageBatches);
@@ -83,18 +88,18 @@ public class MainFormController {
         Platform.runLater(() -> {
             loggedUser = (User) pneStage.getScene().getWindow().getUserData();
 
-            rprViewCourses.setVisible(!loggedUser.isAdmin());
-            rprManageCourses.setVisible(loggedUser.isAdmin());
-            rprViewBatches.setVisible(!loggedUser.isAdmin());
-            rprManageBatches.setVisible(loggedUser.isAdmin());
-            rprManageUsers.setVisible(loggedUser.isAdmin());
-
-            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewCourses : rprManageCourses);
-            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewBatches : rprManageBatches);
-
-            if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
-                // TODO: Guidelines to change password
-            }
+//            rprViewCourses.setVisible(!loggedUser.isAdmin());
+//            rprManageCourses.setVisible(loggedUser.isAdmin());
+//            rprViewBatches.setVisible(!loggedUser.isAdmin());
+//            rprManageBatches.setVisible(loggedUser.isAdmin());
+//            rprManageUsers.setVisible(loggedUser.isAdmin());
+//
+//            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewCourses : rprManageCourses);
+//            pneItemContainer.getChildren().remove(loggedUser.isAdmin() ? rprViewBatches : rprManageBatches);
+//
+//            if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
+//                // TODO: Guidelines to change password
+//            }
         });
     }
 
@@ -269,5 +274,15 @@ public class MainFormController {
         if (keyEvent.getCode() == KeyCode.SPACE || keyEvent.getCode() == KeyCode.ENTER) {
             rprManageUsers.createManualRipple().run();
         }
+    }
+
+    private void startClock() {
+        Timeline t1 = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
+            LocalDateTime now = LocalDateTime.now();
+            String time = DateTimeFormatter.ofPattern("yyyy-MMM-dd hh:mm:ss a").format(now);
+            lblTime.setText(time);
+        }));
+        t1.setCycleCount(Animation.INDEFINITE);
+        t1.play();
     }
 }

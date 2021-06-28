@@ -11,7 +11,7 @@ public class Course {
     private String duration;
     private String firstInstallment;
     private String installmentGap;
-    private boolean courseAvailable;
+    private String courseStatus;
     private String courseSchedule;
     private String minimumRequirements;
     private String notes;
@@ -20,7 +20,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(String courseID, String courseName, double courseFee, int numberOfInstallments, int numberOfStudents, String duration, String firstInstallment, String installmentGap, boolean courseAvailable, String courseSchedule, String minimumRequirements, String notes, LocalDate courseInitiationDate) {
+    public Course(String courseID, String courseName, double courseFee, int numberOfInstallments, int numberOfStudents, String duration, String firstInstallment, String installmentGap, String courseStatus, String courseSchedule, String minimumRequirements, String notes, LocalDate courseInitiationDate) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseFee = courseFee;
@@ -29,7 +29,7 @@ public class Course {
         this.duration = duration;
         this.firstInstallment = firstInstallment;
         this.installmentGap = installmentGap;
-        this.courseAvailable = courseAvailable;
+        this.courseStatus = courseStatus;
         this.courseSchedule = courseSchedule;
         this.minimumRequirements = minimumRequirements;
         this.notes = notes;
@@ -100,12 +100,12 @@ public class Course {
         this.installmentGap = installmentGap;
     }
 
-    public boolean isCourseAvailable() {
-        return courseAvailable;
+    public String getCourseStatus() {
+        return courseStatus;
     }
 
-    public void setCourseAvailable(boolean courseAvailable) {
-        this.courseAvailable = courseAvailable;
+    public void setCourseStatus(String courseStatus) {
+        this.courseStatus = courseStatus;
     }
 
     public String getCourseSchedule() {
@@ -151,7 +151,7 @@ public class Course {
                 ", duration='" + duration + '\'' +
                 ", firstInstallment='" + firstInstallment + '\'' +
                 ", installmentGap='" + installmentGap + '\'' +
-                ", courseAvailable=" + courseAvailable +
+                ", courseStatus='" + courseStatus + '\'' +
                 ", courseSchedule='" + courseSchedule + '\'' +
                 ", minimumRequirements='" + minimumRequirements + '\'' +
                 ", notes='" + notes + '\'' +

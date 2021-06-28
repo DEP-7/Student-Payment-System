@@ -55,7 +55,7 @@ public class ManageCoursesAdminFormController {
         tblResult.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("courseFee"));
         tblResult.getColumns().get(3).setCellValueFactory(new PropertyValueFactory("numberOfInstallments"));
         tblResult.getColumns().get(4).setCellValueFactory(new PropertyValueFactory("duration"));
-        tblResult.getColumns().get(5).setCellValueFactory(new PropertyValueFactory("courseAvailable"));
+        tblResult.getColumns().get(5).setCellValueFactory(new PropertyValueFactory("courseStatus"));
         tblResult.getColumns().get(6).setCellValueFactory(new PropertyValueFactory("courseInitiationDate"));
 
         chkUnlimitedStudents.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -106,7 +106,7 @@ public class ManageCoursesAdminFormController {
                     rbnDuration.getToggles().get(0).setSelected(existingCourse.getDuration().contains("Months"));
                     rbnFirstInstallment.getToggles().get(0).setSelected(existingCourse.getFirstInstallment().contains("Weeks"));
                     rbnInstallmentGap.getToggles().get(0).setSelected(existingCourse.getInstallmentGap().contains("Months"));
-                    rbnCourseStatus.getToggles().get(0).setSelected(existingCourse.isCourseAvailable());
+                    rbnCourseStatus.getToggles().get(0).setSelected(existingCourse.getCourseStatus().equals("Available"));
 
                     chkUnlimitedStudents.setSelected(existingCourse.getNumberOfStudents() == -1);
 
@@ -129,7 +129,7 @@ public class ManageCoursesAdminFormController {
         tblResult.getItems().clear();
 
         for (Course course : courseService.searchCourseByKeyword(keyword)) {
-            tblResult.getItems().add(new CourseTM(course.getCourseID(), course.getCourseName(), course.getCourseFee(), course.getNumberOfInstallments(), course.getDuration(), course.isCourseAvailable(), course.getCourseInitiationDate()));
+            tblResult.getItems().add(new CourseTM(course.getCourseID(), course.getCourseName(), course.getCourseFee(), course.getNumberOfInstallments(), course.getDuration(), course.getCourseStatus(), course.getCourseInitiationDate()));
         }
     }
 
@@ -184,7 +184,7 @@ public class ManageCoursesAdminFormController {
                 txtCourseDuration.getText() + " - " + ((RadioButton) rbnDuration.getSelectedToggle()).getText(),
                 txtFirstInstallment.getText() + " - " + ((RadioButton) rbnFirstInstallment.getSelectedToggle()).getText(),
                 txtInstallmentGap.getText() + " - " + ((RadioButton) rbnInstallmentGap.getSelectedToggle()).getText(),
-                rbnCourseStatus.getToggles().get(0).isSelected(),
+                ((RadioButton)rbnCourseStatus.getSelectedToggle()).getText(),
                 txtFileName.getText(),
                 txtMinimumRequirements.getText(),
                 txtNotes.getText(),

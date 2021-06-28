@@ -18,7 +18,7 @@ public class DashboardFormController {
     public ImageView imgMinutesHand;
 
     public void initialize() {
-        startTimer();
+        //startTimer();
         tblResults.getItems().add("sdfsd");
         tblResults.getItems().add("sdfsd");
         tblResults.getItems().add("sdfsd");
