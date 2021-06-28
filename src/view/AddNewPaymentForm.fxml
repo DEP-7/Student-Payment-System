@@ -257,7 +257,7 @@
             </TextField>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="218.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="298.0" AnchorPane.topAnchor="614.0">
+      <ImageView fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="218.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="298.0" AnchorPane.topAnchor="614.0">
          <image>
             <Image url="@assets/icons/Icon_Left_Arrow.png" />
          </image>
