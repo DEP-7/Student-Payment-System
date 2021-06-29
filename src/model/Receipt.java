@@ -2,6 +2,7 @@ package model;
 
 import model.sub.PaymentMethod;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Receipt {
@@ -9,17 +10,17 @@ public class Receipt {
     private Student student;
     private String paymentDescription;
     private PaymentMethod paymentMethod;
-    private double amountReceived;
+    private BigDecimal amountReceived;
     private LocalDate dueDateOfBalancePayment;
     private LocalDate paymentDate;
     private String notes;
     private LocalDate receiptDate;
-    private User userId;
+    private User user;
 
     public Receipt() {
     }
 
-    public Receipt(long receiptNumber, Student student, String paymentDescription, PaymentMethod paymentMethod, double amountReceived, LocalDate dueDateOfBalancePayment, LocalDate paymentDate, String notes, LocalDate receiptDate, User userId) {
+    public Receipt(long receiptNumber, Student student, String paymentDescription, PaymentMethod paymentMethod, BigDecimal amountReceived, LocalDate dueDateOfBalancePayment, LocalDate paymentDate, String notes, LocalDate receiptDate, User user) {
         this.receiptNumber = receiptNumber;
         this.student = student;
         this.paymentDescription = paymentDescription;
@@ -29,7 +30,7 @@ public class Receipt {
         this.paymentDate = paymentDate;
         this.notes = notes;
         this.receiptDate = receiptDate;
-        this.userId = userId;
+        this.user = user;
     }
 
     public long getReceiptNumber() {
@@ -64,11 +65,11 @@ public class Receipt {
         this.paymentMethod = paymentMethod;
     }
 
-    public double getAmountReceived() {
+    public BigDecimal getAmountReceived() {
         return amountReceived;
     }
 
-    public void setAmountReceived(double amountReceived) {
+    public void setAmountReceived(BigDecimal amountReceived) {
         this.amountReceived = amountReceived;
     }
 
@@ -104,11 +105,11 @@ public class Receipt {
         this.receiptDate = receiptDate;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

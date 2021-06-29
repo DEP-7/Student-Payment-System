@@ -34,8 +34,6 @@ public class OnlinePayment implements PaymentMethod {
 
     @Override
     public String toString() {
-        return "OnlinePayment{" +
-                "referenceNumber='" + getReferenceNumber() + '\'' +
-                '}';
+        return "Online Payment";
     }
 }

@@ -214,7 +214,7 @@
             </TextField>
          </children>
       </AnchorPane>
-      <JFXButton layoutX="258.0" layoutY="364.0" onAction="#btnMakePayment_OnAction" onKeyPressed="#btnMakePayment_OnKeyPressed" prefHeight="36.0" prefWidth="140.0" style="-fx-background-color: #545454;" text="Make Payment" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="864.0">
+      <JFXButton fx:id="btnMakePayment" layoutX="258.0" layoutY="364.0" onAction="#btnMakePayment_OnAction" onKeyPressed="#btnMakePayment_OnKeyPressed" prefHeight="36.0" prefWidth="140.0" style="-fx-background-color: #545454;" text="Make Payment" textFill="WHITE" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="864.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -271,7 +271,7 @@
 
       <AnchorPane layoutX="34.0" layoutY="271.0" prefHeight="66.0" prefWidth="253.0" AnchorPane.leftAnchor="647.0" AnchorPane.topAnchor="19.0">
          <children>
-            <TextField fx:id="txtReceiptNumber" accessibleText="Reciept Number" editable="false" prefHeight="24.0" text="R00001" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <TextField fx:id="txtReceiptNumber" accessibleText="Reciept Number" editable="false" prefHeight="24.0" text="R000001" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font size="16.0" />
                </font>

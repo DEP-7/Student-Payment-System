@@ -42,10 +42,6 @@ public class CardPayment implements PaymentMethod{
 
     @Override
     public String toString() {
-        return "CardPayment{" +
-                "cardNumber='" + cardNumber + '\'' +
-                ", cardExpireDate=" + cardExpireDate +
-                ", nameOnCard='" + nameOnCard + '\'' +
-                '}';
+        return "Card Payment";
     }
 }

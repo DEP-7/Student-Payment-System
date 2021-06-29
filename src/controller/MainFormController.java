@@ -139,7 +139,7 @@ public class MainFormController {
         load(8, "Dashboard / Manage Batches");
     }
 
-    private void load(int urlIndex, String currentFormLocation) {
+    public void load(int urlIndex, String currentFormLocation) {
         if (pneStage.getChildren().get(0) == formArray.get(urlIndex)) {
             return;
         }

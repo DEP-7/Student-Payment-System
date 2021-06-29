@@ -63,6 +63,8 @@ public class ManageStudentsFormController {
     private String studentNICToUpdate = "";
     private int lengthOfString = 0;
 
+    MainFormController mainFormController;
+
     public static String getNewNIC(String oldNIC) { // Neglect this condition for now
         return "19" + oldNIC.substring(0, 5) + "0" + oldNIC.substring(5, oldNIC.length() - 2);
     }
@@ -76,14 +78,23 @@ public class ManageStudentsFormController {
         btnAdd.getParent().parentProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 Platform.runLater(() -> {
-                    MainFormController ctrl = (MainFormController) txtNIC.getScene().getUserData();
-                    boolean[] formUpdateController = (boolean[]) ctrl.pneItemContainer.getUserData();
+                    mainFormController = (MainFormController) txtNIC.getScene().getUserData();
+                    boolean[] formUpdateController = (boolean[]) mainFormController.pneItemContainer.getUserData();
+
                     if (formUpdateController[3]) {
                         cmbCourseId.getItems().clear();
+
                         for (Course course : courseService.searchAllCourses()) {
                             cmbCourseId.getItems().add(course.getCourseID());
                         }
+
                         cmbBatchNumber.getItems().clear();
+                    }
+
+                    String nic = (String) mainFormController.pneStage.getUserData();
+
+                    if (nic != null) {
+                        txtNIC.setText(nic);
                     }
                 });
             }
@@ -248,11 +259,14 @@ public class ManageStudentsFormController {
             }
             loadAllStudents(txtSearch.getText());
             String alertMessage = isUpdateStudent ? "Student have been updated successfully" : "Student have been added successfully";
-            new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
+            new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).showAndWait();
             clearAll();
             btnAdd.setDisable(false);
             btnUpdate.setDisable(true);
             txtNIC.requestFocus();
+            if (mainFormController.pneStage.getUserData() != null) {
+                mainFormController.load(1, "Dashboard / Add New Payment");
+            }
         } catch (DuplicateEntryException e) {
             new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText()).show();
             txtNIC.requestFocus();
