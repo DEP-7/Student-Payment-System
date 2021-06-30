@@ -15,8 +15,8 @@ public class ReceiptService {
     public static ArrayList<Receipt> receiptDB = new ArrayList();
 
     static {
-        receiptDB.add(new Receipt(1, StudentService.studentDB.get(0), "Registration Fee", new CashPayment(), new BigDecimal("50000"), null, LocalDate.of(2021, 5, 2), "", LocalDate.of(2021, 5, 2), UserService.usersDB.get(0)));
-        receiptDB.add(new Receipt(2, StudentService.studentDB.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("20000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.of(2021, 6, 20), UserService.usersDB.get(0)));
+        receiptDB.add(new Receipt(1, StudentService.studentDB.get(0), "Registration Fee", new CashPayment(), new BigDecimal("50000"), new BigDecimal("0"), null, LocalDate.of(2021, 5, 2), "", LocalDate.of(2021, 5, 2), UserService.usersDB.get(0),null));
+        receiptDB.add(new Receipt(2, StudentService.studentDB.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("20000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.of(2021, 6, 20), UserService.usersDB.get(0),null));
     }
 
     public void addReceipt(Receipt receipt) throws DuplicateEntryException {
@@ -65,7 +65,6 @@ public class ReceiptService {
         for (Receipt receipt : receiptDB) {
             if (Long.toString(receipt.getReceiptNumber()).contains(keyword) ||
                     receipt.getPaymentDescription().toLowerCase().contains(keyword) ||
-                    receipt.getDueDateOfBalancePayment().toString().contains(keyword) ||
                     receipt.getPaymentDate().toString().contains(keyword) ||
                     receipt.getReceiptDate().toString().contains(keyword) ||
                     receipt.getAmountReceived().toString().contains(keyword) ||

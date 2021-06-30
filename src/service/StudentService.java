@@ -13,8 +13,8 @@ public class StudentService {
     public static ArrayList<Student> studentDB = new ArrayList();
 
     static {
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", "GDSE", 1, new BigDecimal("20")));
-        studentDB.add(new Student("199316300377", "Prasad Viduranha", "P.Viduranga", "Male", LocalDate.of(1995, 12, 20), null, "BSc", "Galle", "0772565368", "prasad@gmail.com", "DEP", 2, new BigDecimal("0")));
+        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", CourseService.courseDB.get(2), 1, new BigDecimal("20")));
+        studentDB.add(new Student("199316300377", "Prasad Viduranha", "P.Viduranga", "Male", LocalDate.of(1995, 12, 20), null, "BSc", "Galle", "0772565368", "prasad@gmail.com", CourseService.courseDB.get(0), 2, new BigDecimal("0")));
     }
 
     public void addStudent(Student student) throws DuplicateEntryException {
@@ -65,7 +65,7 @@ public class StudentService {
                     student.getAddress().toLowerCase().contains(keyword) ||
                     student.getContactNumber().contains(keyword) ||
                     student.getEmail().toLowerCase().contains(keyword) ||
-                    student.getCourseId().toLowerCase().contains(keyword) ||
+                    student.getCourse().getCourseID().toLowerCase().contains(keyword) ||
                     Integer.toString(student.getBatchNumber()).contains(keyword)) {
                 searchResult.add(student);
             }

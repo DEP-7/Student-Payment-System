@@ -57,13 +57,12 @@ public class ManageStudentsFormController {
     public TextField txtEmail;
     public TextField txtNIC;
     public TextField txtAge;
+    MainFormController mainFormController;
     private boolean isFirstFocusLostFromNIC = true;
     private ArrayList<Integer> caretPositionArray;
     private TextField previouslyFocusedTextField;
     private String studentNICToUpdate = "";
     private int lengthOfString = 0;
-
-    MainFormController mainFormController;
 
     public static String getNewNIC(String oldNIC) { // Neglect this condition for now
         return "19" + oldNIC.substring(0, 5) + "0" + oldNIC.substring(5, oldNIC.length() - 2);
@@ -183,7 +182,7 @@ public class ManageStudentsFormController {
                         txtAddress.setText(existingStudent.getAddress());
                         txtContactNumber.setText(existingStudent.getContactNumber());
                         txtEmail.setText(existingStudent.getEmail());
-                        cmbCourseId.getSelectionModel().select(existingStudent.getCourseId());
+                        cmbCourseId.getSelectionModel().select(existingStudent.getCourse().getCourseID());
                         cmbBatchNumber.getSelectionModel().select(existingStudent.getBatchNumber() + "");
                         setDisableAll(true);
                         btnAdd.setDisable(true);
@@ -206,7 +205,7 @@ public class ManageStudentsFormController {
         tblResult.getItems().clear();
 
         for (Student student : studentService.searchStudentsByKeyword(keyword)) {
-            tblResult.getItems().add(new StudentTM(student.getNic(), student.getNameWithInitials(), student.getCourseId(), student.getBatchNumber(), student.getContactNumber()));
+            tblResult.getItems().add(new StudentTM(student.getNic(), student.getNameWithInitials(), student.getCourse().getCourseID(), student.getBatchNumber(), student.getContactNumber()));
         }
     }
 
@@ -237,21 +236,21 @@ public class ManageStudentsFormController {
             return;
         }
 
-        Student student = new Student(txtNIC.getText(),
-                txtFullName.getText(),
-                txtNameWithInitials.getText(),
-                ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
-                LocalDate.parse(txtDateOfBirth.getText()),
-                imgStudentImage.getImage(),
-                txtHighestEducationalQualification.getText(),
-                txtAddress.getText(),
-                txtContactNumber.getText(),
-                txtEmail.getText(),
-                cmbCourseId.getValue(),
-                Integer.parseInt(cmbBatchNumber.getValue()),
-                new BigDecimal(txtDiscount.getText()));
-
         try {
+            Student student = new Student(txtNIC.getText(),
+                    txtFullName.getText(),
+                    txtNameWithInitials.getText(),
+                    ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
+                    LocalDate.parse(txtDateOfBirth.getText()),
+                    imgStudentImage.getImage(),
+                    txtHighestEducationalQualification.getText(),
+                    txtAddress.getText(),
+                    txtContactNumber.getText(),
+                    txtEmail.getText(),
+                    courseService.searchCourse(cmbCourseId.getValue()),
+                    Integer.parseInt(cmbBatchNumber.getValue()),
+                    new BigDecimal(txtDiscount.getText()));
+
             if (isUpdateStudent) {
                 studentService.updateStudent(student, studentNICToUpdate);
             } else {

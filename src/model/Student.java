@@ -16,14 +16,14 @@ public class Student {
     private String address;
     private String contactNumber;
     private String email;
-    private String courseId;
+    private Course course;
     private int batchNumber;
     private BigDecimal discount;
 
     public Student() {
     }
 
-    public Student(String nic, String nameInFull, String nameWithInitials, String gender, LocalDate dateOfBirth, Image image, String eduQualification, String address, String contactNumber, String email, String courseId, int batchNumber, BigDecimal discount) {
+    public Student(String nic, String nameInFull, String nameWithInitials, String gender, LocalDate dateOfBirth, Image image, String eduQualification, String address, String contactNumber, String email, Course course, int batchNumber, BigDecimal discount) {
         this.nic = nic;
         this.nameInFull = nameInFull;
         this.nameWithInitials = nameWithInitials;
@@ -34,7 +34,7 @@ public class Student {
         this.address = address;
         this.contactNumber = contactNumber;
         this.email = email;
-        this.courseId = courseId;
+        this.course = course;
         this.batchNumber = batchNumber;
         this.discount = discount;
     }
@@ -119,12 +119,12 @@ public class Student {
         this.email = email;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public int getBatchNumber() {
@@ -156,7 +156,7 @@ public class Student {
                 ", address='" + address + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", courseId='" + courseId + '\'' +
+                ", courseId='" + course + '\'' +
                 ", batchNumber=" + batchNumber +
                 ", discount=" + discount +
                 '}';

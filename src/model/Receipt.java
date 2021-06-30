@@ -11,26 +11,30 @@ public class Receipt {
     private String paymentDescription;
     private PaymentMethod paymentMethod;
     private BigDecimal amountReceived;
+    private BigDecimal balancePayment;
     private LocalDate dueDateOfBalancePayment;
     private LocalDate paymentDate;
     private String notes;
     private LocalDate receiptDate;
     private User user;
+    private Receipt balancePaymentReceipt;
 
     public Receipt() {
     }
 
-    public Receipt(long receiptNumber, Student student, String paymentDescription, PaymentMethod paymentMethod, BigDecimal amountReceived, LocalDate dueDateOfBalancePayment, LocalDate paymentDate, String notes, LocalDate receiptDate, User user) {
+    public Receipt(long receiptNumber, Student student, String paymentDescription, PaymentMethod paymentMethod, BigDecimal amountReceived, BigDecimal balancePayment, LocalDate dueDateOfBalancePayment, LocalDate paymentDate, String notes, LocalDate receiptDate, User user, Receipt balancePaymentReceipt) {
         this.receiptNumber = receiptNumber;
         this.student = student;
         this.paymentDescription = paymentDescription;
         this.paymentMethod = paymentMethod;
         this.amountReceived = amountReceived;
+        this.balancePayment = balancePayment;
         this.dueDateOfBalancePayment = dueDateOfBalancePayment;
         this.paymentDate = paymentDate;
         this.notes = notes;
         this.receiptDate = receiptDate;
         this.user = user;
+        this.balancePaymentReceipt = balancePaymentReceipt;
     }
 
     public long getReceiptNumber() {
@@ -73,6 +77,14 @@ public class Receipt {
         this.amountReceived = amountReceived;
     }
 
+    public BigDecimal getBalancePayment() {
+        return balancePayment;
+    }
+
+    public void setBalancePayment(BigDecimal balancePayment) {
+        this.balancePayment = balancePayment;
+    }
+
     public LocalDate getDueDateOfBalancePayment() {
         return dueDateOfBalancePayment;
     }
@@ -111,5 +123,13 @@ public class Receipt {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Receipt getBalancePaymentReceipt() {
+        return balancePaymentReceipt;
+    }
+
+    public void setBalancePaymentReceipt(Receipt balancePaymentReceipt) {
+        this.balancePaymentReceipt = balancePaymentReceipt;
     }
 }

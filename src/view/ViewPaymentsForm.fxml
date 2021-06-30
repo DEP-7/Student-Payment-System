@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -31,33 +30,33 @@
             <font>
                 <Font size="14.0" />
             </font>
-            <toggleGroup>
-                <ToggleGroup fx:id="rbtnDayGaps" />
-            </toggleGroup>
+         <toggleGroup>
+            <ToggleGroup fx:id="rbnDayGaps" />
+         </toggleGroup>
         </JFXRadioButton>
-        <JFXRadioButton layoutX="191.0" layoutY="133.0" text="Today" textFill="WHITE" toggleGroup="$rbtnDayGaps" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="130.0">
+        <JFXRadioButton layoutX="191.0" layoutY="133.0" text="Today" textFill="WHITE" toggleGroup="$rbnDayGaps" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="130.0">
             <font>
                 <Font size="14.0" />
             </font>
         </JFXRadioButton>
-        <JFXRadioButton layoutX="281.0" layoutY="135.0" text="Last Week" textFill="WHITE" toggleGroup="$rbtnDayGaps" AnchorPane.leftAnchor="257.0" AnchorPane.topAnchor="130.0">
+        <JFXRadioButton layoutX="281.0" layoutY="135.0" text="Last Week" textFill="WHITE" toggleGroup="$rbnDayGaps" AnchorPane.leftAnchor="257.0" AnchorPane.topAnchor="130.0">
             <font>
                 <Font size="14.0" />
             </font>
         </JFXRadioButton>
-        <JFXRadioButton layoutX="379.0" layoutY="140.0" text="Last Month" textFill="WHITE" toggleGroup="$rbtnDayGaps" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="130.0">
+        <JFXRadioButton layoutX="379.0" layoutY="140.0" text="Last Month" textFill="WHITE" toggleGroup="$rbnDayGaps" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="130.0">
             <font>
                 <Font size="14.0" />
             </font>
         </JFXRadioButton>
-        <JFXRadioButton layoutX="466.0" layoutY="148.0" text="Custom" textFill="WHITE" toggleGroup="$rbtnDayGaps" AnchorPane.leftAnchor="503.0" AnchorPane.topAnchor="130.0">
+        <JFXRadioButton layoutX="466.0" layoutY="148.0" text="Custom" textFill="WHITE" toggleGroup="$rbnDayGaps" AnchorPane.leftAnchor="503.0" AnchorPane.topAnchor="130.0">
             <font>
                 <Font size="14.0" />
             </font>
         </JFXRadioButton>
         <AnchorPane layoutX="628.0" layoutY="97.0" prefHeight="66.0" prefWidth="154.0" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="104.0">
             <children>
-                <TextField fx:id="txtFromDate" accessibleText="From" prefHeight="24.0" promptText="2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                <TextField fx:id="txtSearchFromDate" accessibleText="From" prefHeight="24.0" promptText="2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -66,78 +65,75 @@
         </AnchorPane>
         <AnchorPane layoutX="763.0" layoutY="98.0" prefHeight="66.0" prefWidth="154.0" AnchorPane.leftAnchor="778.0" AnchorPane.topAnchor="104.0">
             <children>
-                <TextField fx:id="txtToDate" accessibleText="To" prefHeight="24.0" promptText="2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                <TextField fx:id="txtSearchToDate" accessibleText="To" prefHeight="24.0" promptText="2021-06-07" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </TextField>
             </children>
         </AnchorPane>
-        <TableView layoutX="344.0" layoutY="118.0" prefHeight="716.0" prefWidth="847.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="199.0">
+        <TableView fx:id="tblResult" layoutX="344.0" layoutY="118.0" prefHeight="716.0" prefWidth="847.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="199.0">
             <columns>
                 <TableColumn prefWidth="135.0" text="Receipt Number" />
                 <TableColumn prefWidth="84.66665649414062" text="Course" />
                 <TableColumn prefWidth="122.33331298828125" text="Description" />
                 <TableColumn prefWidth="108.3333740234375" text="NIC" />
                 <TableColumn prefWidth="106.33331298828125" text="Cashier" />
-                <TableColumn prefWidth="119.66668701171875" text="Payment Date" />
+                <TableColumn prefWidth="119.66668701171875" text="Receipt Date" />
                 <TableColumn prefWidth="168.66668701171875" text="Balance Payment" />
             </columns>
         </TableView>
         <VBox layoutX="1030.0" layoutY="228.0" spacing="15.0" AnchorPane.leftAnchor="965.0" AnchorPane.topAnchor="19.0">
             <children>
-                <HBox spacing="20.0">
+                <HBox spacing="50.0">
                     <children>
-                        <AnchorPane prefHeight="66.0" prefWidth="171.0">
+                        <AnchorPane prefHeight="66.0" prefWidth="199.0">
                             <children>
-                                <TextField fx:id="txtReceiptNumber" accessibleText="Receipt Number" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtReceiptNumber" accessibleText="Receipt Number" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </TextField>
                             </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="66.0" prefWidth="223.0">
+                        <AnchorPane prefHeight="66.0" prefWidth="300.0">
                             <children>
-                                <TextField fx:id="txtNIC" accessibleText="Student ID (NIC)" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtNIC" accessibleText="Student ID (NIC)" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </TextField>
-                            </children>
-                        </AnchorPane>
-                        <JFXButton prefHeight="49.0" prefWidth="114.0" style="-fx-background-color: #545454;" text="View Student" textFill="WHITE">
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                            <HBox.margin>
-                                <Insets top="14.0" />
-                            </HBox.margin>
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </JFXButton>
-                    </children>
-                </HBox>
-                <HBox spacing="76.0">
-                    <children>
-                        <AnchorPane accessibleText="Course ID" prefHeight="66.0" prefWidth="237.0">
-                            <children>
-                                <JFXComboBox fx:id="cmbCourseId" accessibleText="Course ID" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="66.0" prefWidth="237.0">
-                            <children>
-                                <JFXComboBox fx:id="cmbBatchNumber" accessibleText="Batch Number" focusColor="#c173ff" layoutX="116.0" layoutY="20.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                             </children>
                         </AnchorPane>
                     </children>
                 </HBox>
                 <HBox spacing="76.0">
                     <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="237.0">
+                     <children>
+                        <TextField fx:id="txtCourseId" accessibleText="Course ID" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="66.0" prefWidth="237.0">
+                     <children>
+                        <TextField fx:id="txtBatchNumber" accessibleText="Batch Number" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                    </children>
+                </HBox>
+                <HBox spacing="76.0">
+                    <children>
                         <AnchorPane prefHeight="66.0" prefWidth="237.0">
                             <children>
-                                <TextField fx:id="txtPaymentDescription" accessibleText="Payment Description" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtPaymentDescription" accessibleText="Payment Description" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -146,7 +142,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="66.0" prefWidth="237.0">
                             <children>
-                                <TextField fx:id="txtPaymentMethod" accessibleText="Payment Method" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtPaymentMethod" accessibleText="Payment Method" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -161,7 +157,7 @@
                             <children>
                                 <AnchorPane prefHeight="66.0" prefWidth="362.0">
                                     <children>
-                                        <TextField fx:id="txtOnlineReference" accessibleText="Online Reference Number" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                        <TextField fx:id="txtOnlineReference" accessibleText="Online Reference Number" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                             <font>
                                                 <Font size="16.0" />
                                             </font>
@@ -172,7 +168,7 @@
                                     <children>
                                         <AnchorPane prefHeight="66.0" prefWidth="198.0">
                                             <children>
-                                                <TextField fx:id="txtCardNumber" accessibleText="Card Number" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
+                                                <TextField fx:id="txtCardNumber" accessibleText="Card Number" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
                                                     <font>
                                                         <Font size="16.0" />
                                                     </font>
@@ -181,7 +177,7 @@
                                         </AnchorPane>
                                         <AnchorPane prefHeight="66.0" prefWidth="139.0">
                                             <children>
-                                                <TextField fx:id="txtExpirationDate" accessibleText="Expiration Date" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
+                                                <TextField fx:id="txtExpirationDate" accessibleText="Expiration Date" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
                                                     <font>
                                                         <Font size="16.0" />
                                                     </font>
@@ -192,7 +188,7 @@
                                 </HBox>
                                 <AnchorPane prefHeight="66.0" prefWidth="362.0">
                                     <children>
-                                        <TextField fx:id="txtNameOnCard" accessibleText="Name on Card" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                        <TextField fx:id="txtNameOnCard" accessibleText="Name on Card" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                             <font>
                                                 <Font size="16.0" />
                                             </font>
@@ -217,7 +213,7 @@
                     <children>
                         <AnchorPane prefHeight="66.0" prefWidth="170.0">
                             <children>
-                                <TextField fx:id="txtTotalAmount" accessibleText="Total Amount" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtTotalAmount" accessibleText="Total Amount" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -226,7 +222,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="66.0" prefWidth="170.0">
                             <children>
-                                <TextField fx:id="txtAmountReceived" accessibleText="Amount Received" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtAmountReceived" accessibleText="Amount Received" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -235,7 +231,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="66.0" prefWidth="170.0">
                             <children>
-                                <TextField fx:id="txtBalanceAmount" accessibleText="Balance Amount" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtBalanceAmount" accessibleText="Balance Amount" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -248,7 +244,7 @@
                     <children>
                         <AnchorPane prefHeight="66.0" prefWidth="210.0">
                             <children>
-                                <TextField fx:id="txtDueDate" accessibleText="Due Date of Balance Payment" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtDueDate" accessibleText="Due Date of Balance Payment" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -257,14 +253,14 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="66.0" prefWidth="210.0">
                             <children>
-                                <TextField fx:id="txtBalanceSettledDate" accessibleText="Balance Settled Date" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtBalanceSettledDate" accessibleText="Balance Settled Date" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </TextField>
                             </children>
                         </AnchorPane>
-                        <JFXButton prefHeight="49.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="R00000" textFill="WHITE">
+                        <JFXButton fx:id="btnBalancePaymentReceipt" onAction="#btnBalancePaymentReceipt_OnAction" onKeyPressed="#btnBalancePaymentReceipt_OnKeyPressed" prefHeight="49.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Balance&#10;Receipt" textFill="WHITE">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -281,7 +277,7 @@
                     <children>
                         <AnchorPane prefHeight="66.0" prefWidth="210.0">
                             <children>
-                                <TextField fx:id="txtReceiptDate" accessibleText="Receipt Date" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtPaymentDate" accessibleText="Payment Date" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -290,7 +286,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="66.0" prefWidth="318.0">
                             <children>
-                                <TextField fx:id="txtCashier" accessibleText="Cashier" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                <TextField fx:id="txtCashier" accessibleText="Cashier" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -301,16 +297,16 @@
                 </HBox>
                 <AnchorPane prefHeight="115.0" prefWidth="550.0">
                     <children>
-                        <TextField fx:id="txtNotes" accessibleText="Notes" alignment="TOP_LEFT" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
+                        <TextField fx:id="txtNotes" accessibleText="Notes" alignment="TOP_LEFT" disable="true" prefHeight="24.0" promptText="Select Payment" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </TextField>
                     </children>
                 </AnchorPane>
-            <HBox spacing="70.0">
+            <HBox spacing="147.0">
                <children>
-                  <JFXButton fx:id="btnAdd" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Add" textFill="WHITE">
+                  <JFXButton fx:id="btnEdit" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -318,7 +314,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE">
+                  <JFXButton fx:id="btnUpdate" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -326,15 +322,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE">
+                  <JFXButton fx:id="btnClear" onAction="#btnClear_OnAction" onKeyPressed="#btnClear_OnKeyPressed" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #545454;" text="Clear" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>

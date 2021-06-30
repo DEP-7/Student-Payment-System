@@ -64,6 +64,8 @@ public class AddNewPaymentFormController {
     public TextField txtFileName;
     public TextField txtNIC;
     public TextArea txtNotes;
+    public Label lblBalancePaymentReceipt;
+    public Label lblMaximumDueDate;
 
     MainFormController mainFormController;
     User loggedUser;
@@ -72,7 +74,7 @@ public class AddNewPaymentFormController {
         MaterialUI.paintTextFields(txtNIC, txtReceiptNumber, txtOnlineReferenceNumber, txtFileName, txtCardNumber, txtExpirationDate, txtNameOnCard, txtAmountReceived, txtDueDateOfBalancePayment, txtPaymentDate, txtTotalAmount, txtBalanceAmount, txtNotes);
 
         txtNIC.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue) {
+            if (oldValue && !txtNIC.getText().isEmpty()) {
                 if (isValidNIC(txtNIC.getText())) {
                     try {
                         studentService.searchStudent(txtNIC.getText());
@@ -147,11 +149,13 @@ public class AddNewPaymentFormController {
                     ((RadioButton) rbnPaymentDescription.getSelectedToggle()).getText() + (rbnPaymentDescription.getToggles().get(4).isSelected() ? txtCustomText.getText() : ""),
                     paymentMethod,
                     new BigDecimal(txtAmountReceived.getText()),
+                    new BigDecimal(txtBalanceAmount.getText()),
                     LocalDate.parse(txtDueDateOfBalancePayment.getText()),
                     LocalDate.parse(txtPaymentDate.getText()),
                     txtNotes.getText(),
                     LocalDate.now(),
-                    loggedUser);
+                    loggedUser,
+                    null);
 
             receiptService.addReceipt(receipt);
             new Alert(Alert.AlertType.INFORMATION, "Payment have been added successfully", ButtonType.OK).showAndWait();
@@ -271,6 +275,9 @@ public class AddNewPaymentFormController {
         txtDiscount.clear();
         txtAddress.clear();
         txtEmail.clear();
+
+        lblBalancePaymentReceipt.setText("");
+        lblMaximumDueDate.setText("");
 
         imgMasterCard.setVisible(true);
         imgVisaCard.setVisible(true);
