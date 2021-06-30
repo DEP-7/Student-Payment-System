@@ -290,6 +290,16 @@ public class ViewPaymentsFormController {
     }
 
     public void btnBalancePaymentReceipt_OnAction(ActionEvent actionEvent) {
+        showBalancePaymentReceipt();
+    }
+
+    public void btnBalancePaymentReceipt_OnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
+            showBalancePaymentReceipt();
+        }
+    }
+
+    private void showBalancePaymentReceipt() {
         if (txtReceiptNumber.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please select a receipt from table first", ButtonType.OK).show();
             return;
@@ -314,11 +324,6 @@ public class ViewPaymentsFormController {
                     break;
                 }
             }
-        }
-    }
-
-    public void btnBalancePaymentReceipt_OnKeyPressed(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
         }
     }
 

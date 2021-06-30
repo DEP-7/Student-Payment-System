@@ -1,5 +1,6 @@
 .menu:hover{
     -fx-border-color: #6a4fcb;
+    -fx-background-color: #6a6a6a;
     -fx-border-radius: 5px;
 }
 
