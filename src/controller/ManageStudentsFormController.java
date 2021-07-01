@@ -16,7 +16,7 @@ import model.Student;
 import model.StudentTM;
 import service.BatchService;
 import service.CourseService;
-import service.StudentService;
+import service.StudentServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -31,7 +31,7 @@ import java.util.Optional;
 import static util.ValidationUtil.*;
 
 public class ManageStudentsFormController {
-    private final StudentService studentService = new StudentService();
+    private final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     private final CourseService courseService = new CourseService();
     private final BatchService batchService = new BatchService();
     public TableView<StudentTM> tblResult;

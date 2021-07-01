@@ -15,7 +15,8 @@ import model.sub.CashPayment;
 import model.sub.OnlinePayment;
 import model.sub.PaymentMethod;
 import service.ReceiptService;
-import service.StudentService;
+import service.StudentServiceRedisImpl;
+import service.StudentServiceRedisImpl;
 import service.UserService;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
@@ -34,7 +35,7 @@ import static util.ValidationUtil.isValidPastDate;
 
 public class AddNewPaymentFormController {
     public final ReceiptService receiptService = new ReceiptService();
-    public final StudentService studentService = new StudentService();
+    public final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     public final UserService userService = new UserService();
     public JFXTextField txtNameWithInitials;
     public JFXTextField txtContactNumber;

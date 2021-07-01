@@ -18,7 +18,7 @@ import model.sub.PaymentMethod;
 import service.BatchService;
 import service.CourseService;
 import service.ReceiptService;
-import service.StudentService;
+import service.StudentServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -37,7 +37,7 @@ public class ViewPaymentsFormController {
     private final ReceiptService receiptService = new ReceiptService();
     private final CourseService courseService = new CourseService();
     private final BatchService batchService = new BatchService();
-    private final StudentService studentService = new StudentService();
+    private final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     public TableView<ReceiptTM> tblResult;
     public ToggleGroup rbnDayGaps;
     public JFXButton btnBalancePaymentReceipt;
