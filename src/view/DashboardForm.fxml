@@ -5,8 +5,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -19,7 +17,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblTotalRegistrations" alignment="CENTER" layoutX="83.0" layoutY="83.0" text="34" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+            <Label fx:id="lblTotalRegistrations" alignment="CENTER" layoutX="83.0" layoutY="83.0" text="0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                <font>
                   <Font size="64.0" />
                </font>
@@ -34,7 +32,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblTotalPayments" alignment="CENTER" layoutX="83.0" layoutY="83.0" text="52" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+            <Label fx:id="lblTotalPayments" alignment="CENTER" layoutX="83.0" layoutY="83.0" text="0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                <font>
                   <Font size="64.0" />
                </font>
@@ -49,36 +47,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblTotalIncome" alignment="CENTER" layoutX="83.0" layoutY="83.0" text="425,000" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+            <Label fx:id="lblTotalIncome" alignment="CENTER" layoutX="83.0" layoutY="83.0" text="0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                <font>
                   <Font size="64.0" />
                </font>
             </Label>
             <Label alignment="CENTER" layoutX="2.0" layoutY="154.0" prefHeight="18.0" prefWidth="215.0" text="Click here to view income details" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="154.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="1315.0" layoutY="34.0" prefHeight="263.0" prefWidth="263.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="16.0">
-         <children>
-            <ImageView fitHeight="263.0" fitWidth="263.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <image>
-                  <Image url="@assets/clockitems/Clock_Frame1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imgHoursHand" fitHeight="171.0" fitWidth="177.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/clockitems/Hour_Hand.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imgSecondsHand" fitHeight="171.0" fitWidth="193.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/clockitems/Seconds_Hand.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imgMinutesHand" fitHeight="143.0" fitWidth="151.0" layoutX="60.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/clockitems/Minutes_Hand.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <TableView id="tbl-today-information" fx:id="tblResult" layoutX="96.0" layoutY="335.0" prefHeight="621.0" prefWidth="1153.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="359.0" AnchorPane.topAnchor="336.0">

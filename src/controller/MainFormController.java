@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,7 @@ public class MainFormController {
     public AnchorPane pneItemManageUsers;
     public AnchorPane pneItemDashboard;
     public AnchorPane pneStage;
+    public AnchorPane pneClock;
     public JFXRippler rprManageStudents;
     public JFXRippler rprAddNewPayment;
     public JFXRippler rprManageBatches;
@@ -43,12 +45,15 @@ public class MainFormController {
     public JFXRippler rprViewBatches;
     public JFXRippler rprManageUsers;
     public JFXRippler rprDashboard;
+    public ImageView imgSecondsHand;
+    public ImageView imgMinutesHand;
+    public ImageView imgHoursHand;
     public Label lblTitle;
     public Label lblTime;
     public VBox pneItemContainer;
 
-    User loggedUser;
-    ArrayList<Parent> formArray = new ArrayList<>();
+    private User loggedUser;
+    private ArrayList<Parent> formArray = new ArrayList<>();
 
     public void initialize() throws IOException {
         startClock();
@@ -64,7 +69,7 @@ public class MainFormController {
         rprDashboard.setControl(pneItemDashboard);
 
         // Please update below array by inserting fxml file name, when adding new forms
-        String[] urlFormNames = {"DashboardForm", "AddNewPaymentForm", "ViewPaymentsForm", "ManageStudentsForm", "ViewCoursesForm", "ViewBatchesForm", "ManageCoursesAdminForm", "ManageUsersAdminForm", "ManageBatchesAdminForm"};
+        String[] urlFormNames = {"DashboardForm", "AddNewPaymentForm", "ViewPaymentsForm", "ManageStudentsForm", "ViewCoursesForm", "ViewBatchesForm", "ManageBatchesAdminForm", "ManageCoursesAdminForm", "ManageUsersAdminForm"};
 
         for (int i = 0; i < urlFormNames.length; i++) {
             formArray.add(FXMLLoader.load(this.getClass().getResource("../view/" + urlFormNames[i] + ".fxml")));
@@ -74,7 +79,7 @@ public class MainFormController {
             AnchorPane.setBottomAnchor(formArray.get(i), 0.0);
         }
 
-        pneItemContainer.setUserData(new boolean[9]);
+        pneItemContainer.setUserData(new boolean[9]); // Set notifications to the forms
         /*0 - Dashboard
          * 1 - Add New Payment
          * 2 - View Payments
@@ -152,6 +157,8 @@ public class MainFormController {
         transition.setFromValue(0.5);
         transition.setToValue(1);
         transition.play();
+
+        pneClock.setVisible(pneStage.getChildren().get(0) == formArray.get(0));
     }
 
     public void imgSettings_OnMouseClicked(MouseEvent mouseEvent) throws IOException {
@@ -277,10 +284,52 @@ public class MainFormController {
     }
 
     private void startClock() {
+        String time1 = String.format("%tT", new Date());
+        String[] arr1 = time1.split(":");
+
+        //Set initial positions to start the clock
+        double s = 6 * Double.parseDouble(arr1[2]);
+        RotateTransition rs = new RotateTransition(Duration.millis(100), imgSecondsHand);
+        rs.setFromAngle(s - 6);
+        rs.setToAngle(s);
+        rs.play();
+
+        double m = 6 * Double.parseDouble(arr1[1]);
+        RotateTransition rm = new RotateTransition(Duration.millis(10), imgMinutesHand);
+        rm.setToAngle(m);
+        rm.play();
+
+        double h = 30 * (Double.parseDouble(arr1[0]) + Double.parseDouble(arr1[1]) / 60);
+        RotateTransition rh = new RotateTransition(Duration.millis(100), imgHoursHand);
+        rh.setFromAngle(h - 6);
+        rh.setToAngle(h);
+        rh.play();
+
         Timeline t1 = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
             LocalDateTime now = LocalDateTime.now();
-            String time = DateTimeFormatter.ofPattern("yyyy-MMM-dd hh:mm:ss a").format(now);
-            lblTime.setText(time);
+            String date = DateTimeFormatter.ofPattern("yyyy-MMM-dd hh:mm:ss a").format(now);
+            String time = DateTimeFormatter.ofPattern("hh:mm:ss").format(now);
+            lblTime.setText(date);
+
+            double secondsAngle = 6 * now.getSecond();
+            RotateTransition rotateSecondHand = new RotateTransition(Duration.millis(100), imgSecondsHand);
+            rotateSecondHand.setFromAngle(secondsAngle - 6);
+            rotateSecondHand.setToAngle(secondsAngle);
+            rotateSecondHand.play();
+
+            if (now.getSecond() == 1) {
+                double minutesAngle = 6 * now.getMinute();
+                RotateTransition rotateMinuteHand = new RotateTransition(Duration.millis(100), imgMinutesHand);
+                rotateMinuteHand.setFromAngle(minutesAngle - 6);
+                rotateMinuteHand.setToAngle(minutesAngle);
+                rotateMinuteHand.play();
+
+                double hourAngle = 30 * now.getHour() + (now.getMinute() + 1) * 0.5;
+                RotateTransition rotateHourHand = new RotateTransition(Duration.millis(100), imgHoursHand);
+                rotateHourHand.setFromAngle(hourAngle - 0.5);
+                rotateHourHand.setToAngle(hourAngle);
+                rotateHourHand.play();
+            }
         }));
         t1.setCycleCount(Animation.INDEFINITE);
         t1.play();
