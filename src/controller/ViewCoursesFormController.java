@@ -10,12 +10,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Course;
 import model.CourseTM;
-import service.CourseService;
+import service.CourseServiceRedisImpl;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
 public class ViewCoursesFormController {
-    private final CourseService courseService = new CourseService();
+    private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
     public TableView<CourseTM> tblResult;
     public TextField txtSearch;
     public Label lblEntryRequirements;
@@ -46,7 +46,7 @@ public class ViewCoursesFormController {
                     new Alert(Alert.AlertType.ERROR, "Something went wrong. Please contact developer").show();
                     txtSearch.requestFocus();
                 }
-            }else{
+            } else {
                 lblEntryRequirements.setText("");
                 lblNotes.setText("");
                 // TODO: Disconnect file location to button

@@ -36,7 +36,6 @@ import static util.ValidationUtil.isValidPastDate;
 public class AddNewPaymentFormController {
     public final ReceiptService receiptService = new ReceiptService();
     public final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
-    public final UserService userService = new UserService();
     public JFXTextField txtNameWithInitials;
     public JFXTextField txtContactNumber;
     public JFXTextField txtBatchNumber;

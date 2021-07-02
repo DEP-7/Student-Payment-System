@@ -44,7 +44,7 @@ public class Student {
         this.discount = discount;
     }
 
-    public static Student fromDB(String nic, Map<String, String> data) {
+    public static Student fromMap(String nic, Map<String, String> data) {
         try {
             return new Student(
                     nic,
@@ -170,7 +170,7 @@ public class Student {
         this.discount = discount;
     }
 
-    public Map<String, String> toDB() {
+    public Map<String, String> toMap() {
         HashMap<String, String> map = new HashMap<>();
         map.put("nameInFull", nameInFull);
         map.put("nameWithInitials", nameWithInitials);

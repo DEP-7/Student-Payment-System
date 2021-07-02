@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Course {
@@ -37,8 +38,38 @@ public class Course {
         this.courseInitiationDate = courseInitiationDate;
     }
 
-    public static Course fromDB(String course, Map<String, String> data) {
-        return null;
+    public static Course fromMap(String courseId, Map<String, String> data) {
+        return new Course(
+                courseId,
+                data.get("courseName"),
+                Double.parseDouble(data.get("courseFee")),
+                Integer.parseInt(data.get("numberOfInstallments")),
+                Integer.parseInt(data.get("numberOfStudents")),
+                data.get("duration"),
+                data.get("firstInstallment"),
+                data.get("installmentGap"),
+                data.get("courseStatus"),
+                data.get("courseSchedule"),
+                data.get("minimumRequirements"),
+                data.get("notes"),
+                LocalDate.parse(data.get("courseInitiationDate")));
+    }
+
+    public Map<String, String> toMap() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("courseName", courseName);
+        map.put("courseFee", courseFee + "");
+        map.put("numberOfInstallments", numberOfInstallments + "");
+        map.put("numberOfStudents", numberOfStudents + "");
+        map.put("duration", duration);
+        map.put("firstInstallment", firstInstallment);
+        map.put("installmentGap", installmentGap);
+        map.put("courseStatus", courseStatus);
+        map.put("courseSchedule", courseSchedule);
+        map.put("minimumRequirements", minimumRequirements);
+        map.put("notes", notes);
+        map.put("courseInitiationDate", courseInitiationDate + "");
+        return map;
     }
 
     public String getCourseID() {

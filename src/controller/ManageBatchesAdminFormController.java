@@ -13,7 +13,7 @@ import model.Batch;
 import model.BatchTM;
 import model.Course;
 import service.BatchService;
-import service.CourseService;
+import service.CourseServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class ManageBatchesAdminFormController {
-    private final CourseService courseService = new CourseService();
+    private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
     private final BatchService batchService = new BatchService();
     public JFXComboBox<String> cmbCourseId;
     public TableView<BatchTM> tblResult;
@@ -103,7 +103,7 @@ public class ManageBatchesAdminFormController {
         if (cmbCourseId.getValue() != null && !cmbCourseId.getValue().isEmpty()) {
             try {
                 for (Batch batch : batchService.searchBatchByKeyword(courseService.searchCourse(cmbCourseId.getValue()), keyword, onGoingBatchesOnly)) {
-                    tblResult.getItems().add(new BatchTM(batch.getBatchNumber(), 0/*TODO: Update number of students here*/, batch.getStartedDate(), batch.getStartedDate().plusDays(Integer.parseInt(batch.getCourse().getDuration().split(" - ")[0])), batch.getEndDate(),courseService.searchCourse(cmbCourseId.getValue())));
+                    tblResult.getItems().add(new BatchTM(batch.getBatchNumber(), 0/*TODO: Update number of students here*/, batch.getStartedDate(), batch.getStartedDate().plusDays(Integer.parseInt(batch.getCourse().getDuration().split(" - ")[0])), batch.getEndDate(), courseService.searchCourse(cmbCourseId.getValue())));
                 }
             } catch (NotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code batch 002").show();

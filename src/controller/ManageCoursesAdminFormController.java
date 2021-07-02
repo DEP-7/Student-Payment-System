@@ -9,7 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Course;
 import model.CourseTM;
-import service.CourseService;
+import service.CourseServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ManageCoursesAdminFormController {
-    private final CourseService courseService = new CourseService();
+    private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
     public TableView<CourseTM> tblResult;
     public ToggleGroup rbnFirstInstallment;
     public ToggleGroup rbnInstallmentGap;
@@ -63,7 +63,7 @@ public class ManageCoursesAdminFormController {
                 txtNumberOfStudents.setDisable(true);
                 chkUnlimitedStudents.setUserData(txtNumberOfStudents.getText());
                 txtNumberOfStudents.setText("Unlimited");
-            }else{
+            } else {
                 txtNumberOfStudents.setDisable(false);
                 txtNumberOfStudents.setText(chkUnlimitedStudents.getUserData().toString());
             }
@@ -184,7 +184,7 @@ public class ManageCoursesAdminFormController {
                 txtCourseDuration.getText() + " - " + ((RadioButton) rbnDuration.getSelectedToggle()).getText(),
                 txtFirstInstallment.getText() + " - " + ((RadioButton) rbnFirstInstallment.getSelectedToggle()).getText(),
                 txtInstallmentGap.getText() + " - " + ((RadioButton) rbnInstallmentGap.getSelectedToggle()).getText(),
-                ((RadioButton)rbnCourseStatus.getSelectedToggle()).getText(),
+                ((RadioButton) rbnCourseStatus.getSelectedToggle()).getText(),
                 txtFileName.getText(),
                 txtMinimumRequirements.getText(),
                 txtNotes.getText(),

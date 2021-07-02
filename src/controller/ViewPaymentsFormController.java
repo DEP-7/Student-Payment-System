@@ -1,25 +1,19 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import model.Batch;
-import model.Course;
 import model.Receipt;
 import model.ReceiptTM;
 import model.sub.CardPayment;
 import model.sub.CashPayment;
 import model.sub.OnlinePayment;
 import model.sub.PaymentMethod;
-import service.BatchService;
-import service.CourseService;
 import service.ReceiptService;
 import service.StudentServiceRedisImpl;
-import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -35,8 +29,6 @@ import static util.ValidationUtil.isValidPastDate;
 
 public class ViewPaymentsFormController {
     private final ReceiptService receiptService = new ReceiptService();
-    private final CourseService courseService = new CourseService();
-    private final BatchService batchService = new BatchService();
     private final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     public TableView<ReceiptTM> tblResult;
     public ToggleGroup rbnDayGaps;
@@ -89,7 +81,7 @@ public class ViewPaymentsFormController {
                     txtReceiptNumber.setText(selectedReceipt.getReceiptNumber() + "");
                     txtNIC.setText(selectedReceipt.getStudent().getNic());
                     txtCourseId.setText(selectedReceipt.getStudent().getCourse().getCourseID());
-                    txtBatchNumber.setText(selectedReceipt.getStudent().getBatchNumber()+"");
+                    txtBatchNumber.setText(selectedReceipt.getStudent().getBatchNumber() + "");
                     txtPaymentDescription.setText(selectedReceipt.getPaymentDescription());
                     txtPaymentMethod.setText(selectedReceipt.getPaymentMethod().toString());
                     txtOnlineReference.setText(selectedReceipt.getPaymentMethod() instanceof OnlinePayment ? ((OnlinePayment) selectedReceipt.getPaymentMethod()).getReferenceNumber() : "");
@@ -316,7 +308,7 @@ public class ViewPaymentsFormController {
         if (receipt.getBalancePaymentReceipt() == null) {
             new Alert(Alert.AlertType.ERROR, "There is no balance payment receipt to show", ButtonType.OK).show();
             btnBalancePaymentReceipt.requestFocus();
-        }else{
+        } else {
             for (ReceiptTM item : tblResult.getItems()) {
                 if (item.getReceiptNumber() == receipt.getReceiptNumber()) {
                     tblResult.getSelectionModel().select(item);

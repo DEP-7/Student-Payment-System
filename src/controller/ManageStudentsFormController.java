@@ -15,7 +15,7 @@ import model.Course;
 import model.Student;
 import model.StudentTM;
 import service.BatchService;
-import service.CourseService;
+import service.CourseServiceRedisImpl;
 import service.StudentServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
@@ -32,7 +32,7 @@ import static util.ValidationUtil.*;
 
 public class ManageStudentsFormController {
     private final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
-    private final CourseService courseService = new CourseService();
+    private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
     private final BatchService batchService = new BatchService();
     public TableView<StudentTM> tblResult;
     public JFXComboBox<String> cmbBatchNumber;

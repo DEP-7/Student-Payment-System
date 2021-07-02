@@ -25,7 +25,7 @@ public class StudentServiceRedisImpl {
             throw new DuplicateEntryException();
         }
 
-        client.hset(DB_PREFIX + student.getNic(), student.toDB());
+        client.hset(DB_PREFIX + student.getNic(), student.toMap());
     }
 
     public void updateStudent(Student studentToUpdate, String previousNIC) throws NotFoundException {
@@ -35,7 +35,7 @@ public class StudentServiceRedisImpl {
         }
 
         client.del(DB_PREFIX + previousNIC);
-        client.hset(DB_PREFIX + studentToUpdate.getNic(), studentToUpdate.toDB());
+        client.hset(DB_PREFIX + studentToUpdate.getNic(), studentToUpdate.toMap());
     }
 
     public void deleteStudent(String nic) throws NotFoundException {
@@ -51,7 +51,7 @@ public class StudentServiceRedisImpl {
         if (!client.exists(DB_PREFIX + nic)) {
             throw new NotFoundException();
         }
-        return Student.fromDB(nic, client.hgetAll(DB_PREFIX + nic));
+        return Student.fromMap(nic, client.hgetAll(DB_PREFIX + nic));
     }
 
     public List<Student> searchStudentsByKeyword(String keyword) {
@@ -65,11 +65,11 @@ public class StudentServiceRedisImpl {
         for (String nic : nicList) {
 
             if (nic.substring(2).toLowerCase().contains(keyword)) {
-                searchResult.add(Student.fromDB(nic.substring(2), client.hgetAll(nic)));
+                searchResult.add(Student.fromMap(nic.substring(2), client.hgetAll(nic)));
             } else {
                 for (String data : client.hvals(nic)) {
                     if (data.toLowerCase().contains(keyword)) {
-                        searchResult.add(Student.fromDB(nic.substring(2), client.hgetAll(nic)));
+                        searchResult.add(Student.fromMap(nic.substring(2), client.hgetAll(nic)));
                         break;
                     }
                 }
@@ -83,7 +83,7 @@ public class StudentServiceRedisImpl {
         Set<String> nicList = client.keys(DB_PREFIX + "*");
 
         for (String nic : nicList) {
-            studentList.add(Student.fromDB(nic.substring(2), client.hgetAll(nic)));
+            studentList.add(Student.fromMap(nic.substring(2), client.hgetAll(nic)));
         }
 
         return studentList;

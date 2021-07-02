@@ -12,7 +12,7 @@ import model.Batch;
 import model.BatchTM;
 import model.Course;
 import service.BatchService;
-import service.CourseService;
+import service.CourseServiceRedisImpl;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 import util.ValidationUtil;
@@ -20,7 +20,7 @@ import util.ValidationUtil;
 import java.time.LocalDate;
 
 public class ViewBatchesFormController {
-    private final CourseService courseService = new CourseService();
+    private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
     private final BatchService batchService = new BatchService();
     public JFXComboBox<String> cmbCourseId;
     public TableView<BatchTM> tblResult;
@@ -122,7 +122,7 @@ public class ViewBatchesFormController {
                     e.printStackTrace();
                 }
 
-            }else{
+            } else {
                 lblDelayedPayments.setText("Select a batch from table to view details");
                 lblNextPaymentDate.setText("Select a batch from table to view details");
                 lblBatchNumber.setText("Select a batch from table to view details");
