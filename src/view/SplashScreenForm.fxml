@@ -18,10 +18,10 @@
             <Image url="@assets/splashImages/IJSE.png" />
          </image>
       </ImageView>
-      <JFXProgressBar fx:id="pgbLoadingApp" layoutX="38.0" layoutY="224.0" prefHeight="0.0" prefWidth="414.0" progress="0.24" />
+      <JFXProgressBar fx:id="pgbLoading" layoutX="38.0" layoutY="224.0" prefHeight="0.0" prefWidth="414.0" progress="0.0" />
       <AnchorPane layoutX="203.0" layoutY="194.0" prefWidth="82.0" style="-fx-background-color: #404040; -fx-background-radius: 5;">
          <children>
-            <Label text="Loading..." textFill="WHITE" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="2.0" />
+            <Label fx:id="lblLoading" text="Loading..." textFill="WHITE" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="2.0" />
          </children>
       </AnchorPane>
       <Label layoutX="26.0" layoutY="235.0" style="-fx-background-color: #404040;" text="Student Payment System 2021-1.1.0                              DC Solutions" textFill="WHITE" />

@@ -116,7 +116,6 @@ public class ViewPaymentsFormController {
         });
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
             loadAllReceipts(newValue);
         });
 

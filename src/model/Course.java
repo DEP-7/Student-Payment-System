@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 public class Course {
     private String courseID;
@@ -34,6 +35,10 @@ public class Course {
         this.minimumRequirements = minimumRequirements;
         this.notes = notes;
         this.courseInitiationDate = courseInitiationDate;
+    }
+
+    public static Course fromDB(String course, Map<String, String> data) {
+        return null;
     }
 
     public String getCourseID() {

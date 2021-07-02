@@ -1,52 +1,57 @@
 package service;
 
 import model.Student;
+import redis.clients.jedis.Jedis;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
+import util.JedisClient;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class StudentServiceRedisImpl {
 
-    public static ArrayList<Student> studentDB = new ArrayList();
+    private static final String DB_PREFIX = "s#";
+    private final Jedis client;
 
-    static {
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", CourseService.courseDB.get(2), 1, new BigDecimal("20")));
-        studentDB.add(new Student("199316300377", "Prasad Viduranha", "P.Viduranga", "Male", LocalDate.of(1995, 12, 20), null, "BSc", "Galle", "0772565368", "prasad@gmail.com", CourseService.courseDB.get(0), 2, new BigDecimal("0")));
+    public StudentServiceRedisImpl() {
+        client = JedisClient.getInstance().getClient();
     }
 
     public void addStudent(Student student) throws DuplicateEntryException {
-        if (getStudent(student.getNic()) != null) {
+
+        if (client.exists(DB_PREFIX + student.getNic())) {
             throw new DuplicateEntryException();
         }
-        studentDB.add(student);
+
+        client.hset(DB_PREFIX + student.getNic(), student.toDB());
     }
 
     public void updateStudent(Student studentToUpdate, String previousNIC) throws NotFoundException {
-        Student studentBeforeUpdate = searchStudent(previousNIC);
-        studentDB.set(studentDB.indexOf(studentBeforeUpdate), studentToUpdate);
+
+        if (!client.exists(DB_PREFIX + previousNIC)) {
+            throw new NotFoundException();
+        }
+
+        client.del(DB_PREFIX + previousNIC);
+        client.hset(DB_PREFIX + studentToUpdate.getNic(), studentToUpdate.toDB());
     }
 
     public void deleteStudent(String nic) throws NotFoundException {
         // TODO : Students without any single payments can delete. So check payment details before delete
-        Student studentToDelete = searchStudent(nic);
-        studentDB.remove(studentToDelete);
-    }
-
-    public List<Student> searchAllStudents() {
-        return studentDB;
+        if (!client.exists(DB_PREFIX + nic)) {
+            throw new NotFoundException();
+        }
+        client.del(DB_PREFIX + nic);
     }
 
     public Student searchStudent(String nic) throws NotFoundException {
-        Student student = getStudent(nic);
 
-        if (student != null) {
-            return student;
+        if (!client.exists(DB_PREFIX + nic)) {
+            throw new NotFoundException();
         }
-        throw new NotFoundException();
+        return Student.fromDB(nic, client.hgetAll(DB_PREFIX + nic));
     }
 
     public List<Student> searchStudentsByKeyword(String keyword) {
@@ -55,31 +60,36 @@ public class StudentServiceRedisImpl {
         }
         keyword = keyword.toLowerCase();
         List<Student> searchResult = new ArrayList();
+        Set<String> nicList = client.keys(DB_PREFIX + "*");
 
-        for (Student student : studentDB) {
-            if (student.getNic().toLowerCase().contains(keyword) ||
-                    student.getNameInFull().toLowerCase().contains(keyword) ||
-                    student.getNameWithInitials().toLowerCase().contains(keyword) ||
-                    student.getGender().toLowerCase().contains(keyword) ||
-                    student.getDateOfBirth().toString().contains(keyword) ||
-                    student.getEduQualification().toLowerCase().contains(keyword) ||
-                    student.getAddress().toLowerCase().contains(keyword) ||
-                    student.getContactNumber().contains(keyword) ||
-                    student.getEmail().toLowerCase().contains(keyword) ||
-                    student.getCourse().getCourseID().toLowerCase().contains(keyword) ||
-                    Integer.toString(student.getBatchNumber()).contains(keyword)) {
-                searchResult.add(student);
+        for (String nic : nicList) {
+
+            if (nic.substring(2).toLowerCase().contains(keyword)) {
+                searchResult.add(Student.fromDB(nic.substring(2), client.hgetAll(nic)));
+            } else {
+                for (String data : client.hvals(nic)) {
+                    if (data.toLowerCase().contains(keyword)) {
+                        searchResult.add(Student.fromDB(nic.substring(2), client.hgetAll(nic)));
+                        break;
+                    }
+                }
             }
         }
         return searchResult;
     }
 
-    private Student getStudent(String nic) {
-        for (Student student : studentDB) {
-            if (student.getNic().equals(nic)) {
-                return student;
-            }
+    public List<Student> searchAllStudents() {
+        List<Student> studentList = new ArrayList<>();
+        Set<String> nicList = client.keys(DB_PREFIX + "*");
+
+        for (String nic : nicList) {
+            studentList.add(Student.fromDB(nic.substring(2), client.hgetAll(nic)));
         }
-        return null;
+
+        return studentList;
+    }
+
+    private boolean existStudent(String nic) {
+        return client.exists(nic);
     }
 }
