@@ -1,15 +1,9 @@
 package controller;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 import model.DashboardTM;
 import model.Receipt;
 import service.ReceiptService;
@@ -17,7 +11,6 @@ import service.ReceiptService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DashboardFormController {
     private final ReceiptService receiptService = new ReceiptService();
@@ -77,7 +70,7 @@ public class DashboardFormController {
             tblResult.getItems().add(new DashboardTM(courseID.get(i), newRegistrations.get(i), noOfPayments.get(i), totalIncome.get(i)));
         }
 
-        lblTotalIncome.setText(String.format("%,.0f",income));
+        lblTotalIncome.setText(String.format("%,.0f", income));
         lblTotalPayments.setText(numberOfPayments + "");
         lblTotalRegistrations.setText(numberOfRegistrations + "");
     }

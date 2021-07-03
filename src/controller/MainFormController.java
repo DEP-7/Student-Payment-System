@@ -53,7 +53,7 @@ public class MainFormController {
     public VBox pneItemContainer;
 
     private User loggedUser;
-    private ArrayList<Parent> formArray = new ArrayList<>();
+    private final ArrayList<Parent> formArray = new ArrayList<>();
 
     public void initialize() throws IOException {
         startClock();

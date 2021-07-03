@@ -34,7 +34,7 @@ public class StudentServiceRedisImpl {
             throw new NotFoundException();
         }
 
-        client.del(DB_PREFIX + previousNIC);
+        client.rename(DB_PREFIX + previousNIC, DB_PREFIX + studentToUpdate.getNic());
         client.hset(DB_PREFIX + studentToUpdate.getNic(), studentToUpdate.toMap());
     }
 

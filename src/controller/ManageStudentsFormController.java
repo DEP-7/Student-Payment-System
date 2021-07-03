@@ -14,7 +14,7 @@ import model.Batch;
 import model.Course;
 import model.Student;
 import model.StudentTM;
-import service.BatchService;
+import service.BatchServiceRedisImpl;
 import service.CourseServiceRedisImpl;
 import service.StudentServiceRedisImpl;
 import service.exception.DuplicateEntryException;
@@ -33,7 +33,7 @@ import static util.ValidationUtil.*;
 public class ManageStudentsFormController {
     private final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
-    private final BatchService batchService = new BatchService();
+    private final BatchServiceRedisImpl batchService = new BatchServiceRedisImpl();
     public TableView<StudentTM> tblResult;
     public JFXComboBox<String> cmbBatchNumber;
     public JFXComboBox<String> cmbCourseId;
@@ -46,7 +46,6 @@ public class ManageStudentsFormController {
     public JFXButton btnEdit;
     public JFXButton btnAdd;
     public TextField txtHighestEducationalQualification;
-    public TextField txtPreviousRegisteredCourses;
     public TextField txtNameWithInitials;
     public TextField txtContactNumber;
     public TextField txtDiscount;
@@ -120,7 +119,7 @@ public class ManageStudentsFormController {
         tblResult.getColumns().get(4).setCellValueFactory(new PropertyValueFactory("contactNumber"));
 
         MaterialUI.paintTextFields(txtNIC, txtFullName, txtNameWithInitials, txtDateOfBirth, txtHighestEducationalQualification,
-                txtPreviousRegisteredCourses, txtAddress, txtContactNumber, txtEmail, txtAge, txtSearch, cmbCourseId, cmbBatchNumber, txtDiscount);
+                txtAddress, txtContactNumber, txtEmail, txtAge, txtSearch, cmbCourseId, cmbBatchNumber, txtDiscount);
 
         txtDateOfBirth.textProperty().addListener((observable, oldValue, newValue) -> {
             String inputText = txtDateOfBirth.getText();
@@ -296,7 +295,6 @@ public class ManageStudentsFormController {
         txtNameWithInitials.clear();
         txtDateOfBirth.clear();
         txtHighestEducationalQualification.clear();
-        txtPreviousRegisteredCourses.clear();
         txtAddress.clear();
         txtContactNumber.clear();
         txtEmail.clear();
@@ -459,7 +457,6 @@ public class ManageStudentsFormController {
         txtDateOfBirth.setDisable(value);
         txtAge.setDisable(value);
         txtHighestEducationalQualification.setDisable(value);
-        txtPreviousRegisteredCourses.setDisable(value);
         txtAddress.setDisable(value);
         txtContactNumber.setDisable(value);
         txtEmail.setDisable(value);

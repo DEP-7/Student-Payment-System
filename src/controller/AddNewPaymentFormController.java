@@ -16,8 +16,6 @@ import model.sub.OnlinePayment;
 import model.sub.PaymentMethod;
 import service.ReceiptService;
 import service.StudentServiceRedisImpl;
-import service.StudentServiceRedisImpl;
-import service.UserService;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -105,7 +103,7 @@ public class AddNewPaymentFormController {
         });
 
         Platform.runLater(() -> {
-            txtReceiptNumber.setText(String.format("R%06d",receiptService.getLastReceiptNumber()+1));
+            txtReceiptNumber.setText(String.format("R%06d", receiptService.getLastReceiptNumber() + 1));
         });
     }
 
@@ -159,7 +157,7 @@ public class AddNewPaymentFormController {
 
             receiptService.addReceipt(receipt);
             new Alert(Alert.AlertType.INFORMATION, "Payment have been added successfully", ButtonType.OK).showAndWait();
-            txtReceiptNumber.setText(String.format("RO6%d",receiptService.getLastReceiptNumber()+1));
+            txtReceiptNumber.setText(String.format("RO6%d", receiptService.getLastReceiptNumber() + 1));
             clearAll();
             txtNIC.requestFocus();
         } catch (DuplicateEntryException e) {

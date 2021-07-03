@@ -62,7 +62,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnEdit" layoutX="213.0" layoutY="550.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="182.0" AnchorPane.topAnchor="590.0">
+      <JFXButton fx:id="btnEdit" disable="true" layoutX="213.0" layoutY="550.0" onAction="#btnEdit_OnAction" onKeyPressed="#btnEdit_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="182.0" AnchorPane.topAnchor="590.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -70,7 +70,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="332.0" layoutY="550.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="279.0" AnchorPane.topAnchor="590.0">
+      <JFXButton fx:id="btnUpdate" disable="true" layoutX="332.0" layoutY="550.0" onAction="#btnUpdate_OnAction" onKeyPressed="#btnUpdate_OnKeyPressed" prefHeight="36.0" prefWidth="83.0" style="-fx-background-color: #545454;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="279.0" AnchorPane.topAnchor="590.0">
          <font>
             <Font size="14.0" />
          </font>

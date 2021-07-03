@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 import model.Batch;
 import model.BatchTM;
 import model.Course;
-import service.BatchService;
+import service.BatchServiceRedisImpl;
 import service.CourseServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
@@ -23,7 +23,7 @@ import java.time.format.DateTimeParseException;
 
 public class ManageBatchesAdminFormController {
     private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
-    private final BatchService batchService = new BatchService();
+    private final BatchServiceRedisImpl batchService = new BatchServiceRedisImpl();
     public JFXComboBox<String> cmbCourseId;
     public TableView<BatchTM> tblResult;
     public JFXCheckBox chkOngoingBatches;
@@ -71,7 +71,7 @@ public class ManageBatchesAdminFormController {
 
         cmbCourseId.valueProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (newValue.isEmpty()) {
+            if (newValue==null || newValue.isEmpty()) {
                 txtBatchNumber.clear();
                 return;
             }

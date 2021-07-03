@@ -11,7 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Batch;
 import model.BatchTM;
 import model.Course;
-import service.BatchService;
+import service.BatchServiceRedisImpl;
 import service.CourseServiceRedisImpl;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 
 public class ViewBatchesFormController {
     private final CourseServiceRedisImpl courseService = new CourseServiceRedisImpl();
-    private final BatchService batchService = new BatchService();
+    private final BatchServiceRedisImpl batchService = new BatchServiceRedisImpl();
     public JFXComboBox<String> cmbCourseId;
     public TableView<BatchTM> tblResult;
     public JFXCheckBox chkOngoingBatches;
@@ -137,6 +137,9 @@ public class ViewBatchesFormController {
         if (cmbCourseId.getValue() != null && !cmbCourseId.getValue().isEmpty()) {
             try {
                 for (Batch batch : batchService.searchBatchByKeyword(courseService.searchCourse(cmbCourseId.getValue()), keyword, onGoingBatchesOnly)) {
+                    System.out.println(batch.getCourse().getDuration().split(" - ")[0]);
+                    System.out.println(batch.getCourse().getDuration().split(" - "));
+                    System.out.println(batch.getCourse().getDuration());
                     tblResult.getItems().add(new BatchTM(batch.getBatchNumber(), 0/*TODO: Update number of students here*/, batch.getStartedDate(), batch.getStartedDate().plusDays(Integer.parseInt(batch.getCourse().getDuration().split(" - ")[0])), batch.getEndDate(), courseService.searchCourse(cmbCourseId.getValue())));
                 }
             } catch (NotFoundException e) {
