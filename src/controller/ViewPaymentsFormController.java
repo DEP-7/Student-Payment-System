@@ -12,7 +12,7 @@ import model.sub.CardPayment;
 import model.sub.CashPayment;
 import model.sub.OnlinePayment;
 import model.sub.PaymentMethod;
-import service.ReceiptService;
+import service.ReceiptServiceRedisImpl;
 import service.StudentServiceRedisImpl;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -28,7 +28,7 @@ import static util.ValidationUtil.isValidNIC;
 import static util.ValidationUtil.isValidPastDate;
 
 public class ViewPaymentsFormController {
-    private final ReceiptService receiptService = new ReceiptService();
+    private final ReceiptServiceRedisImpl receiptService = new ReceiptServiceRedisImpl();
     private final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     public TableView<ReceiptTM> tblResult;
     public ToggleGroup rbnDayGaps;

@@ -14,7 +14,7 @@ import model.sub.CardPayment;
 import model.sub.CashPayment;
 import model.sub.OnlinePayment;
 import model.sub.PaymentMethod;
-import service.ReceiptService;
+import service.ReceiptServiceRedisImpl;
 import service.StudentServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
@@ -32,7 +32,7 @@ import static util.ValidationUtil.isValidNIC;
 import static util.ValidationUtil.isValidPastDate;
 
 public class AddNewPaymentFormController {
-    public final ReceiptService receiptService = new ReceiptService();
+    public final ReceiptServiceRedisImpl receiptService = new ReceiptServiceRedisImpl();
     public final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     public JFXTextField txtNameWithInitials;
     public JFXTextField txtContactNumber;

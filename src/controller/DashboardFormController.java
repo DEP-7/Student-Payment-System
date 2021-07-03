@@ -6,14 +6,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import model.DashboardTM;
 import model.Receipt;
-import service.ReceiptService;
+import service.ReceiptServiceRedisImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DashboardFormController {
-    private final ReceiptService receiptService = new ReceiptService();
+    private final ReceiptServiceRedisImpl receiptService = new ReceiptServiceRedisImpl();
     public TableView<DashboardTM> tblResult;
     public ImageView imgHoursHand;
     public ImageView imgSecondsHand;

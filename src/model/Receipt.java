@@ -1,9 +1,22 @@
 package model;
 
+import javafx.scene.control.Alert;
+import model.sub.CardPayment;
+import model.sub.CashPayment;
+import model.sub.OnlinePayment;
 import model.sub.PaymentMethod;
+import service.ReceiptServiceRedisImpl;
+import service.StudentServiceRedisImpl;
+import service.exception.NotFoundException;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Receipt {
     private long receiptNumber;
@@ -18,6 +31,8 @@ public class Receipt {
     private LocalDate receiptDate;
     private User user;
     private Receipt balancePaymentReceipt;
+
+    private static final String PAYMENT_METHOD_DIVIDER = "#*/@#";
 
     public Receipt() {
     }
@@ -35,6 +50,49 @@ public class Receipt {
         this.receiptDate = receiptDate;
         this.user = user;
         this.balancePaymentReceipt = balancePaymentReceipt;
+    }
+
+    public static Receipt fromMap(String receiptNumber, Map<String, String> data) {
+        String paymentMethodInDB = data.get("paymentMethod");
+        PaymentMethod paymentMethod = null;
+
+        try {
+
+            if (paymentMethodInDB.startsWith("Cash")) {
+                paymentMethod = new CashPayment();
+            } else if (paymentMethodInDB.startsWith("Online")) {
+                String[] details = paymentMethodInDB.split(PAYMENT_METHOD_DIVIDER);
+                paymentMethod = new OnlinePayment(details[1], details[2]);
+            } else if (paymentMethodInDB.startsWith("Card")) {
+                String[] details = paymentMethodInDB.split(PAYMENT_METHOD_DIVIDER);
+
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/yy");
+                Date date = formatter.parse(details[2]);
+                LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+                paymentMethod = new CardPayment(details[1], localDate, details[3]);
+            }
+
+            return new Receipt(
+                    Long.parseLong(receiptNumber),
+                    new StudentServiceRedisImpl().searchStudent(data.get("student")),
+                    data.get("paymentDescription"),
+                    paymentMethod,
+                    new BigDecimal(data.get("amountReceived")),
+                    new BigDecimal(data.get("balancePayment")),
+                    LocalDate.parse(data.get("dueDateOfBalancePayment")),
+                    LocalDate.parse(data.get("paymentDate")),
+                    data.get("notes"),
+                    LocalDate.parse(data.get("receiptDate")),
+                    null,//data.get("user"), // TODO: Fill this after creating UserServiceRedisImpl
+                    new ReceiptServiceRedisImpl().searchReceipt(Long.parseLong(data.get("balancePaymentReceipt"))));
+        } catch (NotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "Something terribly gone wrong, please contact the developer").show();
+            throw new RuntimeException("Saved value not exist in database");
+        } catch (ParseException e) {
+            new Alert(Alert.AlertType.ERROR, "Something terribly gone wrong, please contact the developer").show();
+            throw new RuntimeException("Card expiration date parse exception");
+        }
     }
 
     public long getReceiptNumber() {
@@ -131,5 +189,49 @@ public class Receipt {
 
     public void setBalancePaymentReceipt(Receipt balancePaymentReceipt) {
         this.balancePaymentReceipt = balancePaymentReceipt;
+    }
+
+    public Map<String, String> toMap() {
+        String paymentMethodToSaveInDB="";
+
+        if (paymentMethod.toString().equals("Cash Payment")) {
+            paymentMethodToSaveInDB="Cash";
+        } else if (paymentMethod.toString().equals("Online Payment")) {
+            paymentMethodToSaveInDB="Online"+PAYMENT_METHOD_DIVIDER+((OnlinePayment)paymentMethod).getReferenceNumber()+PAYMENT_METHOD_DIVIDER+((OnlinePayment)paymentMethod).getFileName();
+        } else if (paymentMethod.toString().equals("Card Payment")) {
+            paymentMethodToSaveInDB="Card"+PAYMENT_METHOD_DIVIDER+((CardPayment)paymentMethod).getCardNumber()+PAYMENT_METHOD_DIVIDER+((CardPayment)paymentMethod).getCardExpireDate()+PAYMENT_METHOD_DIVIDER+((CardPayment)paymentMethod).getNameOnCard();
+        }
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("student", student.getNic());
+        map.put("paymentDescription", paymentDescription);
+        map.put("paymentMethod", paymentMethodToSaveInDB);
+        map.put("amountReceived", amountReceived + "");
+        map.put("balancePayment", balancePayment + "");
+        map.put("dueDateOfBalancePayment", dueDateOfBalancePayment + "");
+        map.put("paymentDate", paymentDate + "");
+        map.put("notes", notes);
+        map.put("receiptDate", receiptDate + "");
+        map.put("user", user.getNic());
+        map.put("balancePaymentReceipt", balancePaymentReceipt.getReceiptNumber() + "");
+        return map;
+    }
+
+    @Override
+    public String toString() {
+        return "Receipt{" +
+                "receiptNumber=" + receiptNumber +
+                ", student=" + student +
+                ", paymentDescription='" + paymentDescription + '\'' +
+                ", paymentMethod=" + paymentMethod +
+                ", amountReceived=" + amountReceived +
+                ", balancePayment=" + balancePayment +
+                ", dueDateOfBalancePayment=" + dueDateOfBalancePayment +
+                ", paymentDate=" + paymentDate +
+                ", notes='" + notes + '\'' +
+                ", receiptDate=" + receiptDate +
+                ", user=" + user +
+                ", balancePaymentReceipt=" + balancePaymentReceipt +
+                '}';
     }
 }

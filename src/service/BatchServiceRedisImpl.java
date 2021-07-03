@@ -97,7 +97,7 @@ public class BatchServiceRedisImpl { // TODO: Waste of DB memory. Try to merge b
 
     public int getLastBatchNumber(Course course) {
         Set<String> batchNumberList = client.keys(DB_PREFIX + course.getCourseID() + "*");
-        int count = batchNumberList.size();
+        int count = batchNumberList.size()+1;
 
         for (int i = 0; i < batchNumberList.size() + 1; i++) {
             if (!client.exists(DB_PREFIX + course.getCourseID() + count)) {
