@@ -1,4 +1,3 @@
-/*
 package service;
 
 import model.Receipt;
@@ -124,4 +123,3 @@ public class ReceiptService {
         return null;
     }
 }
-*/

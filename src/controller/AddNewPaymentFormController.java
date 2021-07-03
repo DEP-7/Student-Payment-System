@@ -8,7 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import model.Receipt;
+import model.Student;
 import model.User;
 import model.sub.CardPayment;
 import model.sub.CashPayment;
@@ -26,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static util.ValidationUtil.isValidNIC;
@@ -34,6 +37,7 @@ import static util.ValidationUtil.isValidPastDate;
 public class AddNewPaymentFormController {
     public final ReceiptServiceRedisImpl receiptService = new ReceiptServiceRedisImpl();
     public final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
+    private final BigDecimal registrationFee = new BigDecimal(5000);
     public JFXTextField txtNameWithInitials;
     public JFXTextField txtContactNumber;
     public JFXTextField txtBatchNumber;
@@ -46,6 +50,7 @@ public class AddNewPaymentFormController {
     public ToggleGroup rbnPaymentDescription;
     public ToggleGroup rbnPaymentMethod;
     public JFXButton btnMakePayment;
+    public JFXButton btnAddFile;
     public ImageView imgMasterCard;
     public ImageView imgProfilePic;
     public ImageView imgVisaCard;
@@ -64,9 +69,10 @@ public class AddNewPaymentFormController {
     public TextArea txtNotes;
     public Label lblBalancePaymentReceipt;
     public Label lblMaximumDueDate;
+    private MainFormController mainFormController;
+    private User loggedUser;
+    private Student currentStudent;
 
-    MainFormController mainFormController;
-    User loggedUser;
 
     public void initialize() {
         MaterialUI.paintTextFields(txtNIC, txtReceiptNumber, txtOnlineReferenceNumber, txtFileName, txtCardNumber, txtExpirationDate, txtNameOnCard, txtAmountReceived, txtDueDateOfBalancePayment, txtPaymentDate, txtTotalAmount, txtBalanceAmount, txtNotes);
@@ -75,21 +81,26 @@ public class AddNewPaymentFormController {
             if (oldValue && !txtNIC.getText().isEmpty()) {
                 if (isValidNIC(txtNIC.getText())) {
                     try {
-                        studentService.searchStudent(txtNIC.getText());
+                        currentStudent = studentService.searchStudent(txtNIC.getText());
+                        loadNicRelatedDetails();
+                        loggedUser = (User) txtReceiptNumber.getScene().getWindow().getUserData();
                     } catch (NotFoundException e) {
+                        clearNicRelatedDetails();
                         Optional<ButtonType> option = new Alert(Alert.AlertType.CONFIRMATION, "There is no such a student for the given NIC.\nDo you want to add this student?", ButtonType.OK, ButtonType.CANCEL).showAndWait();
 
                         if (option.get() == ButtonType.CANCEL) {
                             txtNIC.requestFocus();
                         } else {
-                            loggedUser = (User) txtNIC.getScene().getWindow().getUserData();
                             mainFormController.load(3, "Dashboard / Manage Students");
                             mainFormController.pneStage.setUserData(txtNIC.getText());
                         }
                     }
                 } else {
-                    new Alert(Alert.AlertType.ERROR, "Invalid NIC").show();
+                    new Alert(Alert.AlertType.ERROR, "Invalid NIC").showAndWait();
+                    clearNicRelatedDetails();
                 }
+            } else if (txtNIC.getText().isEmpty()) {
+                clearNicRelatedDetails();
             }
         });
 
@@ -102,9 +113,135 @@ public class AddNewPaymentFormController {
             }
         });
 
+        rbnPaymentDescription.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (currentStudent != null) {
+                loadPaymentDescriptionRelatedDetails();
+            }
+
+            if (((RadioButton) newValue).getText().equals("Custom Text")) {
+                txtCustomText.setDisable(false);
+                txtCustomText.requestFocus();
+            } else {
+                txtCustomText.setDisable(true);
+            }
+        });
+
+        rbnPaymentMethod.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            txtOnlineReferenceNumber.setDisable(!rbnPaymentMethod.getToggles().get(1).isSelected());
+            btnAddFile.setDisable(!rbnPaymentMethod.getToggles().get(1).isSelected());
+
+            txtCardNumber.setDisable(!rbnPaymentMethod.getToggles().get(2).isSelected());
+            txtExpirationDate.setDisable(!rbnPaymentMethod.getToggles().get(2).isSelected());
+            txtNameOnCard.setDisable(!rbnPaymentMethod.getToggles().get(2).isSelected());
+        });
+
+        txtAmountReceived.textProperty().addListener((observable, oldValue, newValue) -> {
+            setBalanceAmount();
+        });
+
         Platform.runLater(() -> {
             txtReceiptNumber.setText(String.format("R%06d", receiptService.getLastReceiptNumber() + 1));
         });
+    }
+
+    private void loadNicRelatedDetails() {
+        txtNameWithInitials.setText(currentStudent.getNameWithInitials());
+        txtFullName.setText(currentStudent.getNameInFull());
+        txtAddress.setText(currentStudent.getAddress());
+        txtContactNumber.setText(currentStudent.getContactNumber());
+        txtEmail.setText(currentStudent.getEmail());
+        txtCourseId.setText(currentStudent.getCourse().getCourseID());
+        txtBatchNumber.setText(currentStudent.getBatchNumber() + "");
+        txtDiscount.setText(String.format("%.2f%%", currentStudent.getDiscount()));
+
+        loadPaymentDescriptionRelatedDetails();
+    }
+
+    private void clearNicRelatedDetails() {
+        currentStudent = null;
+        txtNameWithInitials.clear();
+        txtFullName.clear();
+        txtAddress.clear();
+        txtContactNumber.clear();
+        txtEmail.clear();
+        txtCourseId.clear();
+        txtBatchNumber.clear();
+        txtDiscount.clear();
+
+        txtTotalAmount.clear();
+        txtBalanceAmount.clear();
+    }
+
+    private void loadPaymentDescriptionRelatedDetails() {
+        List<Receipt> receipts = receiptService.searchReceiptsByStudent(currentStudent);
+        String paymentDescription = ((RadioButton) rbnPaymentDescription.getSelectedToggle()).getText();
+        double[] payments = {0, 0, 0}; // Registration fee, total payments, balance payments
+        Receipt balancePaymentReceipt = null;
+
+        for (Receipt receipt : receipts) { // TODO: Try to do these things using db
+            if (receipt.getBalancePayment().compareTo(new BigDecimal(0)) > 0 && receipt.getBalancePaymentReceipt() == null) {
+                payments[2] += receipt.getBalancePayment().doubleValue();
+                balancePaymentReceipt = receipt;
+            }
+            if (receipt.getPaymentDescription().equals("Registration Fee")) {
+                payments[0] += receipt.getAmountReceived().doubleValue();
+            } else if (receipt.getPaymentDescription().equals("Installment") || receipt.getPaymentDescription().equals("Full Payment") || receipt.getPaymentDescription().equals("Balance Payment")) {
+                payments[1] += receipt.getAmountReceived().doubleValue();
+            }
+        }
+
+        switch (paymentDescription) {
+            case "Registration Fee":
+                if (payments[0] >= registrationFee.doubleValue()) {
+                    new Alert(Alert.AlertType.INFORMATION, "It seems this student already pay the registration fee").showAndWait();
+                }
+                txtTotalAmount.setText(String.format("%,.2f", registrationFee));
+                setBalanceAmount();
+                break;
+            case "Installment":
+                if (payments[1] >= currentStudent.getCourse().getCourseFee()) {
+                    new Alert(Alert.AlertType.INFORMATION, "It seems this student already pay the course fee").showAndWait();
+                }
+                txtTotalAmount.setText(String.format("%,.2f", currentStudent.getCourse().getCourseFee() / currentStudent.getCourse().getNumberOfInstallments()));
+                setBalanceAmount();
+                break;
+            case "Full Payment":
+                if (payments[1] >= currentStudent.getCourse().getCourseFee()) {
+                    new Alert(Alert.AlertType.INFORMATION, "It seems this student already pay the course fee").showAndWait();
+                }
+                txtTotalAmount.setText(String.format("%,.2f", currentStudent.getCourse().getCourseFee() - payments[1]));
+                setBalanceAmount();
+                break;
+            case "Balance Payment":
+                if (payments[2] == 0) {
+                    new Alert(Alert.AlertType.INFORMATION, "This student haven't any due balance payments").showAndWait();
+                    txtTotalAmount.setText("0.00");
+                    setBalanceAmount();
+                } else {
+                    txtTotalAmount.setText(String.format("%,.2f", balancePaymentReceipt.getBalancePayment()));
+                    setBalanceAmount();
+                }
+                break;
+            case "Custom Text":
+                txtTotalAmount.setText("0.00");
+                setBalanceAmount();
+                break;
+        }
+    }
+
+    private void setBalanceAmount() {
+        if (txtAmountReceived.getText().isEmpty()) {
+            txtBalanceAmount.setText(txtTotalAmount.getText());
+        } else {
+            BigDecimal totalAmount = new BigDecimal(txtTotalAmount.getText().replaceAll(",", ""));
+            BigDecimal amountReceived = new BigDecimal(txtAmountReceived.getText().replaceAll(",", ""));
+
+            if (totalAmount.compareTo(amountReceived) < 0) {
+                txtBalanceAmount.setText("Invalid Input");
+            } else {
+                txtBalanceAmount.setText(String.format("%,.2f", totalAmount.subtract(amountReceived)));
+            }
+        }
     }
 
     public void btnMakePayment_OnAction(ActionEvent actionEvent) {
@@ -146,9 +283,9 @@ public class AddNewPaymentFormController {
                     studentService.searchStudent(txtNIC.getText()),
                     ((RadioButton) rbnPaymentDescription.getSelectedToggle()).getText() + (rbnPaymentDescription.getToggles().get(4).isSelected() ? txtCustomText.getText() : ""),
                     paymentMethod,
-                    new BigDecimal(txtAmountReceived.getText()),
-                    new BigDecimal(txtBalanceAmount.getText()),
-                    LocalDate.parse(txtDueDateOfBalancePayment.getText()),
+                    new BigDecimal(txtAmountReceived.getText().replaceAll(",","")),
+                    new BigDecimal(txtBalanceAmount.getText().replaceAll(",","")),
+                    Double.parseDouble(txtBalanceAmount.getText().replaceAll(",",""))>0?LocalDate.parse(txtDueDateOfBalancePayment.getText()):null,
                     LocalDate.parse(txtPaymentDate.getText()),
                     txtNotes.getText(),
                     LocalDate.now(),
@@ -157,13 +294,10 @@ public class AddNewPaymentFormController {
 
             receiptService.addReceipt(receipt);
             new Alert(Alert.AlertType.INFORMATION, "Payment have been added successfully", ButtonType.OK).showAndWait();
-            txtReceiptNumber.setText(String.format("RO6%d", receiptService.getLastReceiptNumber() + 1));
+            txtReceiptNumber.setText(String.format("R%06d", receiptService.getLastReceiptNumber() + 1));
             clearAll();
             txtNIC.requestFocus();
-        } catch (DuplicateEntryException e) {
-            new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
-            txtNIC.requestFocus();
-        } catch (NotFoundException e) {
+        } catch (DuplicateEntryException | NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
             txtNIC.requestFocus();
         } catch (ParseException e) {
@@ -219,7 +353,7 @@ public class AddNewPaymentFormController {
             new Alert(Alert.AlertType.ERROR, "Invalid amount", ButtonType.OK).show();
             txtAmountReceived.requestFocus();
             return false;
-        } else if (!isValidPastDate(txtDueDateOfBalancePayment.getText(), 14)) {
+        } else if (Double.parseDouble(txtBalanceAmount.getText().replaceAll(",", "")) > 0 && !isValidPastDate(txtDueDateOfBalancePayment.getText(), 14)) {
             new Alert(Alert.AlertType.ERROR, "Invalid due date", ButtonType.OK).show();
             txtDueDateOfBalancePayment.requestFocus();
             return false;
@@ -279,6 +413,10 @@ public class AddNewPaymentFormController {
 
         imgMasterCard.setVisible(true);
         imgVisaCard.setVisible(true);
+    }
+
+    public void lblArrowToFillData_OnMouseClicked(MouseEvent mouseEvent) {
+        txtAmountReceived.setText(txtTotalAmount.getText());
     }
 
     public void btnAddFile_OnAction(ActionEvent actionEvent) {

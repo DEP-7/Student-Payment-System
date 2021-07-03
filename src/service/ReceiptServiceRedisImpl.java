@@ -1,6 +1,7 @@
 package service;
 
 import model.Receipt;
+import model.Student;
 import redis.clients.jedis.Jedis;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
@@ -58,7 +59,7 @@ public class ReceiptServiceRedisImpl {
     }
 
     public List<Receipt> searchReceiptsByKeyword(String keyword) {
-        return searchReceiptsByKeyword(keyword,null,null);
+        return searchReceiptsByKeyword(keyword, null, null);
     }
 
     public List<Receipt> searchReceiptsByKeyword(String keyword, LocalDate startingDate, LocalDate endDate) {
@@ -91,12 +92,24 @@ public class ReceiptServiceRedisImpl {
         return searchResult;
     }
 
+    public List<Receipt> searchReceiptsByStudent(Student student) {
+        List<Receipt> searchResult = new ArrayList();
+        Set<String> receiptNumberList = client.keys(DB_PREFIX + "*");
+
+        for (String receiptNumber : receiptNumberList) {
+            if (client.hget(receiptNumber,"student").equals(student.getNic())) {
+                searchResult.add(Receipt.fromMap(receiptNumber.substring(2), client.hgetAll(receiptNumber)));
+            }
+        }
+        return searchResult;
+    }
+
     public long getLastReceiptNumber() {
-        Set<String> receiptNumberList = client.keys(DB_PREFIX+ "*");
-        int count = receiptNumberList.size()+1;
+        Set<String> receiptNumberList = client.keys(DB_PREFIX + "*");
+        int count = receiptNumberList.size() + 1;
 
         for (int i = 0; i < receiptNumberList.size() + 1; i++) {
-            if (!client.exists(DB_PREFIX+ count)) {
+            if (!client.exists(DB_PREFIX + count)) {
                 return count == 0 ? 0 : count - 1;
             }
             count++;

@@ -80,12 +80,12 @@ public class Receipt {
                     paymentMethod,
                     new BigDecimal(data.get("amountReceived")),
                     new BigDecimal(data.get("balancePayment")),
-                    LocalDate.parse(data.get("dueDateOfBalancePayment")),
+                    data.get("dueDateOfBalancePayment").equals("null")?null:LocalDate.parse(data.get("dueDateOfBalancePayment")),
                     LocalDate.parse(data.get("paymentDate")),
                     data.get("notes"),
                     LocalDate.parse(data.get("receiptDate")),
                     null,//data.get("user"), // TODO: Fill this after creating UserServiceRedisImpl
-                    new ReceiptServiceRedisImpl().searchReceipt(Long.parseLong(data.get("balancePaymentReceipt"))));
+                    data.get("balancePaymentReceipt").equals("null")?null:new ReceiptServiceRedisImpl().searchReceipt(Long.parseLong(data.get("balancePaymentReceipt"))));
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly gone wrong, please contact the developer").show();
             throw new RuntimeException("Saved value not exist in database");
@@ -213,7 +213,7 @@ public class Receipt {
         map.put("notes", notes);
         map.put("receiptDate", receiptDate + "");
         map.put("user", user.getNic());
-        map.put("balancePaymentReceipt", balancePaymentReceipt.getReceiptNumber() + "");
+        map.put("balancePaymentReceipt", balancePaymentReceipt==null?"null":balancePaymentReceipt.getReceiptNumber() + "");
         return map;
     }
 
