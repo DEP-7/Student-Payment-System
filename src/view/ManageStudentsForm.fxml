@@ -90,7 +90,7 @@
         </AnchorPane>
         <AnchorPane layoutX="50.0" layoutY="340.0" prefHeight="66.0" prefWidth="156.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="355.0">
             <children>
-                <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" onKeyReleased="#txtDateOfBirth_OnKeyReleased" prefHeight="24.0" promptText="Eg: 1993-06-11" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
+                <TextField fx:id="txtDateOfBirth" accessibleText="Date of Birth" onKeyReleased="#txtDateOfBirth_OnKeyReleased" prefHeight="24.0" promptText="Eg: 1993-06-11" style="-fx-font: Monospaced;" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -177,7 +177,7 @@
         </JFXButton>
         <AnchorPane layoutX="673.0" layoutY="53.0" prefHeight="66.0" prefWidth="844.0" AnchorPane.leftAnchor="671.0" AnchorPane.topAnchor="15.0">
             <children>
-                <TextField fx:id="txtSearch" accessibleText="Student ID (NIC)" prefHeight="24.0" promptText="Eg: 931630377V" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                <TextField fx:id="txtSearch" accessibleText="Student ID (NIC)" prefHeight="24.0" promptText="Search here" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
                         <Font size="16.0" />
                     </font>

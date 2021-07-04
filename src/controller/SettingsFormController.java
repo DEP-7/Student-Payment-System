@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.User;
+import org.apache.commons.codec.digest.DigestUtils;
 import service.UserServiceRedisImpl;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -55,15 +56,28 @@ public class SettingsFormController {
         }
 
         if (updateUsername) {
+            String previousUsername = loggedUser.getUsername();
             loggedUser.setUsername(txtUsername.getText());
-            txtUsername.clear();
+            try {
+                userService.updateUser(loggedUser,previousUsername);
+                txtUsername.clear();
+            } catch (NotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact the developer", ButtonType.OK).show();
+            }
+            txtUsername.requestFocus();
         }
 
         if (updatePassword) {
-            loggedUser.setPassword(txtNewPassword.getText());
-            txtCurrentPassword.clear();
-            txtNewPassword.clear();
-            txtConfirmPassword.clear();
+            loggedUser.setPassword(DigestUtils.sha256Hex(txtNewPassword.getText()));
+            try {
+                userService.updateUser(loggedUser,loggedUser.getUsername());
+                txtCurrentPassword.clear();
+                txtNewPassword.clear();
+                txtConfirmPassword.clear();
+            } catch (NotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact the developer", ButtonType.OK).show();
+            }
+            txtCurrentPassword.requestFocus();
         }
 
         String alertMessage = updateUsername && updatePassword ? "Login details updated successfully" : updateUsername ? "Username have been updated successfully" : "Password have been updated successfully";

@@ -21,11 +21,11 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        /*Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
             System.out.println(e);
             new Alert(Alert.AlertType.ERROR, "Something went terribly wrong, try restarting the app").showAndWait();
             System.exit(1);
-        });*/
+        });
 
         AnchorPane root = FXMLLoader.load(this.getClass().getResource("view/SplashScreenForm.fxml"));
         Scene scene = new Scene(root);

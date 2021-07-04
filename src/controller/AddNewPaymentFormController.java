@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.SimpleInputMasking;
 import model.Receipt;
 import model.Student;
 import model.User;
@@ -73,9 +74,32 @@ public class AddNewPaymentFormController {
     private User loggedUser;
     private Student currentStudent;
 
-
     public void initialize() {
+        SimpleInputMasking simpleInputMasking = new SimpleInputMasking();
+        simpleInputMasking.setInputMask(txtExpirationDate, "__/__");
+        simpleInputMasking.setInputMask(txtDueDateOfBalancePayment, "____-__-__");
+        simpleInputMasking.setInputMask(txtPaymentDate, "____-__-__");
+        simpleInputMasking.setInputMask(txtCardNumber, "____ ____ ____ ____");
+
         MaterialUI.paintTextFields(txtNIC, txtReceiptNumber, txtOnlineReferenceNumber, txtFileName, txtCardNumber, txtExpirationDate, txtNameOnCard, txtAmountReceived, txtDueDateOfBalancePayment, txtPaymentDate, txtTotalAmount, txtBalanceAmount, txtNotes);
+
+        txtCardNumber.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Character.isDigit(newValue.toCharArray()[18])) {
+                if (newValue.startsWith("4")) {
+                    imgVisaCard.setVisible(true);
+                    imgMasterCard.setVisible(false);
+                }else if (newValue.startsWith("5")) {
+                    imgVisaCard.setVisible(false);
+                    imgMasterCard.setVisible(true);
+                }else {
+                    imgVisaCard.setVisible(false);
+                    imgMasterCard.setVisible(false);
+                }
+            }else {
+                imgVisaCard.setVisible(true);
+                imgMasterCard.setVisible(true);
+            }
+        });
 
         txtNIC.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue && !txtNIC.getText().isEmpty()) {

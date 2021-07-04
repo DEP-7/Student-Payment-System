@@ -58,14 +58,6 @@
     -fx-background-color: #404040;
 }
 
-/*Text Field Styles*/
-.text-field, .combo-box{
-    -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
-    -fx-text-fill: white;
-    -fx-background-color: transparent;
-    -fx-font-size: 16px;
-}
-
 /*Text Area Styles*/
 .text-area {
     -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
