@@ -7,6 +7,7 @@ import model.sub.OnlinePayment;
 import model.sub.PaymentMethod;
 import service.ReceiptServiceRedisImpl;
 import service.StudentServiceRedisImpl;
+import service.UserServiceRedisImpl;
 import service.exception.NotFoundException;
 
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Receipt {
+    private static final String PAYMENT_METHOD_DIVIDER = "#*/@#";
     private long receiptNumber;
     private Student student;
     private String paymentDescription;
@@ -31,8 +33,6 @@ public class Receipt {
     private LocalDate receiptDate;
     private User user;
     private Receipt balancePaymentReceipt;
-
-    private static final String PAYMENT_METHOD_DIVIDER = "#*/@#";
 
     public Receipt() {
     }
@@ -80,12 +80,12 @@ public class Receipt {
                     paymentMethod,
                     new BigDecimal(data.get("amountReceived")),
                     new BigDecimal(data.get("balancePayment")),
-                    data.get("dueDateOfBalancePayment").equals("null")?null:LocalDate.parse(data.get("dueDateOfBalancePayment")),
+                    data.get("dueDateOfBalancePayment").equals("null") ? null : LocalDate.parse(data.get("dueDateOfBalancePayment")),
                     LocalDate.parse(data.get("paymentDate")),
                     data.get("notes"),
                     LocalDate.parse(data.get("receiptDate")),
-                    null,//data.get("user"), // TODO: Fill this after creating UserServiceRedisImpl
-                    data.get("balancePaymentReceipt").equals("null")?null:new ReceiptServiceRedisImpl().searchReceipt(Long.parseLong(data.get("balancePaymentReceipt"))));
+                    new UserServiceRedisImpl().searchUser(data.get("user")),
+                    data.get("balancePaymentReceipt").equals("null") ? null : new ReceiptServiceRedisImpl().searchReceipt(Long.parseLong(data.get("balancePaymentReceipt"))));
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly gone wrong, please contact the developer").show();
             throw new RuntimeException("Saved value not exist in database");
@@ -192,14 +192,14 @@ public class Receipt {
     }
 
     public Map<String, String> toMap() {
-        String paymentMethodToSaveInDB="";
+        String paymentMethodToSaveInDB = "";
 
         if (paymentMethod.toString().equals("Cash Payment")) {
-            paymentMethodToSaveInDB="Cash";
+            paymentMethodToSaveInDB = "Cash";
         } else if (paymentMethod.toString().equals("Online Payment")) {
-            paymentMethodToSaveInDB="Online"+PAYMENT_METHOD_DIVIDER+((OnlinePayment)paymentMethod).getReferenceNumber()+PAYMENT_METHOD_DIVIDER+((OnlinePayment)paymentMethod).getFileName();
+            paymentMethodToSaveInDB = "Online" + PAYMENT_METHOD_DIVIDER + ((OnlinePayment) paymentMethod).getReferenceNumber() + PAYMENT_METHOD_DIVIDER + ((OnlinePayment) paymentMethod).getFileName();
         } else if (paymentMethod.toString().equals("Card Payment")) {
-            paymentMethodToSaveInDB="Card"+PAYMENT_METHOD_DIVIDER+((CardPayment)paymentMethod).getCardNumber()+PAYMENT_METHOD_DIVIDER+((CardPayment)paymentMethod).getCardExpireDate()+PAYMENT_METHOD_DIVIDER+((CardPayment)paymentMethod).getNameOnCard();
+            paymentMethodToSaveInDB = "Card" + PAYMENT_METHOD_DIVIDER + ((CardPayment) paymentMethod).getCardNumber() + PAYMENT_METHOD_DIVIDER + ((CardPayment) paymentMethod).getCardExpireDate() + PAYMENT_METHOD_DIVIDER + ((CardPayment) paymentMethod).getNameOnCard();
         }
 
         HashMap<String, String> map = new HashMap<>();
@@ -212,8 +212,8 @@ public class Receipt {
         map.put("paymentDate", paymentDate + "");
         map.put("notes", notes);
         map.put("receiptDate", receiptDate + "");
-        map.put("user", user.getNic());
-        map.put("balancePaymentReceipt", balancePaymentReceipt==null?"null":balancePaymentReceipt.getReceiptNumber() + "");
+        map.put("user", user.getUsername());
+        map.put("balancePaymentReceipt", balancePaymentReceipt == null ? "null" : balancePaymentReceipt.getReceiptNumber() + "");
         return map;
     }
 

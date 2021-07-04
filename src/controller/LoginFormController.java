@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
-import service.UserService;
+import service.UserServiceRedisImpl;
 import service.exception.NotFoundException;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class LoginFormController {
     public JFXPasswordField txtPassword;
     public JFXTextField txtUsername;
-    UserService userService = new UserService();
+    UserServiceRedisImpl userService = new UserServiceRedisImpl();
 
     public void btnLogin_OnAction(ActionEvent actionEvent) {
         loginIn();
@@ -38,7 +38,7 @@ public class LoginFormController {
         User loginUser;
 
         try {
-            loginUser = userService.searchUserByUsername(txtUsername.getText().trim());
+            loginUser = userService.searchUser(txtUsername.getText().trim());
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Invalid username").show();
             txtUsername.requestFocus();

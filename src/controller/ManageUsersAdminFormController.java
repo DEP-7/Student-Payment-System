@@ -9,7 +9,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.User;
 import model.UserTM;
-import service.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
+import service.UserServiceRedisImpl;
 import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
@@ -22,7 +23,7 @@ import java.util.Optional;
 import static util.ValidationUtil.*;
 
 public class ManageUsersAdminFormController {
-    private final UserService userService = new UserService();
+    private final UserServiceRedisImpl userService = new UserServiceRedisImpl();
     public TableView<UserTM> tblResult;
     public JFXCheckBox chkMakeAdmin;
     public ToggleGroup rbnGender;
@@ -175,6 +176,8 @@ public class ManageUsersAdminFormController {
         }
 
         try {
+            User existingUser = isUpdateUser ? userService.searchUserByNic(userNICToUpdate) : null;
+
             User user = new User(txtNIC.getText(),
                     txtFullName.getText(),
                     txtNameWithInitials.getText(),
@@ -184,9 +187,9 @@ public class ManageUsersAdminFormController {
                     txtContactNumber.getText(),
                     txtEmail.getText(),
                     chkMakeAdmin.isSelected(),
-                    !isUpdateUser ? null : userService.searchUser(userNICToUpdate).getLastLogin(),
-                    txtNIC.getText(),
-                    txtNIC.getText(),
+                    !isUpdateUser ? null : existingUser.getLastLogin(),
+                    !isUpdateUser ? txtNIC.getText() : existingUser.getUsername(),
+                    !isUpdateUser ? DigestUtils.sha256Hex(txtNIC.getText()) : existingUser.getPassword(),
                     true);
 
             if (isUpdateUser) {
@@ -326,55 +329,51 @@ public class ManageUsersAdminFormController {
     }
 
     public void btnDelete_OnAction(ActionEvent actionEvent) {
-        try {
-            userService.deleteUser(txtNIC.getText());
-            clearAll();
-            btnAdd.setDisable(true);
-            btnUpdate.setDisable(false);
-        } catch (NotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
-            btnClear.requestFocus();
-        }
+        updateUser(0);
     }
 
     public void btnDelete_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
-            try {
-                userService.deleteUser(txtNIC.getText());
-                btnAdd.setDisable(true);
-                btnUpdate.setDisable(false);
-            } catch (NotFoundException e) {
-                new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
-                btnClear.requestFocus();
-            }
+            updateUser(0);
         }
     }
 
-    public void btnResetPassword_OnAction(ActionEvent actionEvent) {
+    private void updateUser(int value) { // 0 - delete, 1 - reset password
         try {
-            String nic = txtNIC.getText().trim();
-            userService.resetAccount(nic);
-            lblDefaultUserName.setText("System generated username is \"" + nic + "\" and it is recommended to change the username after first login");
-            lblDefaultPassword.setText("System generated password is \"" + nic + "\" and it is recommended to change the password after first login");
+            User existingUser = userService.searchUserByNic(userNICToUpdate);
+
+            if (value == 0) {
+                existingUser.setAccountActive(false);
+            } else if (value == 1) {
+                existingUser.setUsername(existingUser.getNic());
+                existingUser.setPassword(DigestUtils.sha256Hex(existingUser.getNic()));
+                lblDefaultUserName.setText("System generated username is \"" + userNICToUpdate + "\" and it is recommended to change the username after first login");
+                lblDefaultPassword.setText("System generated password is \"" + userNICToUpdate + "\" and it is recommended to change the password after first login");
+            }
+            userService.updateUser(existingUser, userNICToUpdate);
+
+            btnAdd.setDisable(false);
+            btnUpdate.setDisable(true);
             btnResetPassword.setDisable(true);
+            loadAllUsers(txtSearch.getText());
+            String alertMessage = value == 0 ? "User have been deleted successfully" : "Username and password reset";
+            new Alert(Alert.AlertType.INFORMATION, "User have been deleted successfully", ButtonType.OK).showAndWait();
+            clearAll();
+            txtNIC.requestFocus();
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
-            btnClear.requestFocus();
+            btnDelete.requestFocus();
         }
+    }
+
+
+    public void btnResetPassword_OnAction(ActionEvent actionEvent) {
+        updateUser(1);
     }
 
     public void btnResetPassword_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
-            try {
-                String nic = txtNIC.getText().trim();
-                userService.resetAccount(nic);
-                lblDefaultUserName.setText("System generated username is \"" + nic + "\" and it is recommended to change the username after first login");
-                lblDefaultPassword.setText("System generated password is \"" + nic + "\" and it is recommended to change the password after first login");
-                btnResetPassword.setDisable(true);
-            } catch (NotFoundException e) {
-                new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
-                btnClear.requestFocus();
-            }
+            updateUser(1);
         }
     }
 

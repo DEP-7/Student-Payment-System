@@ -9,7 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.User;
-import service.UserService;
+import service.UserServiceRedisImpl;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -19,7 +19,7 @@ public class SettingsFormController {
     public TextField txtNewPassword;
     public TextField txtConfirmPassword;
 
-    UserService userService = new UserService();
+    UserServiceRedisImpl userService = new UserServiceRedisImpl();
     User loggedUser;
 
     public void initialize() {
@@ -81,7 +81,7 @@ public class SettingsFormController {
                     return false;
                 }
 
-                userService.searchUserByUsername(txtUsername.getText());
+                userService.searchUser(txtUsername.getText());
                 new Alert(Alert.AlertType.ERROR, "Username already exist", ButtonType.OK).show();
                 txtUsername.requestFocus();
                 return false;
@@ -117,12 +117,12 @@ public class SettingsFormController {
     }
 
     public void btnOk_OnAction(ActionEvent actionEvent) {
-        ((Stage)txtUsername.getScene().getWindow()).close();
+        ((Stage) txtUsername.getScene().getWindow()).close();
     }
 
     public void btnOk_OnKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
-            ((Stage)txtUsername.getScene().getWindow()).close();
+            ((Stage) txtUsername.getScene().getWindow()).close();
         }
     }
 }

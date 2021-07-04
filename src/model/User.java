@@ -1,9 +1,11 @@
 package model;
 
-import lk.ijse.crypto.DCCrypto;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
     private String nic;
@@ -37,6 +39,24 @@ public class User {
         this.username = username;
         this.password = password;
         this.accountActive = accountActive;
+    }
+
+    public static User fromMap(String username, Map<String, String> data) {
+        return new User(
+                data.get("nic"),
+                data.get("nameInFull"),
+                data.get("nameWithInitials"),
+                data.get("gender"),
+                LocalDate.parse(data.get("dateOfBirth")),
+                data.get("address"),
+                data.get("contactNumber"),
+                data.get("email"),
+                Boolean.parseBoolean(data.get("admin")),
+                data.get("lastLogin").equals("null") ? null : LocalDateTime.parse(data.get("lastLogin")),
+                username,
+                data.get("password"),
+                Boolean.parseBoolean(data.get("accountActive"))
+        );
     }
 
     public String getNic() {
@@ -128,11 +148,15 @@ public class User {
     }
 
     public boolean isPasswordCorrect(String passwordInput) {
-        return password.equals(DCCrypto.encrypt(passwordInput, passwordInput.charAt(0) + "" + passwordInput.charAt(passwordInput.length()-1) + passwordInput.length()*2));
+        return password.equals(DigestUtils.sha256Hex(passwordInput));
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
-        this.password = DCCrypto.encrypt(password, password.charAt(0) + "" + password.charAt(password.length()-1) + password.length()*2);
+        this.password = password;
     }
 
     public boolean isAccountActive() {
@@ -141,6 +165,23 @@ public class User {
 
     public void setAccountActive(boolean accountActive) {
         this.accountActive = accountActive;
+    }
+
+    public Map<String, String> toMap() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("nic", nic);
+        map.put("nameInFull", nameInFull);
+        map.put("nameWithInitials", nameWithInitials);
+        map.put("gender", gender);
+        map.put("dateOfBirth", dateOfBirth + "");
+        map.put("address", address);
+        map.put("contactNumber", contactNumber);
+        map.put("email", email);
+        map.put("admin", admin + "");
+        map.put("lastLogin", lastLogin + "");
+        map.put("password", password);
+        map.put("accountActive", accountActive + "");
+        return map;
     }
 
     @Override

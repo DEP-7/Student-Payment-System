@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MainFormController {
+    private final ArrayList<Parent> formArray = new ArrayList<>();
     public AnchorPane pneItemManageStudents;
     public AnchorPane pneItemAddNewPayment;
     public AnchorPane pneItemManageBatches;
@@ -51,9 +52,7 @@ public class MainFormController {
     public Label lblTitle;
     public Label lblTime;
     public VBox pneItemContainer;
-
     private User loggedUser;
-    private final ArrayList<Parent> formArray = new ArrayList<>();
 
     public void initialize() throws IOException {
         startClock();

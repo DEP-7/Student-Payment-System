@@ -267,7 +267,7 @@
             <Image url="@assets/icons/Icon_Left_Arrow.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblMaximumDueDate" layoutX="286.0" layoutY="791.0" prefHeight="40.0" prefWidth="80.0" text="Maximum Dates 34" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="697.0">
+      <Label fx:id="lblMaximumDueDate" layoutX="286.0" layoutY="791.0" prefHeight="40.0" prefWidth="80.0" text="Maximum 14 dates" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="697.0">
          <font>
             <Font size="14.0" />
          </font>

@@ -71,7 +71,7 @@ public class ManageBatchesAdminFormController {
 
         cmbCourseId.valueProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (newValue==null || newValue.isEmpty()) {
+            if (newValue == null || newValue.isEmpty()) {
                 txtBatchNumber.clear();
                 return;
             }
