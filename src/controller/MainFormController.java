@@ -1,11 +1,14 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -35,6 +38,7 @@ public class MainFormController {
     public AnchorPane pneItemViewBatches;
     public AnchorPane pneItemManageUsers;
     public AnchorPane pneItemDashboard;
+    public AnchorPane pneSettings;
     public AnchorPane pneStage;
     public AnchorPane pneClock;
     public JFXRippler rprManageStudents;
@@ -49,12 +53,16 @@ public class MainFormController {
     public ImageView imgSecondsHand;
     public ImageView imgMinutesHand;
     public ImageView imgHoursHand;
+    public JFXButton btnSettings;
+    public JFXButton btnLogout;
+    public Label lblUsername;
     public Label lblTitle;
     public Label lblTime;
     public VBox pneItemContainer;
     private User loggedUser;
 
     public void initialize() throws IOException {
+        pneSettings.setVisible(false);
         startClock();
 
         rprManageStudents.setControl(pneItemManageStudents);
@@ -91,6 +99,7 @@ public class MainFormController {
 
         Platform.runLater(() -> {
             loggedUser = (User) pneStage.getScene().getWindow().getUserData();
+            lblUsername.setText(loggedUser.getNameWithInitials());
 
             rprViewCourses.setVisible(!loggedUser.isAdmin());
             rprManageCourses.setVisible(loggedUser.isAdmin());
@@ -104,6 +113,22 @@ public class MainFormController {
             if (loggedUser.getUsername().equals(loggedUser.getNic()) && loggedUser.isPasswordCorrect(loggedUser.getNic())) {
                 // TODO: Guidelines to change password
             }
+
+            btnSettings.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (oldValue) {
+                    if (!btnLogout.isFocused()) {
+                        setVisibleSettingsPane(false);
+                    }
+                }
+            });
+
+            btnLogout.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (oldValue) {
+                    if (!btnSettings.isFocused()) {
+                        setVisibleSettingsPane(false);
+                    }
+                }
+            });
         });
     }
 
@@ -158,20 +183,6 @@ public class MainFormController {
         transition.play();
 
         pneClock.setVisible(pneStage.getChildren().get(0) == formArray.get(0));
-    }
-
-    public void imgSettings_OnMouseClicked(MouseEvent mouseEvent) throws IOException {
-        Stage settingsStage = new Stage();
-        settingsStage.setUserData(loggedUser);
-        Parent load = FXMLLoader.load(this.getClass().getResource("../view/SettingsForm.fxml"));
-        Scene settingScene = new Scene(load);
-        settingsStage.setScene(settingScene);
-        settingsStage.setTitle("Settings");
-        settingsStage.initModality(Modality.WINDOW_MODAL);
-        settingsStage.initOwner(pneStage.getScene().getWindow());
-        settingsStage.setResizable(false);
-        settingsStage.centerOnScreen();
-        settingsStage.show();
     }
 
     public void pneItemDashbord_OnKeyReleased(KeyEvent keyEvent) {
@@ -332,5 +343,84 @@ public class MainFormController {
         }));
         t1.setCycleCount(Animation.INDEFINITE);
         t1.play();
+    }
+
+    public void imgSettings_OnMouseClicked(MouseEvent mouseEvent) {
+        setVisibleSettingsPane(!pneSettings.isVisible());
+        btnSettings.requestFocus();
+    }
+
+    private void setVisibleSettingsPane(boolean value) {
+        double paneHeight = pneSettings.getHeight();
+        TranslateTransition paneAppearAnimation = new TranslateTransition(new Duration(100),pneSettings);
+        paneAppearAnimation.setFromY(value?-paneHeight:0);
+        paneAppearAnimation.setToY(value?0:-paneHeight);
+        paneAppearAnimation.play();
+
+        if (value) {
+            pneSettings.setVisible(true);
+        }else {
+            paneAppearAnimation.setOnFinished(event -> {
+                pneSettings.setVisible(false);
+            });
+        }
+    }
+
+    public void btnLogout_OnAction(ActionEvent actionEvent) {
+        logOut();
+    }
+
+    public void btnLogout_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
+            logOut();
+        }
+    }
+
+    private void logOut() {
+        Stage primaryStage = (Stage) pneItemDashboard.getScene().getWindow();
+        try {
+            Parent root = FXMLLoader.load(this.getClass().getResource("../view/LoginForm.fxml"));
+            primaryStage.setMaximized(false);
+            primaryStage.setMinWidth(0);
+            primaryStage.setMinHeight(0);
+            Scene loginScene = new Scene(root,450,440);
+            primaryStage.setTitle("Login");
+            primaryStage.setScene(loginScene);
+            Platform.runLater(() -> {
+                primaryStage.sizeToScene();
+                primaryStage.centerOnScreen();
+            });
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Loading error. Please contact the developer").show();
+        }
+    }
+
+    public void btnSettings_OnAction(ActionEvent actionEvent) {
+        showSettingsWindow();
+    }
+
+    public void btnSettings_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER || keyEvent.getCode() == KeyCode.SPACE) {
+            showSettingsWindow();
+        }
+    }
+
+    private void showSettingsWindow() {
+        Stage settingsStage = new Stage();
+        settingsStage.setUserData(loggedUser);
+        try {
+            Parent load = FXMLLoader.load(this.getClass().getResource("../view/SettingsForm.fxml"));
+            Scene settingScene = new Scene(load);
+            settingsStage.setScene(settingScene);
+            settingsStage.setTitle("Settings");
+            settingsStage.initModality(Modality.WINDOW_MODAL);
+            settingsStage.initOwner(pneStage.getScene().getWindow());
+            settingsStage.setResizable(false);
+            settingsStage.centerOnScreen();
+            settingsStage.show();
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Loading error. Please contact the developer").show();
+        }
+
     }
 }

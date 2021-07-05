@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRippler?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -13,6 +14,56 @@
 <AnchorPane prefHeight="944.0" prefWidth="1830.0" style="-fx-background-color: #404040;" stylesheets="@css/MainFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
       <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="881.0" prefWidth="1526.0" style=": #404040;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
+      <AnchorPane fx:id="pneClock" layoutX="1325.0" layoutY="44.0" prefHeight="263.0" prefWidth="263.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <ImageView fitHeight="263.0" fitWidth="263.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@assets/clockitems/Clock_Frame1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgHoursHand" fitHeight="171.0" fitWidth="177.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/clockitems/Hour_Hand.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgSecondsHand" fitHeight="171.0" fitWidth="193.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/clockitems/Seconds_Hand.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMinutesHand" fitHeight="143.0" fitWidth="151.0" layoutX="60.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/clockitems/Minutes_Hand.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pneSettings" layoutX="96.0" prefHeight="277.0" prefWidth="200.0" style="-fx-background-color: #898888FF; -fx-background-radius: 15;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="64.0">
+         <children>
+            <JFXButton fx:id="btnSettings" defaultButton="true" layoutX="20.0" layoutY="172.0" onAction="#btnSettings_OnAction" onKeyReleased="#btnSettings_OnKeyReleased" prefHeight="36.0" prefWidth="186.0" style="-fx-background-color: #545454;" text="Settings" textFill="WHITE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnLogout" defaultButton="true" layoutX="10.0" layoutY="211.0" onAction="#btnLogout_OnAction" onKeyReleased="#btnLogout_OnKeyReleased" prefHeight="36.0" prefWidth="186.0" style="-fx-background-color: #545454;" text="Logout" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="112.0" fitWidth="117.0" layoutX="44.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/profileimages/DC_Profile_Image.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblUsername" alignment="CENTER" layoutX="82.0" layoutY="139.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="140.0" />
+         </children>
+      </AnchorPane>
       <AnchorPane layoutX="304.0" layoutY="6.0" maxHeight="1594.0" prefHeight="64.0" prefWidth="1594.0" style="-fx-background-color: #575757;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label fx:id="lblTitle" layoutX="72.0" layoutY="20.0" text="Dashboard" textFill="WHITE" AnchorPane.leftAnchor="376.0" AnchorPane.topAnchor="20.0">
@@ -212,29 +263,5 @@
             <Image url="@assets/icons/Icon_IJSE.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="pneClock" layoutX="1325.0" layoutY="44.0" prefHeight="263.0" prefWidth="263.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="80.0">
-         <children>
-            <ImageView fitHeight="263.0" fitWidth="263.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <image>
-                  <Image url="@assets/clockitems/Clock_Frame1.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imgHoursHand" fitHeight="171.0" fitWidth="177.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/clockitems/Hour_Hand.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imgSecondsHand" fitHeight="171.0" fitWidth="193.0" layoutX="46.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/clockitems/Seconds_Hand.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imgMinutesHand" fitHeight="143.0" fitWidth="151.0" layoutX="60.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/clockitems/Minutes_Hand.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

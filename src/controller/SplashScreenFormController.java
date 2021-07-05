@@ -59,7 +59,7 @@ public class SplashScreenFormController {
     }
 
     private void spinUpRedisServerInstance() throws Exception {
-        String[] commands = {"redis-server", "redis.conf", "--requirepass", "redis"};
+        String[] commands = {"redis-server", "redis.conf", "--requirepass", "ecdba0e2f6615760b196edd49a2f1bf0d0d6dfccbf0ad8fe9ee55722dcca42a4"};
 
         Process redisServer = Runtime.getRuntime().exec(commands);
         int exitCode = redisServer.waitFor();

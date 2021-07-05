@@ -1,5 +1,6 @@
 package util;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import redis.clients.jedis.Jedis;
 
 public class JedisClient {
@@ -8,7 +9,7 @@ public class JedisClient {
 
     private JedisClient() {
         client = new Jedis("localhost", 9090);
-        client.auth("redis");
+        client.auth(DigestUtils.sha256Hex("DC"));
     }
 
     public static JedisClient getInstance() {

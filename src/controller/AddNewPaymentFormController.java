@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -39,6 +40,7 @@ public class AddNewPaymentFormController {
     public final ReceiptServiceRedisImpl receiptService = new ReceiptServiceRedisImpl();
     public final StudentServiceRedisImpl studentService = new StudentServiceRedisImpl();
     private final BigDecimal registrationFee = new BigDecimal(5000);
+    public JFXRadioButton rbnCustomText;
     public JFXTextField txtNameWithInitials;
     public JFXTextField txtContactNumber;
     public JFXTextField txtBatchNumber;
@@ -257,11 +259,13 @@ public class AddNewPaymentFormController {
         if (txtAmountReceived.getText().isEmpty()) {
             txtBalanceAmount.setText(txtTotalAmount.getText());
         } else {
-            BigDecimal totalAmount = new BigDecimal(txtTotalAmount.getText().replaceAll(",", ""));
+            BigDecimal totalAmount = new BigDecimal(txtTotalAmount.getText().isEmpty()?"0":txtTotalAmount.getText().replaceAll(",", ""));
             BigDecimal amountReceived = new BigDecimal(txtAmountReceived.getText().replaceAll(",", ""));
 
-            if (totalAmount.compareTo(amountReceived) < 0) {
+            if (totalAmount.compareTo(amountReceived) < 0 && !rbnCustomText.isSelected()) {
                 txtBalanceAmount.setText("Invalid Input");
+            }else if (rbnCustomText.isSelected()) {
+                txtBalanceAmount.setText("0.00");
             } else {
                 txtBalanceAmount.setText(String.format("%,.2f", totalAmount.subtract(amountReceived)));
             }
