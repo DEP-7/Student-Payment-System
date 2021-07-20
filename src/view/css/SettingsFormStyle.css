@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Dhanushka Chandimal. All rights reserved.
+ * Licensed under the MIT License. See License in the project root for license information.
+ */
+
 .text-field{
     -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
     -fx-text-fill: white;

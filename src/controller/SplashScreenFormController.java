@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Dhanushka Chandimal. All rights reserved.
+ * Licensed under the MIT License. See License in the project root for license information.
+ */
+
 package controller;
 
 import com.jfoenix.controls.JFXProgressBar;
@@ -12,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 
 public class SplashScreenFormController {
@@ -60,6 +66,10 @@ public class SplashScreenFormController {
 
     private void spinUpRedisServerInstance() throws Exception {
         String[] commands = {"redis-server", "redis.conf", "--requirepass", "ecdba0e2f6615760b196edd49a2f1bf0d0d6dfccbf0ad8fe9ee55722dcca42a4"};
+        File file = new File("redis.conf");
+        if (!file.exists()) {
+            throw new Exception("Missing redis.conf");
+        }
 
         Process redisServer = Runtime.getRuntime().exec(commands);
         int exitCode = redisServer.waitFor();

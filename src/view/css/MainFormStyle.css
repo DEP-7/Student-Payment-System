@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Dhanushka Chandimal. All rights reserved.
+ * Licensed under the MIT License. See License in the project root for license information.
+ */
+
 .menu:hover{
     -fx-border-color: #6a4fcb;
     -fx-background-color: #6a6a6a;

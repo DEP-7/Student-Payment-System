@@ -15,6 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<!--
+  ~ Copyright (c) Dhanushka Chandimal. All rights reserved.
+  ~ Licensed under the MIT License. See License in the project root for license information.
+  -->
+
 <AnchorPane accessibleText="View Payments" prefHeight="955.0" prefWidth="1555.0" style="-fx-background-color: #404040;" stylesheets="@css/ViewPaymentsFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewPaymentsFormController">
     <children>
         <AnchorPane layoutX="154.0" layoutY="21.0" prefHeight="66.0" prefWidth="847.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="19.0">

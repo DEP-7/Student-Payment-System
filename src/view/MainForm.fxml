@@ -11,6 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<!--
+  ~ Copyright (c) Dhanushka Chandimal. All rights reserved.
+  ~ Licensed under the MIT License. See License in the project root for license information.
+  -->
+
 <AnchorPane prefHeight="944.0" prefWidth="1830.0" style="-fx-background-color: #404040;" stylesheets="@css/MainFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
    <children>
       <AnchorPane fx:id="pneStage" layoutX="304.0" layoutY="64.0" prefHeight="881.0" prefWidth="1526.0" style=": #404040;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
