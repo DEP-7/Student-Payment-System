@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Batch {
+public class Batch implements Serializable {
     private int batchNumber;
     private Course course;
     private LocalDate startedDate;

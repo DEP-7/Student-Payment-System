@@ -18,6 +18,7 @@ import service.BatchService;
 import service.CourseService;
 import service.StudentService;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -242,7 +243,7 @@ public class ManageStudentsFormController {
                     txtNameWithInitials.getText(),
                     ((RadioButton) (rbnGender.getSelectedToggle())).getText(),
                     LocalDate.parse(txtDateOfBirth.getText()),
-                    imgStudentImage.getImage(),
+                    "",//TODO: Set image path here
                     txtHighestEducationalQualification.getText(),
                     txtAddress.getText(),
                     txtContactNumber.getText(),
@@ -262,17 +263,17 @@ public class ManageStudentsFormController {
             clearAll();
             btnAdd.setDisable(false);
             btnUpdate.setDisable(true);
-            txtNIC.requestFocus();
             if (mainFormController.pneStage.getUserData() != null) {
                 mainFormController.load(1, "Dashboard / Add New Payment");
             }
         } catch (DuplicateEntryException e) {
             new Alert(Alert.AlertType.ERROR, "Student already exist for this NIC " + txtNIC.getText()).show();
-            txtNIC.requestFocus();
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
-            txtNIC.requestFocus();
+        } catch (FailedOperationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
         }
+        txtNIC.requestFocus();
     }
 
     public void btnClear_OnAction(ActionEvent actionEvent) {

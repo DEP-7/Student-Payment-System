@@ -15,10 +15,10 @@ public class ReceiptService {
     public static ArrayList<Receipt> receiptDB = new ArrayList();
 
     static {
-        receiptDB.add(new Receipt(1, StudentService.studentDB.get(0), "Registration Fee", new CashPayment(), new BigDecimal("50000"), new BigDecimal("0"), null, LocalDate.of(2021, 5, 2), "", LocalDate.of(2021, 5, 2), UserService.usersDB.get(0), null));
-        receiptDB.add(new Receipt(2, StudentService.studentDB.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("20000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
-        receiptDB.add(new Receipt(3, StudentService.studentDB.get(0), "Installment", new OnlinePayment("212536542452"), new BigDecimal("10000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
-        receiptDB.add(new Receipt(4, StudentService.studentDB.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("5000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
+        receiptDB.add(new Receipt(1, StudentService.studentList.get(0), "Registration Fee", new CashPayment(), new BigDecimal("50000"), new BigDecimal("0"), null, LocalDate.of(2021, 5, 2), "", LocalDate.of(2021, 5, 2), UserService.usersDB.get(0), null));
+        receiptDB.add(new Receipt(2, StudentService.studentList.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("20000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
+        receiptDB.add(new Receipt(3, StudentService.studentList.get(0), "Installment", new OnlinePayment("212536542452"), new BigDecimal("10000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
+        receiptDB.add(new Receipt(4, StudentService.studentList.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("5000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
     }
 
     public void addReceipt(Receipt receipt) throws DuplicateEntryException {

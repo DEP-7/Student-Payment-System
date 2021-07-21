@@ -2,10 +2,11 @@ package model;
 
 import model.sub.PaymentMethod;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Receipt {
+public class Receipt implements Serializable {
     private long receiptNumber;
     private Student student;
     private String paymentDescription;

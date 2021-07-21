@@ -2,41 +2,52 @@ package service;
 
 import model.Student;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
 
+import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentService {
-    public static ArrayList<Student> studentDB = new ArrayList();
+    private static final File studentDBFile = new File("sps-students.db");
+    public static ArrayList<Student> studentList = new ArrayList();
 
     static {
-        studentDB.add(new Student("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), null, "A/L passed", "Handiya Kade, Deeyagaha, Matara", "0716520080", "dhanushkachandimal11@gmail.com", CourseService.courseDB.get(2), 1, new BigDecimal("20")));
-        studentDB.add(new Student("199316300377", "Prasad Viduranha", "P.Viduranga", "Male", LocalDate.of(1995, 12, 20), null, "BSc", "Galle", "0772565368", "prasad@gmail.com", CourseService.courseDB.get(0), 2, new BigDecimal("0")));
+        readDataFromFile();
     }
 
-    public void addStudent(Student student) throws DuplicateEntryException {
+    public void addStudent(Student student) throws DuplicateEntryException, FailedOperationException {
         if (getStudent(student.getNic()) != null) {
             throw new DuplicateEntryException();
         }
-        studentDB.add(student);
+        studentList.add(student);
+        if (!writeDataToFile()) {
+            throw new FailedOperationException();
+        }
     }
 
-    public void updateStudent(Student studentToUpdate, String previousNIC) throws NotFoundException {
+    public void updateStudent(Student studentToUpdate, String previousNIC) throws NotFoundException, FailedOperationException {
         Student studentBeforeUpdate = searchStudent(previousNIC);
-        studentDB.set(studentDB.indexOf(studentBeforeUpdate), studentToUpdate);
+        studentList.set(studentList.indexOf(studentBeforeUpdate), studentToUpdate);
+        if (!writeDataToFile()) {
+            throw new FailedOperationException();
+        }
     }
 
-    public void deleteStudent(String nic) throws NotFoundException {
+    public void deleteStudent(String nic) throws NotFoundException, FailedOperationException {
         // TODO : Students without any single payments can delete. So check payment details before delete
         Student studentToDelete = searchStudent(nic);
-        studentDB.remove(studentToDelete);
+        studentList.remove(studentToDelete);
+        if (!writeDataToFile()) {
+            throw new FailedOperationException();
+        }
     }
 
     public List<Student> searchAllStudents() {
-        return studentDB;
+        return studentList;
     }
 
     public Student searchStudent(String nic) throws NotFoundException {
@@ -55,7 +66,7 @@ public class StudentService {
         keyword = keyword.toLowerCase();
         List<Student> searchResult = new ArrayList();
 
-        for (Student student : studentDB) {
+        for (Student student : studentList) {
             if (student.getNic().toLowerCase().contains(keyword) ||
                     student.getNameInFull().toLowerCase().contains(keyword) ||
                     student.getNameWithInitials().toLowerCase().contains(keyword) ||
@@ -74,11 +85,43 @@ public class StudentService {
     }
 
     private Student getStudent(String nic) {
-        for (Student student : studentDB) {
+        for (Student student : studentList) {
             if (student.getNic().equals(nic)) {
                 return student;
             }
         }
         return null;
+    }
+
+    private boolean writeDataToFile(){
+        try (FileOutputStream fos = new FileOutputStream(studentDBFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+
+            oos.writeObject(studentList);
+            return true;
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static void readDataFromFile() {
+
+        if (!studentDBFile.exists()) return;
+
+        try (FileInputStream fis = new FileInputStream(studentDBFile);
+             ObjectInputStream oos = new ObjectInputStream(fis)) {
+
+            studentList = (ArrayList<Student>) oos.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            if (e instanceof EOFException) {
+                studentDBFile.delete();
+            }else {
+                e.printStackTrace();
+            }
+        }
     }
 }

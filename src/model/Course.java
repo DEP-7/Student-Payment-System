@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Course {
+public class Course implements Serializable {
     private String courseID;
     private String courseName;
     private double courseFee;

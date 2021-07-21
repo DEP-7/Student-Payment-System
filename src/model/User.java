@@ -2,10 +2,11 @@ package model;
 
 import lk.ijse.crypto.DCCrypto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class User {
+public class User implements Serializable {
     private String nic;
     private String nameInFull;
     private String nameWithInitials;

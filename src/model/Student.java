@@ -1,17 +1,16 @@
 package model;
 
-import javafx.scene.image.Image;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Student {
+public class Student implements Serializable {
     private String nic;
     private String nameInFull;
     private String nameWithInitials;
     private String gender;
     private LocalDate dateOfBirth;
-    private Image image;
+    private String image;
     private String eduQualification;
     private String address;
     private String contactNumber;
@@ -20,10 +19,12 @@ public class Student {
     private int batchNumber;
     private BigDecimal discount;
 
+    private static final long serialVersionUID = -6580256395854306190L;
+
     public Student() {
     }
 
-    public Student(String nic, String nameInFull, String nameWithInitials, String gender, LocalDate dateOfBirth, Image image, String eduQualification, String address, String contactNumber, String email, Course course, int batchNumber, BigDecimal discount) {
+    public Student(String nic, String nameInFull, String nameWithInitials, String gender, LocalDate dateOfBirth, String image, String eduQualification, String address, String contactNumber, String email, Course course, int batchNumber, BigDecimal discount) {
         this.nic = nic;
         this.nameInFull = nameInFull;
         this.nameWithInitials = nameWithInitials;
@@ -79,11 +80,11 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
