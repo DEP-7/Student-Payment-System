@@ -4,19 +4,20 @@ import model.Student;
 import service.exception.DuplicateEntryException;
 import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
+import util.FileIO;
 
-import java.io.*;
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentService {
     private static final File studentDBFile = new File("sps-students.db");
     public static ArrayList<Student> studentList = new ArrayList();
+    private static FileIO fileIO = new FileIO();
 
     static {
-        readDataFromFile();
+        ArrayList arrayList = fileIO.readDataFromFile(studentList, studentDBFile);
+        if (arrayList != null) studentList = arrayList;
     }
 
     public void addStudent(Student student) throws DuplicateEntryException, FailedOperationException {
@@ -24,7 +25,8 @@ public class StudentService {
             throw new DuplicateEntryException();
         }
         studentList.add(student);
-        if (!writeDataToFile()) {
+        if (!fileIO.writeDataToFile(studentList, studentDBFile)) {
+            studentList.remove(student);
             throw new FailedOperationException();
         }
     }
@@ -32,7 +34,8 @@ public class StudentService {
     public void updateStudent(Student studentToUpdate, String previousNIC) throws NotFoundException, FailedOperationException {
         Student studentBeforeUpdate = searchStudent(previousNIC);
         studentList.set(studentList.indexOf(studentBeforeUpdate), studentToUpdate);
-        if (!writeDataToFile()) {
+        if (!fileIO.writeDataToFile(studentList, studentDBFile)) {
+            studentList.set(studentList.indexOf(studentToUpdate), studentBeforeUpdate);
             throw new FailedOperationException();
         }
     }
@@ -41,7 +44,8 @@ public class StudentService {
         // TODO : Students without any single payments can delete. So check payment details before delete
         Student studentToDelete = searchStudent(nic);
         studentList.remove(studentToDelete);
-        if (!writeDataToFile()) {
+        if (!fileIO.writeDataToFile(studentList, studentDBFile)) {
+            studentList.add(studentToDelete);
             throw new FailedOperationException();
         }
     }
@@ -91,37 +95,5 @@ public class StudentService {
             }
         }
         return null;
-    }
-
-    private boolean writeDataToFile(){
-        try (FileOutputStream fos = new FileOutputStream(studentDBFile);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-
-            oos.writeObject(studentList);
-            return true;
-
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private static void readDataFromFile() {
-
-        if (!studentDBFile.exists()) return;
-
-        try (FileInputStream fis = new FileInputStream(studentDBFile);
-             ObjectInputStream oos = new ObjectInputStream(fis)) {
-
-            studentList = (ArrayList<Student>) oos.readObject();
-
-        } catch (IOException | ClassNotFoundException e) {
-
-            if (e instanceof EOFException) {
-                studentDBFile.delete();
-            }else {
-                e.printStackTrace();
-            }
-        }
     }
 }

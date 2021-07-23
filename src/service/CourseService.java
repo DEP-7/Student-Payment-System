@@ -2,42 +2,55 @@ package service;
 
 import model.Course;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
+import util.FileIO;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseService {
 
-    public static ArrayList<Course> courseDB = new ArrayList();
+    private static final File courseDBFile = new File("sps-courses.db");
+    public static ArrayList<Course> courseList = new ArrayList();
+    private static FileIO fileIO = new FileIO();
 
     static {
-        courseDB.add(new Course("DEP", "Direct Entry Program", 100000, 2, 30, "4 - Months", "2 - Weeks", "2 - Montshs", "Available", null, " (A) 3 or 4 years Bachelor Degree in any stream which includes 3 main IT subjects OR,\n" + "\n" + "(B) HND in Computing (or IT related) OR,\n" + "\n" + "(C) Any equivalent or higher education qualification acceptable by the IJSE (The candidate will have to face an interview in order to be selected to the programme)", "Lecturer Name : Mr. Ranjith Suranga\nContact : 071 000 0000", LocalDate.of(2015, 4, 11)));
-        courseDB.add(new Course("CMJD", "Comprehensive Master Java Developer", 150000, 3, -1, "12 - Months", "2 - Weeks", "4 - Montshs", "Available", null, " (A) Being an undergraduate in any stream in private or government university. OR,\n" + "\n" + "(B) Being a IT Professional who needs to get started with Java. OR,\n" + "\n" + "(C) Being a Java Enthusiasts ", "", LocalDate.of(2010, 1, 4)));
-        courseDB.add(new Course("GDSE", "Graduate Diploma in Software Engineering", 200000, 4, -1, "24 - Months", "2 - Weeks", "6 - Months", "Not Available", null, " (A) 3 Pass Grades at G.C.E. Advanced Level Examination in any stream of study. OR,\n" + "\n" + "(B) 2 Pass Grades for Mathematics and English at G.C.E. Ordinary Level Examination + Pass the Aptitude Test. OR,\n" + "\n" + "(C) Any equivalent or higher qualification acceptable by the IJSE (The candidate will have to face an interview in order to be selected to the programme)", "raduate Diploma in Software Engineering also known as GDSE is the best choice for your Higher Eduction which gives you a rich Academic and Professional experience. GDSE is the most secure and reliable way in Sri Lanka to become a Software Engineer with a Degree and a High-salary.", LocalDate.of(2010, 10, 4)));
+        ArrayList arrayList = fileIO.readDataFromFile(courseList, courseDBFile);
+        if (arrayList != null) courseList = arrayList;
     }
 
-    public void addCourse(Course course) throws DuplicateEntryException {
+    public void addCourse(Course course) throws DuplicateEntryException, FailedOperationException {
         if (getCourse(course.getCourseID()) != null) {
             throw new DuplicateEntryException();
         }
-        courseDB.add(course);
+        courseList.add(course);
+        if (!fileIO.writeDataToFile(courseList, courseDBFile)) {
+            throw new FailedOperationException();
+        }
     }
 
-    public void updateCourse(Course courseToUpdate) throws NotFoundException {
+    public void updateCourse(Course courseToUpdate) throws NotFoundException, FailedOperationException {
         Course courseBeforeUpdate = searchCourse(courseToUpdate.getCourseID());
-        courseDB.set(courseDB.indexOf(courseBeforeUpdate), courseToUpdate);
+        courseList.set(courseList.indexOf(courseBeforeUpdate), courseToUpdate);
+        if (!fileIO.writeDataToFile(courseList, courseDBFile)) {
+            throw new FailedOperationException();
+        }
     }
 
-    public void deleteCourse(String courseId) throws NotFoundException {
+    public void deleteCourse(String courseId) throws NotFoundException, FailedOperationException {
         // TODO : Can only delete null courses
         Course courseToDelete = searchCourse(courseId);
-        courseDB.remove(courseToDelete);
+        courseList.remove(courseToDelete);
+        if (!fileIO.writeDataToFile(courseList, courseDBFile)) {
+            throw new FailedOperationException();
+        }
     }
 
     public List<Course> searchAllCourses() {
-        return courseDB;
+        return courseList;
     }
 
     public Course searchCourse(String courseId) throws NotFoundException {
@@ -56,7 +69,7 @@ public class CourseService {
         keyword = keyword.toLowerCase();
         List<Course> searchResult = new ArrayList();
 
-        for (Course course : courseDB) {
+        for (Course course : courseList) {
             if (course.getCourseID().toLowerCase().contains(keyword) ||
                     course.getCourseName().toLowerCase().contains(keyword) ||
                     Integer.toString(course.getNumberOfInstallments()).contains(keyword) ||
@@ -74,7 +87,7 @@ public class CourseService {
     }
 
     private Course getCourse(String courseId) {
-        for (Course course : courseDB) {
+        for (Course course : courseList) {
             if (course.getCourseID().equals(courseId)) {
                 return course;
             }

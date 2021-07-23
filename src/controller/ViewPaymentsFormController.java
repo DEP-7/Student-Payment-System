@@ -20,6 +20,7 @@ import service.CourseService;
 import service.ReceiptService;
 import service.StudentService;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -216,6 +217,9 @@ public class ViewPaymentsFormController {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
             txtNIC.requestFocus();
         } catch (ParseException e) {
+        } catch (FailedOperationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
+            txtNIC.requestFocus();
         }
     }
 

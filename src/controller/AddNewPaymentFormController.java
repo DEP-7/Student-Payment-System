@@ -18,6 +18,7 @@ import service.ReceiptService;
 import service.StudentService;
 import service.UserService;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -159,7 +160,7 @@ public class AddNewPaymentFormController {
 
             receiptService.addReceipt(receipt);
             new Alert(Alert.AlertType.INFORMATION, "Payment have been added successfully", ButtonType.OK).showAndWait();
-            txtReceiptNumber.setText(String.format("RO6%d",receiptService.getLastReceiptNumber()+1));
+            txtReceiptNumber.setText(String.format("RO6%d", receiptService.getLastReceiptNumber() + 1));
             clearAll();
             txtNIC.requestFocus();
         } catch (DuplicateEntryException e) {
@@ -169,6 +170,9 @@ public class AddNewPaymentFormController {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
             txtNIC.requestFocus();
         } catch (ParseException e) {
+        } catch (FailedOperationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
+            txtNIC.requestFocus();
         }
     }
 

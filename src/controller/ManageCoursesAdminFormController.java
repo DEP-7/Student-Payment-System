@@ -11,6 +11,7 @@ import model.Course;
 import model.CourseTM;
 import service.CourseService;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -215,6 +216,9 @@ public class ManageCoursesAdminFormController {
             txtCourseID.requestFocus();
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code course 001").show();
+            txtCourseName.requestFocus();
+        } catch (FailedOperationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
             txtCourseName.requestFocus();
         }
     }

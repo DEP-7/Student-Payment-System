@@ -15,6 +15,7 @@ import model.Course;
 import service.BatchService;
 import service.CourseService;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -71,7 +72,7 @@ public class ManageBatchesAdminFormController {
 
         cmbCourseId.valueProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (newValue.isEmpty()) {
+            if (newValue == null || newValue.isEmpty()) {
                 txtBatchNumber.clear();
                 return;
             }
@@ -170,14 +171,14 @@ public class ManageBatchesAdminFormController {
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).show();
             clearAll();
             loadAllBatches(txtSearch.getText(), chkOngoingBatches.isSelected());
-            cmbCourseId.requestFocus();
         } catch (DuplicateEntryException e) {
             new Alert(Alert.AlertType.ERROR, "Course already exist").show();
-            cmbCourseId.requestFocus();
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC\nError code batch 003").show();
-            cmbCourseId.requestFocus();
+        } catch (FailedOperationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
         }
+        cmbCourseId.requestFocus();
     }
 
     private void clearAll() {

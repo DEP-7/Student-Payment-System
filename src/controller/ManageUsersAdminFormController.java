@@ -11,6 +11,7 @@ import model.User;
 import model.UserTM;
 import service.UserService;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
 import util.MaterialUI;
 
@@ -201,14 +202,14 @@ public class ManageUsersAdminFormController {
             String alertMessage = isUpdateUser ? "User have been updated successfully" : "User have been added successfully";
             new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK).showAndWait();
             clearAll();
-            txtNIC.requestFocus();
         } catch (DuplicateEntryException e) {
             new Alert(Alert.AlertType.ERROR, "User already exist for this NIC " + txtNIC.getText()).show();
-            txtNIC.requestFocus();
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
-            txtNIC.requestFocus();
+        } catch (FailedOperationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
         }
+        txtNIC.requestFocus();
     }
 
     private void trimTextFields(TextField... textFields) {
@@ -334,6 +335,9 @@ public class ManageUsersAdminFormController {
         } catch (NotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
             btnClear.requestFocus();
+        } catch (FailedOperationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
+            btnDelete.requestFocus();
         }
     }
 
@@ -346,6 +350,9 @@ public class ManageUsersAdminFormController {
             } catch (NotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, "Something terribly wrong. Please contact DC").show();
                 btnClear.requestFocus();
+            } catch (FailedOperationException e) {
+                new Alert(Alert.AlertType.ERROR, "Failed to sync the data with the database, try again").show();
+                btnDelete.requestFocus();
             }
         }
     }

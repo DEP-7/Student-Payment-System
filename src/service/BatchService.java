@@ -3,57 +3,63 @@ package service;
 import model.Batch;
 import model.Course;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
+import util.FileIO;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static service.CourseService.courseDB;
+import static service.CourseService.courseList;
 
 public class BatchService {
 
-    public static ArrayList<Batch> batchesDB = new ArrayList();
+    public static ArrayList<Batch> batchList = new ArrayList();
+    private static final File batchDBFile = new File("sps-batches.db");
+    private static FileIO fileIO = new FileIO();
 
     static {
-        batchesDB.add(new Batch(1, courseDB.get(0), LocalDate.of(2015, 1, 7), LocalDate.of(2015, 5, 7), "First batch"));
-        batchesDB.add(new Batch(2, courseDB.get(0), LocalDate.of(2016, 1, 7), LocalDate.of(2016, 5, 7), "Second batch"));
-        batchesDB.add(new Batch(3, courseDB.get(0), LocalDate.of(2017, 1, 7), LocalDate.of(2017, 5, 7), "Third batch"));
-        batchesDB.add(new Batch(4, courseDB.get(0), LocalDate.of(2018, 1, 7), LocalDate.of(2018, 5, 7), ""));
-        batchesDB.add(new Batch(5, courseDB.get(0), LocalDate.of(2019, 1, 7), LocalDate.of(2019, 5, 7), ""));
-        batchesDB.add(new Batch(6, courseDB.get(0), LocalDate.of(2020, 1, 7), LocalDate.of(2020, 5, 7), ""));
-        batchesDB.add(new Batch(7, courseDB.get(0), LocalDate.of(2021, 5, 3), null, ""));
-        batchesDB.add(new Batch(1, courseDB.get(1), LocalDate.of(2017, 10, 7), LocalDate.of(2018, 10, 7), "First batch"));
-        batchesDB.add(new Batch(2, courseDB.get(1), LocalDate.of(2018, 2, 7), LocalDate.of(2018, 5, 7), ""));
-        batchesDB.add(new Batch(3, courseDB.get(1), LocalDate.of(2019, 12, 7), LocalDate.of(2020, 12, 21), ""));
-        batchesDB.add(new Batch(4, courseDB.get(1), LocalDate.of(2020, 3, 7), LocalDate.of(2021, 5, 7), ""));
-        batchesDB.add(new Batch(1, courseDB.get(2), LocalDate.of(2020, 3, 7), LocalDate.of(2021, 5, 7), ""));
+        ArrayList arrayList = fileIO.readDataFromFile(batchList, batchDBFile);
+        if (arrayList != null) batchList = arrayList;
     }
 
-    public void addBatch(Batch batch) throws DuplicateEntryException {
+    public void addBatch(Batch batch) throws DuplicateEntryException, FailedOperationException {
         if (getBatch(batch.getBatchNumber(), batch.getCourse()) != null) {
             throw new DuplicateEntryException();
         }
-        batchesDB.add(batch);
+        batchList.add(batch);
+        if (!fileIO.writeDataToFile(batchList, batchDBFile)) {
+            batchList.remove(batch);
+            throw new FailedOperationException();
+        }
     }
 
-    public void updateBatch(Batch batchToUpdate) throws NotFoundException {
+    public void updateBatch(Batch batchToUpdate) throws NotFoundException, FailedOperationException {
         Batch batchBeforeUpdate = searchBatch(batchToUpdate.getBatchNumber(), batchToUpdate.getCourse());
-        batchesDB.set(batchesDB.indexOf(batchBeforeUpdate), batchToUpdate);
+        batchList.set(batchList.indexOf(batchBeforeUpdate), batchToUpdate);
+        if (!fileIO.writeDataToFile(batchList, batchDBFile)) {
+            batchList.set(batchList.indexOf(batchToUpdate), batchBeforeUpdate);
+            throw new FailedOperationException();
+        }
     }
 
-    public void deleteBatch(int batchNumber, Course course) throws NotFoundException {
+    public void deleteBatch(int batchNumber, Course course) throws NotFoundException, FailedOperationException {
         // TODO : Can only delete null batches
         Batch batchToDelete = searchBatch(batchNumber, course);
-        batchesDB.remove(batchToDelete);
+        batchList.remove(batchToDelete);
+        if (!fileIO.writeDataToFile(batchList, batchDBFile)) {
+            batchList.add(batchToDelete);
+            throw new FailedOperationException();
+        }
     }
 
     public List<Batch> searchAllBatches(Course course) {
         List<Batch> results = new ArrayList();
 
-        for (Batch batch : batchesDB) {
-
-            if (batch.getCourse() == course) {
+        for (Batch batch : batchList) {
+            if (batch.getCourse().getCourseID().equals(course.getCourseID())) {
                 results.add(batch);
             }
         }
@@ -63,7 +69,7 @@ public class BatchService {
     public List<Batch> searchAllOngoingBatches() {
         List<Batch> results = new ArrayList();
 
-        for (Batch batch : batchesDB) {
+        for (Batch batch : batchList) {
 
             if (batch.getEndDate() == null) { // TODO: If there is null value to another case it will show as ongoing batch. Try to change this apart from null
                 results.add(batch);
@@ -90,7 +96,7 @@ public class BatchService {
         keyword = keyword.toLowerCase();
         List<Batch> searchResult = new ArrayList();
 
-        for (Batch batch : ongoingBatchesOnly ? searchAllOngoingBatches() : batchesDB) {
+        for (Batch batch : ongoingBatchesOnly ? searchAllOngoingBatches() : batchList) {
 
             if (batch.getCourse()==course &&
                     (Integer.toString(batch.getBatchNumber()).contains(keyword) ||
@@ -106,12 +112,12 @@ public class BatchService {
 
     public int getLastBatchNumber(Course course) {
         int count = 0;
-        for (Batch batch : batchesDB) {
+        for (Batch batch : batchList) {
             if (batch.getCourse() == course) {
                 count++;
             }
         }
-        for (int i = 0; i < batchesDB.size(); i++) {
+        for (int i = 0; i < batchList.size(); i++) {
             if (getBatch(count, course) == null) {
                 return count == 0 ? 0 : count - 1;
             }
@@ -121,7 +127,7 @@ public class BatchService {
     }
 
     private Batch getBatch(int batchNumber, Course course) {
-        for (Batch batch : batchesDB) {
+        for (Batch batch : batchList) {
             if (batch.getBatchNumber() == batchNumber && batch.getCourse().equals(course)) {
                 return batch;
             }

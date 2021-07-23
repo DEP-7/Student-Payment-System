@@ -4,38 +4,51 @@ import model.Receipt;
 import model.sub.CashPayment;
 import model.sub.OnlinePayment;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
+import util.FileIO;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReceiptService {
-    public static ArrayList<Receipt> receiptDB = new ArrayList();
+    public static ArrayList<Receipt> receiptList = new ArrayList();
+    private static final File receiptDBFile = new File("sps-receipts.db");
+    private static FileIO fileIO = new FileIO();
 
     static {
-        receiptDB.add(new Receipt(1, StudentService.studentList.get(0), "Registration Fee", new CashPayment(), new BigDecimal("50000"), new BigDecimal("0"), null, LocalDate.of(2021, 5, 2), "", LocalDate.of(2021, 5, 2), UserService.usersDB.get(0), null));
-        receiptDB.add(new Receipt(2, StudentService.studentList.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("20000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
-        receiptDB.add(new Receipt(3, StudentService.studentList.get(0), "Installment", new OnlinePayment("212536542452"), new BigDecimal("10000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
-        receiptDB.add(new Receipt(4, StudentService.studentList.get(1), "Installment", new OnlinePayment("212536542452"), new BigDecimal("5000"), new BigDecimal("30000"), LocalDate.of(2021, 6, 30), LocalDate.of(2021, 6, 20), "", LocalDate.now(), UserService.usersDB.get(0), null));
+        ArrayList arrayList = fileIO.readDataFromFile(receiptList, receiptDBFile);
+        if (arrayList != null) receiptList = arrayList;
     }
 
-    public void addReceipt(Receipt receipt) throws DuplicateEntryException {
+    public void addReceipt(Receipt receipt) throws DuplicateEntryException, FailedOperationException {
         if (getReceipt(receipt.getReceiptNumber()) != null) {
             throw new DuplicateEntryException();
         }
-        receiptDB.add(receipt);
+        receiptList.add(receipt);
+
+        if (!fileIO.writeDataToFile(receiptList, receiptDBFile)) {
+            receiptList.remove(receipt);
+            throw new FailedOperationException();
+        }
     }
 
-    public void updateReceipt(Receipt receiptToUpdate) throws NotFoundException {
+    public void updateReceipt(Receipt receiptToUpdate) throws NotFoundException, FailedOperationException {
         Receipt receiptBeforeUpdate = searchReceipt(receiptToUpdate.getReceiptNumber());
-        receiptDB.set(receiptDB.indexOf(receiptBeforeUpdate), receiptToUpdate);
+        receiptList.set(receiptList.indexOf(receiptBeforeUpdate), receiptToUpdate);
+
+        if (!fileIO.writeDataToFile(receiptList, receiptDBFile)) {
+            receiptList.set(receiptList.indexOf(receiptToUpdate), receiptBeforeUpdate);
+            throw new FailedOperationException();
+        }
     }
 
     public long getLastReceiptNumber() {
-        long lastReceiptNumber = receiptDB.size();
-        for (int i = 0; i < receiptDB.size(); i++) {
+        long lastReceiptNumber = receiptList.size();
+        for (int i = 0; i < receiptList.size(); i++) {
             if (getReceipt(lastReceiptNumber) == null) {
                 return lastReceiptNumber == 0 ? 0 : lastReceiptNumber - 1;
             }
@@ -45,7 +58,7 @@ public class ReceiptService {
     }
 
     public List<Receipt> searchAllReceipts() {
-        return receiptDB;
+        return receiptList;
     }
 
     public Receipt searchReceipt(long receiptNumber) throws NotFoundException {
@@ -64,7 +77,7 @@ public class ReceiptService {
         keyword = keyword.toLowerCase();
         List<Receipt> searchResult = new ArrayList();
 
-        for (Receipt receipt : receiptDB) {
+        for (Receipt receipt : receiptList) {
             if (Long.toString(receipt.getReceiptNumber()).contains(keyword) ||
                     receipt.getPaymentDescription().toLowerCase().contains(keyword) ||
                     receipt.getPaymentDate().toString().contains(keyword) ||
@@ -93,7 +106,7 @@ public class ReceiptService {
         keyword = keyword.toLowerCase();
         List<Receipt> searchResult = new ArrayList();
 
-        for (Receipt receipt : receiptDB) {
+        for (Receipt receipt : receiptList) {
             if (!(receipt.getReceiptDate().isBefore(endDate) && (receipt.getReceiptDate().isEqual(startingDate) || receipt.getReceiptDate().isAfter(startingDate)))) {
                 continue;
             }
@@ -115,7 +128,7 @@ public class ReceiptService {
     }
 
     private Receipt getReceipt(long receiptNumber) {
-        for (Receipt receipt : receiptDB) {
+        for (Receipt receipt : receiptList) {
             if (receipt.getReceiptNumber() == receiptNumber) {
                 return receipt;
             }

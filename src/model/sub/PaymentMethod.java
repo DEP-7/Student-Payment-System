@@ -1,4 +1,6 @@
 package model.sub;
 
-public interface PaymentMethod {
+import java.io.Serializable;
+
+public interface PaymentMethod  extends Serializable {
 }

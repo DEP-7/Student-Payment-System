@@ -2,44 +2,57 @@ package service;
 
 import model.User;
 import service.exception.DuplicateEntryException;
+import service.exception.FailedOperationException;
 import service.exception.NotFoundException;
+import util.FileIO;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    public static ArrayList<User> usersDB = new ArrayList();
+    public static ArrayList<User> userList = new ArrayList();
+    private static final File userDBFile = new File("sps-users.db");
+    private static FileIO fileIO = new FileIO();
 
     static {
-        usersDB.add(new User("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), "Handiya Kade, Deeyagaha, Matara", "071-6520080", "dhanushkachandimal11@gmail.com", true, LocalDateTime.of(2021, 6, 15, 13, 15, 25), "931630377V", "ȴȕɂɡȹȻȼɂȵȕȺɁȻȘ", true));
-        usersDB.add(new User("9316301111V", "Institute of Java Software Engineering", "IJSE", "Male", LocalDate.of(1993, 6, 11), "Panadura", "071-6520080", "ijse@gmail.com", true, LocalDateTime.of(2021, 6, 15, 13, 15, 25), "IJSE-Admin", "ŷŮƈŻƀƖŻ", true));
-        usersDB.add(new User("9316304511V", "Institute of Java Software Engineering", "ijse", "Male", LocalDate.of(1993, 6, 11), "Panadura", "071-6520080", "ijse@gmail.com", false, LocalDateTime.of(2021, 6, 15, 13, 15, 25), "IJSE-General", "ǗƮȈǛǠȖǛ", true));
-        usersDB.add(new User("931630377V", "Magam Mudalige Dhanushka Chandimal Ranasinghe", "M.M.D.C.Ranasinghe", "Male", LocalDate.of(1993, 6, 11), "Handiya Kade, Deeyagaha, Matara", "071-6520080", "dhanushkachandimal11@gmail.com", true, LocalDateTime.of(2021, 6, 15, 13, 15, 25), "931630377V", "ȴȕɂɡȹȻȼɂȵȕȺɁȻȘ", true));
-        usersDB.add(new User("199316300377", "Prasad Viduranha", "P.Viduranga", "Male", LocalDate.of(1995, 12, 20), "Galle", "077-2565368", "prasad@gmail.com", false, LocalDateTime.of(2021, 5, 4, 4, 55, 25), "Prasad", "1234", true));
-        usersDB.add(new User("941630377V", "Manoj Randeni", "R.A.M.R.Randeni", "Male", LocalDate.of(1996, 12, 20), "Gampaha", "078-2515651", "manoj@gmail.com", false, null, "941630377V", "941630377V", true));
+        ArrayList arrayList = fileIO.readDataFromFile(userList, userDBFile);
+        if (arrayList != null) userList = arrayList;
     }
 
-    public void addUser(User user) throws DuplicateEntryException {
+    public void addUser(User user) throws DuplicateEntryException, FailedOperationException {
         if (getUser(user.getNic()) != null) {
             throw new DuplicateEntryException();
         }
-        usersDB.add(user);
+        userList.add(user);
+        if (!fileIO.writeDataToFile(userList, userDBFile)) {
+            userList.remove(user);
+            throw new FailedOperationException();
+        }
     }
 
-    public void updateUser(User userToUpdate, String previousNIC) throws NotFoundException {
+    public void updateUser(User userToUpdate, String previousNIC) throws NotFoundException, FailedOperationException {
         User userBeforeUpdate = searchUser(previousNIC);
-        usersDB.set(usersDB.indexOf(userBeforeUpdate), userToUpdate);
+        userList.set(userList.indexOf(userBeforeUpdate), userToUpdate);
+        if (!fileIO.writeDataToFile(userList, userDBFile)) {
+            userList.set(userList.indexOf(userToUpdate), userBeforeUpdate);
+            throw new FailedOperationException();
+        }
     }
 
-    public void deleteUser(String nic) throws NotFoundException {
+    public void deleteUser(String nic) throws NotFoundException, FailedOperationException {
         User userToDelete = searchUser(nic);
-        usersDB.get(usersDB.indexOf(userToDelete)).setAccountActive(false);
+        userList.get(userList.indexOf(userToDelete)).setAccountActive(false);
+        if (!fileIO.writeDataToFile(userList, userDBFile)) {
+            userList.add(userToDelete);
+            throw new FailedOperationException();
+        }
     }
 
     public List<User> searchAllUsers() {
-        return usersDB;
+        return userList;
     }
 
     public User searchUser(String nic) throws NotFoundException {
@@ -53,7 +66,7 @@ public class UserService {
 
     public User searchUserByUsername(String username) throws NotFoundException {
 
-        for (User user : usersDB) {
+        for (User user : userList) {
             if (user.getUsername().equals(username)) {
                 return user;
             }
@@ -68,7 +81,7 @@ public class UserService {
         keyword = keyword.toLowerCase();
         List<User> searchResult = new ArrayList();
 
-        for (User user : usersDB) {
+        for (User user : userList) {
             if (user.getNic().toLowerCase().contains(keyword) ||
                     user.getNameInFull().toLowerCase().contains(keyword) ||
                     user.getNameWithInitials().toLowerCase().contains(keyword) ||
@@ -91,7 +104,7 @@ public class UserService {
     }
 
     private User getUser(String nic) {
-        for (User user : usersDB) {
+        for (User user : userList) {
             if (user.getNic().equals(nic)) {
                 return user;
             }

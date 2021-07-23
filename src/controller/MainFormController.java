@@ -132,16 +132,16 @@ public class MainFormController {
         load(5, "Dashboard / View Batches");
     }
 
+    public void pneManageBatches_OnMouseClicked(MouseEvent mouseEvent) {
+        load(6, "Dashboard / Manage Batches");
+    }
+
     public void pneManageCourses_OnMouseClicked(MouseEvent mouseEvent) {
-        load(6, "Dashboard / Manage Courses");
+        load(7, "Dashboard / Manage Courses");
     }
 
     public void pneManageUsers_OnMouseClicked(MouseEvent mouseEvent) {
-        load(7, "Dashboard / Manage Users");
-    }
-
-    public void pneManageBatches_OnMouseClicked(MouseEvent mouseEvent) {
-        load(8, "Dashboard / Manage Batches");
+        load(8, "Dashboard / Manage Users");
     }
 
     public void load(int urlIndex, String currentFormLocation) {
